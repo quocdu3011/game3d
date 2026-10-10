@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cuc4eilwoh1a4"]
+
+[ext_resource type="PackedScene" uid="uid://dxjhrfvxw73cy" path="res://models/tileHigh_teamRed.gltf" id="1_eu1j5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0e6c2"]
+size = Vector3(1.9494629, 1.9594727, 1.9935303)
+
+[node name="TileHightRed" type="Node3D" unique_id=535144008]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1868287486]
+
+[node name="tileHigh_teamRed2" parent="StaticBody3D" unique_id=1339883787 instance=ExtResource("1_eu1j5")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1268148587]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01184082, 0.9983059, -0.010070801)
+shape = SubResource("BoxShape3D_0e6c2")

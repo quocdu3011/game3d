@@ -1,0 +1,147 @@
+[gd_scene load_steps=6 format=3 uid="uid://charselectui1"]
+
+[ext_resource type="Script" path="res://scripts/character_select.gd" id="1_csgd"]
+[ext_resource type="Theme" path="res://assets/UI/ui_theme.tres" id="2_theme"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_preview"]
+sky_top_color = Color(0.38, 0.45, 0.55, 1)
+
+[sub_resource type="Sky" id="Sky_preview"]
+sky_material = SubResource("ProceduralSkyMaterial_preview")
+
+[sub_resource type="Environment" id="Environment_preview"]
+background_mode = 2
+sky = SubResource("Sky_preview")
+ambient_light_source = 3
+
+[node name="CharacterSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_theme")
+script = ExtResource("1_csgd")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1, 0.12, 0.18, 1)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_left = 0.5
+anchor_top = 0.5
+offset_left = -250.0
+offset_top = -220.0
+offset_right = 250.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(500, 400)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 1.2, 2.5)
+current = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(0.866, -0.353, 0.353, 0, 0.707, 0.707, -0.5, -0.612, 0.612, 0, 5, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport"]
+environment = SubResource("Environment_preview")
+
+[node name="PreviewSlot" type="Node3D" parent="SubViewportContainer/SubViewport"]
+unique_name_in_owner = true
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = 25.0
+offset_right = 200.0
+offset_bottom = 75.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 36
+text = "TÙY CHỈNH NHÂN VẬT"
+horizontal_alignment = 1
+
+[node name="LblCurrent" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_left = 0.5
+anchor_top = 1.0
+offset_left = -200.0
+offset_top = -140.0
+offset_right = 200.0
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 20
+text = "Nhân vật đã chọn: Gobot"
+horizontal_alignment = 1
+
+[node name="ButtonContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_left = 0.5
+anchor_top = 1.0
+offset_left = -270.0
+offset_top = -90.0
+offset_right = 270.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="BtnGobot" type="Button" parent="ButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(162, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "🤖 GOBOT"
+
+[node name="BtnGdbot" type="Button" parent="ButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(162, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "🦾 GDBOT"
+
+[node name="BtnSophia" type="Button" parent="ButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(162, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "👧 SOPHIA"
+
+[node name="BtnBack" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 171.0
+offset_bottom = 70.0
+custom_minimum_size = Vector2(146, 45)
+theme_override_font_sizes/font_size = 16
+text = "⬅️ XÁC NHẬN"

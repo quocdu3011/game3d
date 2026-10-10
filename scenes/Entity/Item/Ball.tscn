@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dcpfu2vf38mcj"]
+
+[ext_resource type="Script" uid="uid://bbwbv2btx7q0t" path="res://scripts/ball.gd" id="1_0h20m"]
+[ext_resource type="PackedScene" uid="uid://b54loxvpq2cgi" path="res://models/ball.gltf" id="1_nr1u3"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0o70f"]
+radius = 2.483862
+
+[node name="RigidBody3D" type="RigidBody3D" unique_id=982223257]
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 8
+script = ExtResource("1_0h20m")
+
+[node name="ball2" parent="." unique_id=1155516695 instance=ExtResource("1_nr1u3")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2052318472]
+shape = SubResource("SphereShape3D_0o70f")

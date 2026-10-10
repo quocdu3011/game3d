@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cfvl81ntbpehg"]
+
+[ext_resource type="PackedScene" uid="uid://3vskceyqjxgb" path="res://models/arrow_teamBlue.gltf" id="1_b4osa"]
+[ext_resource type="Script" uid="uid://cbhcugnc1w30i" path="res://scripts/arrow_projectile.gd" id="1_jeg1q"]
+
+[node name="Arrow" type="Node3D" unique_id=1389118303]
+script = ExtResource("1_jeg1q")
+
+[node name="arrow_teamBlue2" parent="." unique_id=859098083 instance=ExtResource("1_b4osa")]

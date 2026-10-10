@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://coa0i4qfg04"]
+
+[ext_resource type="PackedScene" uid="uid://dvwkkkmu7k31t" path="res://models/tileMedium_forest.gltf" id="1_a566i"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_37hew"]
+size = Vector3(2.0, 1.5, 2.0)
+
+[node name="TileMediumForest" type="Node3D" unique_id=753682359]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=295775331]
+
+[node name="tileMedium_forest2" parent="StaticBody3D" unique_id=692338895 instance=ExtResource("1_a566i")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=183431947]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 0.75, 0.0)
+shape = SubResource("BoxShape3D_37hew")

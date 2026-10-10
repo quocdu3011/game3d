@@ -1,0 +1,1429 @@
+[gd_scene format=3 uid="uid://c8x2level2map"]
+
+[ext_resource type="Script" uid="uid://dlgcqtuelapre" path="res://scripts/level_controller.gd" id="1_lvlctrl"]
+[ext_resource type="PackedScene" uid="uid://thbm4nj2dq7" path="res://scenes/Entity/Tile/TileLargeDesert.tscn" id="3_74t05"]
+[ext_resource type="PackedScene" uid="uid://ksp0yew6yigf" path="res://scenes/Entity/Tile/TileHightDesert.tscn" id="4_dm4dq"]
+[ext_resource type="PackedScene" uid="uid://cg7xry0i38wf3" path="res://scenes/Entity/Item/CheckPoint_1.tscn" id="5_swmay"]
+[ext_resource type="PackedScene" uid="uid://jbu7sv20j3e" path="res://scenes/Entity/Tile/TileLowDesert.tscn" id="6_gcjdc"]
+[ext_resource type="PackedScene" uid="uid://hudui1" path="res://scenes/ui/hud.tscn" id="6_hud"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sky"]
+sky_top_color = Color(0.48, 0.42, 0.35, 1)
+sky_horizon_color = Color(0.75, 0.65, 0.5, 1)
+
+[sub_resource type="Sky" id="Sky_env"]
+sky_material = SubResource("ProceduralSkyMaterial_sky")
+
+[sub_resource type="Environment" id="Environment_world"]
+background_mode = 2
+sky = SubResource("Sky_env")
+ambient_light_source = 3
+
+[node name="Level2" type="Node3D" unique_id=760165239]
+script = ExtResource("1_lvlctrl")
+
+[node name="HUD" parent="." unique_id=1769264790 instance=ExtResource("6_hud")]
+
+[node name="Players" type="Node3D" parent="." unique_id=155492094]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.059351444, 23.70931, 0.6372576)
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=541893245]
+_spawnable_scenes = PackedStringArray("uid://brcdva43yrr8u")
+spawn_path = NodePath("../Players")
+
+[node name="SpawnPoint1" type="Marker3D" parent="." unique_id=627973054]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1.5, 0)
+
+[node name="SpawnPoint2" type="Marker3D" parent="." unique_id=324994057]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1.5, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1365378897]
+transform = Transform3D(0.86602527, 0.3535535, -0.35355362, 0, 0.7071069, 0.70710665, 0.50000024, -0.6123722, 0.61237246, 0, 0, 0)
+light_color = Color(1, 0.98, 0.92, 1)
+light_energy = 1.2
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=741580283]
+environment = SubResource("Environment_world")
+
+[node name="World" type="Node3D" parent="." unique_id=1808160369]
+
+[node name="TileLargeDesert" parent="World" unique_id=416258289 instance=ExtResource("3_74t05")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20.680773, 0)
+
+[node name="TileHightDesert" parent="World" unique_id=1035992501 instance=ExtResource("4_dm4dq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.2429547, 19.531199, 11.284997)
+
+[node name="TileHightDesert2" parent="World" unique_id=982594347 instance=ExtResource("4_dm4dq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.256382, 19.605118, 11.231938)
+
+[node name="TileHightDesert3" parent="World" unique_id=224147010 instance=ExtResource("4_dm4dq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2579703, 21.58316, 11.221208)
+
+[node name="TileHightDesert4" parent="World" unique_id=491427687 instance=ExtResource("4_dm4dq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2160778, 23.561203, 11.302139)
+
+[node name="TileHightDesert5" parent="World" unique_id=1236287120 instance=ExtResource("4_dm4dq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.169992, 19.531199, 20.246979)
+
+[node name="TileHightDesert6" parent="World" unique_id=1337698172 instance=ExtResource("4_dm4dq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1565647, 19.605118, 20.19392)
+
+[node name="TileHightDesert7" parent="World" unique_id=1882070660 instance=ExtResource("4_dm4dq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1556554, 21.58316, 20.18319)
+
+[node name="TileHightDesert8" parent="World" unique_id=1043539076 instance=ExtResource("4_dm4dq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.197548, 23.561203, 20.26412)
+
+[node name="TileHightDesert9" parent="World" unique_id=1767788252 instance=ExtResource("4_dm4dq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.2429547, 19.531199, 29.099152)
+
+[node name="TileHightDesert10" parent="World" unique_id=156187243 instance=ExtResource("4_dm4dq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.256382, 19.605118, 29.046093)
+
+[node name="TileHightDesert11" parent="World" unique_id=311882827 instance=ExtResource("4_dm4dq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2579703, 21.58316, 29.035362)
+
+[node name="TileHightDesert12" parent="World" unique_id=852116894 instance=ExtResource("4_dm4dq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2160778, 23.561203, 29.116295)
+
+[node name="TileHightDesert13" parent="World" unique_id=877834135 instance=ExtResource("4_dm4dq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.169992, 19.531199, 38.912407)
+
+[node name="TileHightDesert14" parent="World" unique_id=737885725 instance=ExtResource("4_dm4dq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1565647, 19.605118, 38.859352)
+
+[node name="TileHightDesert15" parent="World" unique_id=1086334422 instance=ExtResource("4_dm4dq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1556554, 21.58316, 38.848618)
+
+[node name="TileHightDesert16" parent="World" unique_id=1788775850 instance=ExtResource("4_dm4dq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.197548, 23.561203, 38.92955)
+
+[node name="TileLargeDesert2" parent="World" unique_id=1546601640 instance=ExtResource("3_74t05")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15039039, 20.496569, 52.399464)
+
+[node name="CheckPoint1" parent="World" unique_id=1137657711 instance=ExtResource("5_swmay")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.16420186, 21.561995, 52.432)
+
+[node name="TileLowDesert" parent="World" unique_id=454669260 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13801277, 20.516619, 56.399464)
+
+[node name="TileLowDesert2" parent="World" unique_id=180582180 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8619874, 20.545895, 56.373703)
+
+[node name="TileLowDesert3" parent="World" unique_id=306432234 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.107916, 20.523447, 56.399464)
+
+[node name="TileLowDesert4" parent="World" unique_id=843382646 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13801277, 20.516619, 58.393055)
+
+[node name="TileLowDesert5" parent="World" unique_id=185895254 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8619874, 20.545895, 58.367294)
+
+[node name="TileLowDesert6" parent="World" unique_id=1412743857 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.107916, 20.523447, 58.393055)
+
+[node name="TileLowDesert7" parent="World" unique_id=2036210243 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13801277, 20.516619, 60.304745)
+
+[node name="TileLowDesert8" parent="World" unique_id=1243395590 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8619874, 20.545895, 60.278984)
+
+[node name="TileLowDesert9" parent="World" unique_id=539230627 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.107916, 20.523447, 60.304745)
+
+[node name="TileLowDesert10" parent="World" unique_id=991366055 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13801277, 20.516619, 62.222046)
+
+[node name="TileLowDesert11" parent="World" unique_id=2087024061 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8619874, 20.545895, 62.196285)
+
+[node name="TileLowDesert12" parent="World" unique_id=1470861117 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.107916, 20.523447, 62.222046)
+
+[node name="TileLowDesert13" parent="World" unique_id=368820261 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13801277, 20.516619, 64.18619)
+
+[node name="TileLowDesert14" parent="World" unique_id=1308564835 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8619874, 20.545895, 64.16043)
+
+[node name="TileLowDesert15" parent="World" unique_id=149851827 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.107916, 20.523447, 64.18619)
+
+[node name="TileLowDesert16" parent="World" unique_id=292349422 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13801277, 20.516619, 66.17978)
+
+[node name="TileLowDesert17" parent="World" unique_id=1531159388 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8619874, 20.545895, 66.15402)
+
+[node name="TileLowDesert18" parent="World" unique_id=690208246 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.107916, 20.523447, 66.17978)
+
+[node name="TileLowDesert19" parent="World" unique_id=748558319 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13801277, 20.516619, 68.09148)
+
+[node name="TileLowDesert20" parent="World" unique_id=480628675 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8619874, 20.545895, 68.06571)
+
+[node name="TileLowDesert21" parent="World" unique_id=348446137 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.107916, 20.523447, 68.09148)
+
+[node name="TileLowDesert22" parent="World" unique_id=130196533 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13801277, 20.516619, 70.00877)
+
+[node name="TileLowDesert23" parent="World" unique_id=1637136327 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8619874, 20.545895, 69.98302)
+
+[node name="TileLowDesert24" parent="World" unique_id=1523546623 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1103058, 20.484646, 69.97548)
+
+[node name="TileLowDesert32" parent="World" unique_id=1923464876 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8070128, 20.545895, 69.98302)
+
+[node name="TileLowDesert31" parent="World" unique_id=570089705 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8070128, 20.545895, 68.06571)
+
+[node name="TileLowDesert30" parent="World" unique_id=102438923 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8070128, 20.545895, 66.15402)
+
+[node name="TileLowDesert29" parent="World" unique_id=1272491102 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8070128, 20.545895, 64.16043)
+
+[node name="TileLowDesert28" parent="World" unique_id=9220025 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8070128, 20.545895, 62.196285)
+
+[node name="TileLowDesert27" parent="World" unique_id=1338728274 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8070128, 20.545895, 60.278984)
+
+[node name="TileLowDesert26" parent="World" unique_id=1757467013 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8070128, 20.545895, 58.367294)
+
+[node name="TileLowDesert25" parent="World" unique_id=485414425 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8070128, 20.545895, 56.373703)
+
+[node name="TileLowDesert40" parent="World" unique_id=120094522 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.061407, 20.545895, 69.98302)
+
+[node name="TileLowDesert39" parent="World" unique_id=634402572 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.061407, 20.545895, 68.06571)
+
+[node name="TileLowDesert38" parent="World" unique_id=1986062766 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.061407, 20.545895, 66.15402)
+
+[node name="TileLowDesert37" parent="World" unique_id=1217889584 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.061407, 20.545895, 64.16043)
+
+[node name="TileLowDesert36" parent="World" unique_id=1879481918 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.061407, 20.545895, 62.196285)
+
+[node name="TileLowDesert35" parent="World" unique_id=58580520 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.061407, 20.545895, 60.278984)
+
+[node name="TileLowDesert34" parent="World" unique_id=1963635117 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.061407, 20.545895, 58.367294)
+
+[node name="TileLowDesert33" parent="World" unique_id=344221757 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.061407, 20.545895, 56.373703)
+
+[node name="TileLowDesert48" parent="World" unique_id=1422771557 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7690935, 20.545895, 69.98302)
+
+[node name="TileLowDesert47" parent="World" unique_id=727746387 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7690935, 20.545895, 68.06571)
+
+[node name="TileLowDesert46" parent="World" unique_id=727265968 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7690935, 20.545895, 66.15402)
+
+[node name="TileLowDesert45" parent="World" unique_id=851888306 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7690935, 20.545895, 64.16043)
+
+[node name="TileLowDesert44" parent="World" unique_id=1180962024 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7690935, 20.545895, 62.196285)
+
+[node name="TileLowDesert43" parent="World" unique_id=1773806578 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7690935, 20.545895, 60.278984)
+
+[node name="TileLowDesert42" parent="World" unique_id=2098261791 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7690935, 20.545895, 58.367294)
+
+[node name="TileLowDesert41" parent="World" unique_id=1239871805 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7690935, 20.545895, 56.373703)
+
+[node name="TileLowDesert49" parent="World" unique_id=2046431208 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.044873, 20.545895, 56.373703)
+
+[node name="TileLowDesert50" parent="World" unique_id=358690520 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.044873, 20.545895, 58.367294)
+
+[node name="TileLowDesert51" parent="World" unique_id=82815082 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.044873, 20.545895, 60.278984)
+
+[node name="TileLowDesert52" parent="World" unique_id=1096249733 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.044873, 20.545895, 62.196285)
+
+[node name="TileLowDesert53" parent="World" unique_id=721285662 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.044873, 20.545895, 64.16043)
+
+[node name="TileLowDesert54" parent="World" unique_id=1919912501 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.044873, 20.545895, 66.15402)
+
+[node name="TileLowDesert55" parent="World" unique_id=1814514588 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.044873, 20.545895, 68.06571)
+
+[node name="TileLowDesert56" parent="World" unique_id=886001802 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.044873, 20.545895, 69.98302)
+
+[node name="TileLowDesert63" parent="World" unique_id=43430109 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.044873, 20.545895, 71.941055)
+
+[node name="TileLowDesert62" parent="World" unique_id=102289424 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7690935, 20.545895, 71.941055)
+
+[node name="TileLowDesert61" parent="World" unique_id=536136458 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.061407, 20.545895, 71.941055)
+
+[node name="TileLowDesert60" parent="World" unique_id=1150737875 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8070128, 20.545895, 71.941055)
+
+[node name="TileLowDesert59" parent="World" unique_id=483385351 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1103058, 20.484646, 71.93352)
+
+[node name="TileLowDesert58" parent="World" unique_id=1621640385 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8619874, 20.545895, 71.941055)
+
+[node name="TileLowDesert57" parent="World" unique_id=666029734 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13801277, 20.516619, 71.96681)
+
+[node name="TileLowDesert126" parent="World" unique_id=488281911 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.926121, 20.516619, 71.96681)
+
+[node name="TileLowDesert125" parent="World" unique_id=1130754601 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.926121, 20.545895, 71.941055)
+
+[node name="TileLowDesert124" parent="World" unique_id=2116575875 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.898414, 20.484646, 71.93352)
+
+[node name="TileLowDesert123" parent="World" unique_id=578154895 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.981095, 20.545895, 71.941055)
+
+[node name="TileLowDesert122" parent="World" unique_id=680860951 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.849514, 20.545895, 71.941055)
+
+[node name="TileLowDesert121" parent="World" unique_id=827377459 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.019014, 20.545895, 71.941055)
+
+[node name="TileLowDesert120" parent="World" unique_id=1865976303 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.832981, 20.545895, 71.941055)
+
+[node name="TileLowDesert119" parent="World" unique_id=469748715 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.832981, 20.545895, 69.98302)
+
+[node name="TileLowDesert118" parent="World" unique_id=1438173776 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.832981, 20.545895, 68.06571)
+
+[node name="TileLowDesert117" parent="World" unique_id=495849804 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.832981, 20.545895, 66.15402)
+
+[node name="TileLowDesert116" parent="World" unique_id=1666100940 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.832981, 20.545895, 64.16043)
+
+[node name="TileLowDesert115" parent="World" unique_id=391106605 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.832981, 20.545895, 62.196285)
+
+[node name="TileLowDesert114" parent="World" unique_id=149331498 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.832981, 20.545895, 60.278984)
+
+[node name="TileLowDesert113" parent="World" unique_id=1434433407 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.832981, 20.545895, 58.367294)
+
+[node name="TileLowDesert112" parent="World" unique_id=237399353 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.832981, 20.545895, 56.373703)
+
+[node name="TileLowDesert111" parent="World" unique_id=365020828 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.019014, 20.545895, 56.373703)
+
+[node name="TileLowDesert110" parent="World" unique_id=63576962 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.019014, 20.545895, 58.367294)
+
+[node name="TileLowDesert109" parent="World" unique_id=1655424174 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.019014, 20.545895, 60.278984)
+
+[node name="TileLowDesert108" parent="World" unique_id=1842250738 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.019014, 20.545895, 62.196285)
+
+[node name="TileLowDesert107" parent="World" unique_id=1605029372 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.019014, 20.545895, 64.16043)
+
+[node name="TileLowDesert106" parent="World" unique_id=842046362 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.019014, 20.545895, 66.15402)
+
+[node name="TileLowDesert105" parent="World" unique_id=797287736 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.019014, 20.545895, 68.06571)
+
+[node name="TileLowDesert104" parent="World" unique_id=2107262570 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.019014, 20.545895, 69.98302)
+
+[node name="TileLowDesert103" parent="World" unique_id=516513553 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.849514, 20.545895, 56.373703)
+
+[node name="TileLowDesert102" parent="World" unique_id=930293137 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.849514, 20.545895, 58.367294)
+
+[node name="TileLowDesert101" parent="World" unique_id=1888278605 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.849514, 20.545895, 60.278984)
+
+[node name="TileLowDesert100" parent="World" unique_id=1417634999 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.849514, 20.545895, 62.196285)
+
+[node name="TileLowDesert99" parent="World" unique_id=1275403957 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.849514, 20.545895, 64.16043)
+
+[node name="TileLowDesert98" parent="World" unique_id=1254081869 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.849514, 20.545895, 66.15402)
+
+[node name="TileLowDesert97" parent="World" unique_id=1803000690 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.849514, 20.545895, 68.06571)
+
+[node name="TileLowDesert96" parent="World" unique_id=419488814 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.849514, 20.545895, 69.98302)
+
+[node name="TileLowDesert95" parent="World" unique_id=30545553 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.981095, 20.545895, 56.373703)
+
+[node name="TileLowDesert94" parent="World" unique_id=1648261729 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.981095, 20.545895, 58.367294)
+
+[node name="TileLowDesert93" parent="World" unique_id=1591217315 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.981095, 20.545895, 60.278984)
+
+[node name="TileLowDesert92" parent="World" unique_id=1228989984 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.981095, 20.545895, 62.196285)
+
+[node name="TileLowDesert91" parent="World" unique_id=2131098269 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.981095, 20.545895, 64.16043)
+
+[node name="TileLowDesert90" parent="World" unique_id=514184809 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.981095, 20.545895, 66.15402)
+
+[node name="TileLowDesert89" parent="World" unique_id=1309774908 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.981095, 20.545895, 68.06571)
+
+[node name="TileLowDesert88" parent="World" unique_id=1329149867 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.981095, 20.545895, 69.98302)
+
+[node name="TileLowDesert87" parent="World" unique_id=418941785 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.898414, 20.484646, 69.97548)
+
+[node name="TileLowDesert86" parent="World" unique_id=1676848355 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.926121, 20.545895, 69.98302)
+
+[node name="TileLowDesert85" parent="World" unique_id=1618161999 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.926121, 20.516619, 70.00877)
+
+[node name="TileLowDesert84" parent="World" unique_id=611989602 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.896024, 20.523447, 68.09148)
+
+[node name="TileLowDesert83" parent="World" unique_id=2107254537 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.926121, 20.545895, 68.06571)
+
+[node name="TileLowDesert82" parent="World" unique_id=980948070 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.926121, 20.516619, 68.09148)
+
+[node name="TileLowDesert81" parent="World" unique_id=669507021 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.896024, 20.523447, 66.17978)
+
+[node name="TileLowDesert80" parent="World" unique_id=1578144811 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.926121, 20.545895, 66.15402)
+
+[node name="TileLowDesert79" parent="World" unique_id=207510723 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.926121, 20.516619, 66.17978)
+
+[node name="TileLowDesert78" parent="World" unique_id=838495984 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.896024, 20.523447, 64.18619)
+
+[node name="TileLowDesert77" parent="World" unique_id=638934374 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.926121, 20.545895, 64.16043)
+
+[node name="TileLowDesert76" parent="World" unique_id=1260433793 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.926121, 20.516619, 64.18619)
+
+[node name="TileLowDesert75" parent="World" unique_id=363337785 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.896024, 20.523447, 62.222046)
+
+[node name="TileLowDesert74" parent="World" unique_id=737342657 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.926121, 20.545895, 62.196285)
+
+[node name="TileLowDesert73" parent="World" unique_id=1319824720 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.926121, 20.516619, 62.222046)
+
+[node name="TileLowDesert72" parent="World" unique_id=425287373 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.896024, 20.523447, 60.304745)
+
+[node name="TileLowDesert71" parent="World" unique_id=607946497 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.926121, 20.545895, 60.278984)
+
+[node name="TileLowDesert70" parent="World" unique_id=1278369298 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.926121, 20.516619, 60.304745)
+
+[node name="TileLowDesert69" parent="World" unique_id=337693725 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.896024, 20.523447, 58.393055)
+
+[node name="TileLowDesert68" parent="World" unique_id=125998242 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.926121, 20.545895, 58.367294)
+
+[node name="TileLowDesert67" parent="World" unique_id=1524206982 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.926121, 20.516619, 58.393055)
+
+[node name="TileLowDesert66" parent="World" unique_id=2036423 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.896024, 20.523447, 56.399464)
+
+[node name="TileLowDesert65" parent="World" unique_id=1519056468 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.926121, 20.545895, 56.373703)
+
+[node name="TileLowDesert64" parent="World" unique_id=93330108 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.926121, 20.516619, 56.399464)
+
+[node name="TileLowDesert189" parent="World" unique_id=1042924963 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.618124, 20.516619, 71.96681)
+
+[node name="TileLowDesert188" parent="World" unique_id=10862742 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.618124, 20.545895, 71.941055)
+
+[node name="TileLowDesert187" parent="World" unique_id=1363685531 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.645831, 20.484646, 71.93352)
+
+[node name="TileLowDesert186" parent="World" unique_id=1453331928 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.56315, 20.545895, 71.941055)
+
+[node name="TileLowDesert185" parent="World" unique_id=20004776 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.69473, 20.545895, 71.941055)
+
+[node name="TileLowDesert184" parent="World" unique_id=1614998323 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.52523, 20.545895, 71.941055)
+
+[node name="TileLowDesert183" parent="World" unique_id=278072752 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.7112637, 20.545895, 71.941055)
+
+[node name="TileLowDesert182" parent="World" unique_id=2046335996 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.7112637, 20.545895, 69.98302)
+
+[node name="TileLowDesert181" parent="World" unique_id=1915248329 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.7112637, 20.545895, 68.06571)
+
+[node name="TileLowDesert180" parent="World" unique_id=1312159445 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.7112637, 20.545895, 66.15402)
+
+[node name="TileLowDesert179" parent="World" unique_id=206572064 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.7112637, 20.545895, 64.16043)
+
+[node name="TileLowDesert178" parent="World" unique_id=695444522 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.7112637, 20.545895, 62.196285)
+
+[node name="TileLowDesert177" parent="World" unique_id=1055378885 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.7112637, 20.545895, 60.278984)
+
+[node name="TileLowDesert176" parent="World" unique_id=102792044 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.7112637, 20.545895, 58.367294)
+
+[node name="TileLowDesert175" parent="World" unique_id=1736007651 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.7112637, 20.545895, 56.373703)
+
+[node name="TileLowDesert174" parent="World" unique_id=1498960352 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.52523, 20.545895, 56.373703)
+
+[node name="TileLowDesert173" parent="World" unique_id=1536874508 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.52523, 20.545895, 58.367294)
+
+[node name="TileLowDesert172" parent="World" unique_id=1348802114 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.52523, 20.545895, 60.278984)
+
+[node name="TileLowDesert171" parent="World" unique_id=197248828 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.52523, 20.545895, 62.196285)
+
+[node name="TileLowDesert170" parent="World" unique_id=518274049 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.52523, 20.545895, 64.16043)
+
+[node name="TileLowDesert169" parent="World" unique_id=915546380 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.52523, 20.545895, 66.15402)
+
+[node name="TileLowDesert168" parent="World" unique_id=626381886 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.52523, 20.545895, 68.06571)
+
+[node name="TileLowDesert167" parent="World" unique_id=1916199515 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.52523, 20.545895, 69.98302)
+
+[node name="TileLowDesert166" parent="World" unique_id=1022252064 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.69473, 20.545895, 56.373703)
+
+[node name="TileLowDesert165" parent="World" unique_id=713109604 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.69473, 20.545895, 58.367294)
+
+[node name="TileLowDesert164" parent="World" unique_id=1783202127 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.69473, 20.545895, 60.278984)
+
+[node name="TileLowDesert163" parent="World" unique_id=100113266 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.69473, 20.545895, 62.196285)
+
+[node name="TileLowDesert162" parent="World" unique_id=1832914049 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.69473, 20.545895, 64.16043)
+
+[node name="TileLowDesert161" parent="World" unique_id=26367299 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.69473, 20.545895, 66.15402)
+
+[node name="TileLowDesert160" parent="World" unique_id=59086158 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.69473, 20.545895, 68.06571)
+
+[node name="TileLowDesert159" parent="World" unique_id=109864826 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.69473, 20.545895, 69.98302)
+
+[node name="TileLowDesert158" parent="World" unique_id=2014718783 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.56315, 20.545895, 56.373703)
+
+[node name="TileLowDesert157" parent="World" unique_id=549929800 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.56315, 20.545895, 58.367294)
+
+[node name="TileLowDesert156" parent="World" unique_id=1380372466 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.56315, 20.545895, 60.278984)
+
+[node name="TileLowDesert155" parent="World" unique_id=1739433141 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.56315, 20.545895, 62.196285)
+
+[node name="TileLowDesert154" parent="World" unique_id=480364953 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.56315, 20.545895, 64.16043)
+
+[node name="TileLowDesert153" parent="World" unique_id=559341064 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.56315, 20.545895, 66.15402)
+
+[node name="TileLowDesert152" parent="World" unique_id=188537583 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.56315, 20.545895, 68.06571)
+
+[node name="TileLowDesert151" parent="World" unique_id=1735718525 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.56315, 20.545895, 69.98302)
+
+[node name="TileLowDesert150" parent="World" unique_id=302461515 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.645831, 20.484646, 69.97548)
+
+[node name="TileLowDesert149" parent="World" unique_id=1959471731 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.618124, 20.545895, 69.98302)
+
+[node name="TileLowDesert148" parent="World" unique_id=418589274 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.618124, 20.516619, 70.00877)
+
+[node name="TileLowDesert147" parent="World" unique_id=784125045 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.648221, 20.523447, 68.09148)
+
+[node name="TileLowDesert146" parent="World" unique_id=1276903760 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.618124, 20.545895, 68.06571)
+
+[node name="TileLowDesert145" parent="World" unique_id=69967035 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.618124, 20.516619, 68.09148)
+
+[node name="TileLowDesert144" parent="World" unique_id=454708472 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.648221, 20.523447, 66.17978)
+
+[node name="TileLowDesert143" parent="World" unique_id=865093044 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.618124, 20.545895, 66.15402)
+
+[node name="TileLowDesert142" parent="World" unique_id=736676927 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.618124, 20.516619, 66.17978)
+
+[node name="TileLowDesert141" parent="World" unique_id=972298790 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.648221, 20.523447, 64.18619)
+
+[node name="TileLowDesert140" parent="World" unique_id=721138480 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.618124, 20.545895, 64.16043)
+
+[node name="TileLowDesert139" parent="World" unique_id=1399944320 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.618124, 20.516619, 64.18619)
+
+[node name="TileLowDesert138" parent="World" unique_id=2145888224 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.648221, 20.523447, 62.222046)
+
+[node name="TileLowDesert137" parent="World" unique_id=715764217 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.618124, 20.545895, 62.196285)
+
+[node name="TileLowDesert136" parent="World" unique_id=383167047 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.618124, 20.516619, 62.222046)
+
+[node name="TileLowDesert135" parent="World" unique_id=56098062 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.648221, 20.523447, 60.304745)
+
+[node name="TileLowDesert134" parent="World" unique_id=2012039780 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.618124, 20.545895, 60.278984)
+
+[node name="TileLowDesert133" parent="World" unique_id=475103175 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.618124, 20.516619, 60.304745)
+
+[node name="TileLowDesert132" parent="World" unique_id=460307803 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.648221, 20.523447, 58.393055)
+
+[node name="TileLowDesert131" parent="World" unique_id=2039350275 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.618124, 20.545895, 58.367294)
+
+[node name="TileLowDesert130" parent="World" unique_id=1810628383 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.618124, 20.516619, 58.393055)
+
+[node name="TileLowDesert129" parent="World" unique_id=1689483098 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.648221, 20.523447, 56.399464)
+
+[node name="TileLowDesert128" parent="World" unique_id=1116708404 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.618124, 20.545895, 56.373703)
+
+[node name="TileLowDesert127" parent="World" unique_id=1682856984 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.618124, 20.516619, 56.399464)
+
+[node name="TileLowDesert378" parent="World" unique_id=1145468081 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.618124, 20.516619, 73.79433)
+
+[node name="TileLowDesert377" parent="World" unique_id=106477689 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.618124, 20.545895, 73.76856)
+
+[node name="TileLowDesert376" parent="World" unique_id=1863228874 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.648221, 20.523447, 73.79433)
+
+[node name="TileLowDesert375" parent="World" unique_id=190451180 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.618124, 20.516619, 75.78792)
+
+[node name="TileLowDesert374" parent="World" unique_id=1364041059 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.618124, 20.545895, 75.76215)
+
+[node name="TileLowDesert373" parent="World" unique_id=1187545152 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.648221, 20.523447, 75.78792)
+
+[node name="TileLowDesert372" parent="World" unique_id=2090221174 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.618124, 20.516619, 77.6996)
+
+[node name="TileLowDesert371" parent="World" unique_id=999449543 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.618124, 20.545895, 77.67384)
+
+[node name="TileLowDesert370" parent="World" unique_id=1252180642 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.648221, 20.523447, 77.6996)
+
+[node name="TileLowDesert369" parent="World" unique_id=23641421 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.618124, 20.516619, 79.616905)
+
+[node name="TileLowDesert368" parent="World" unique_id=322978857 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.618124, 20.545895, 79.59114)
+
+[node name="TileLowDesert367" parent="World" unique_id=677995838 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.648221, 20.523447, 79.616905)
+
+[node name="TileLowDesert366" parent="World" unique_id=870826142 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.618124, 20.516619, 81.58105)
+
+[node name="TileLowDesert365" parent="World" unique_id=666608072 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.618124, 20.545895, 81.55529)
+
+[node name="TileLowDesert364" parent="World" unique_id=1381588888 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.648221, 20.523447, 81.58105)
+
+[node name="TileLowDesert363" parent="World" unique_id=1620464370 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.618124, 20.516619, 83.57464)
+
+[node name="TileLowDesert362" parent="World" unique_id=764465547 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.618124, 20.545895, 83.54888)
+
+[node name="TileLowDesert361" parent="World" unique_id=926936722 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.648221, 20.523447, 83.57464)
+
+[node name="TileLowDesert360" parent="World" unique_id=550009063 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.618124, 20.516619, 85.486336)
+
+[node name="TileLowDesert359" parent="World" unique_id=1401909302 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.618124, 20.545895, 85.46057)
+
+[node name="TileLowDesert358" parent="World" unique_id=1204386476 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.648221, 20.523447, 85.486336)
+
+[node name="TileLowDesert357" parent="World" unique_id=2061353654 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.618124, 20.516619, 87.40363)
+
+[node name="TileLowDesert356" parent="World" unique_id=2031628362 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.618124, 20.545895, 87.37788)
+
+[node name="TileLowDesert355" parent="World" unique_id=1205670033 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.645831, 20.484646, 87.37034)
+
+[node name="TileLowDesert354" parent="World" unique_id=1240194045 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.56315, 20.545895, 87.37788)
+
+[node name="TileLowDesert353" parent="World" unique_id=464982017 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.56315, 20.545895, 85.46057)
+
+[node name="TileLowDesert352" parent="World" unique_id=114140422 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.56315, 20.545895, 83.54888)
+
+[node name="TileLowDesert351" parent="World" unique_id=1330709024 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.56315, 20.545895, 81.55529)
+
+[node name="TileLowDesert350" parent="World" unique_id=1090448139 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.56315, 20.545895, 79.59114)
+
+[node name="TileLowDesert349" parent="World" unique_id=1090058727 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.56315, 20.545895, 77.67384)
+
+[node name="TileLowDesert348" parent="World" unique_id=1710722731 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.56315, 20.545895, 75.76215)
+
+[node name="TileLowDesert347" parent="World" unique_id=306851741 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.56315, 20.545895, 73.76856)
+
+[node name="TileLowDesert346" parent="World" unique_id=1426695844 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.69473, 20.545895, 87.37788)
+
+[node name="TileLowDesert345" parent="World" unique_id=1788328935 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.69473, 20.545895, 85.46057)
+
+[node name="TileLowDesert344" parent="World" unique_id=733009692 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.69473, 20.545895, 83.54888)
+
+[node name="TileLowDesert343" parent="World" unique_id=383706679 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.69473, 20.545895, 81.55529)
+
+[node name="TileLowDesert342" parent="World" unique_id=535414004 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.69473, 20.545895, 79.59114)
+
+[node name="TileLowDesert341" parent="World" unique_id=1524798992 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.69473, 20.545895, 77.67384)
+
+[node name="TileLowDesert340" parent="World" unique_id=637294077 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.69473, 20.545895, 75.76215)
+
+[node name="TileLowDesert339" parent="World" unique_id=1736345045 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.69473, 20.545895, 73.76856)
+
+[node name="TileLowDesert338" parent="World" unique_id=1213589463 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.52523, 20.545895, 87.37788)
+
+[node name="TileLowDesert337" parent="World" unique_id=1765881933 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.52523, 20.545895, 85.46057)
+
+[node name="TileLowDesert336" parent="World" unique_id=2145749053 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.52523, 20.545895, 83.54888)
+
+[node name="TileLowDesert335" parent="World" unique_id=108553377 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.52523, 20.545895, 81.55529)
+
+[node name="TileLowDesert334" parent="World" unique_id=992478784 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.52523, 20.545895, 79.59114)
+
+[node name="TileLowDesert333" parent="World" unique_id=1201349294 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.52523, 20.545895, 77.67384)
+
+[node name="TileLowDesert332" parent="World" unique_id=1959230989 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.52523, 20.545895, 75.76215)
+
+[node name="TileLowDesert331" parent="World" unique_id=1467131079 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.52523, 20.545895, 73.76856)
+
+[node name="TileLowDesert330" parent="World" unique_id=1461507830 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.7112637, 20.545895, 73.76856)
+
+[node name="TileLowDesert329" parent="World" unique_id=1858268093 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.7112637, 20.545895, 75.76215)
+
+[node name="TileLowDesert328" parent="World" unique_id=846073305 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.7112637, 20.545895, 77.67384)
+
+[node name="TileLowDesert327" parent="World" unique_id=1257828056 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.7112637, 20.545895, 79.59114)
+
+[node name="TileLowDesert326" parent="World" unique_id=674545610 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.7112637, 20.545895, 81.55529)
+
+[node name="TileLowDesert325" parent="World" unique_id=861538426 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.7112637, 20.545895, 83.54888)
+
+[node name="TileLowDesert324" parent="World" unique_id=1000801719 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.7112637, 20.545895, 85.46057)
+
+[node name="TileLowDesert323" parent="World" unique_id=1395958728 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.7112637, 20.545895, 87.37788)
+
+[node name="TileLowDesert322" parent="World" unique_id=433420935 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.7112637, 20.545895, 89.335915)
+
+[node name="TileLowDesert321" parent="World" unique_id=1766089161 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.52523, 20.545895, 89.335915)
+
+[node name="TileLowDesert320" parent="World" unique_id=2119267947 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.69473, 20.545895, 89.335915)
+
+[node name="TileLowDesert319" parent="World" unique_id=1775595339 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.56315, 20.545895, 89.335915)
+
+[node name="TileLowDesert318" parent="World" unique_id=1103992964 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.645831, 20.484646, 89.32838)
+
+[node name="TileLowDesert317" parent="World" unique_id=1975027614 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.618124, 20.545895, 89.335915)
+
+[node name="TileLowDesert316" parent="World" unique_id=1682026597 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.618124, 20.516619, 89.36167)
+
+[node name="TileLowDesert315" parent="World" unique_id=310077991 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.926121, 20.516619, 73.79433)
+
+[node name="TileLowDesert314" parent="World" unique_id=1476019269 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.926121, 20.545895, 73.76856)
+
+[node name="TileLowDesert313" parent="World" unique_id=1662800898 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.896024, 20.523447, 73.79433)
+
+[node name="TileLowDesert312" parent="World" unique_id=2012465965 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.926121, 20.516619, 75.78792)
+
+[node name="TileLowDesert311" parent="World" unique_id=144592761 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.926121, 20.545895, 75.76215)
+
+[node name="TileLowDesert310" parent="World" unique_id=1874385997 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.896024, 20.523447, 75.78792)
+
+[node name="TileLowDesert309" parent="World" unique_id=342402094 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.926121, 20.516619, 77.6996)
+
+[node name="TileLowDesert308" parent="World" unique_id=1712816308 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.926121, 20.545895, 77.67384)
+
+[node name="TileLowDesert307" parent="World" unique_id=1308615234 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.896024, 20.523447, 77.6996)
+
+[node name="TileLowDesert306" parent="World" unique_id=1598594778 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.926121, 20.516619, 79.616905)
+
+[node name="TileLowDesert305" parent="World" unique_id=1997075061 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.926121, 20.545895, 79.59114)
+
+[node name="TileLowDesert304" parent="World" unique_id=1708494710 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.896024, 20.523447, 79.616905)
+
+[node name="TileLowDesert303" parent="World" unique_id=767400854 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.926121, 20.516619, 81.58105)
+
+[node name="TileLowDesert302" parent="World" unique_id=83334949 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.926121, 20.545895, 81.55529)
+
+[node name="TileLowDesert301" parent="World" unique_id=298883080 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.896024, 20.523447, 81.58105)
+
+[node name="TileLowDesert300" parent="World" unique_id=1637802379 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.926121, 20.516619, 83.57464)
+
+[node name="TileLowDesert299" parent="World" unique_id=852885305 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.926121, 20.545895, 83.54888)
+
+[node name="TileLowDesert298" parent="World" unique_id=1922732273 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.896024, 20.523447, 83.57464)
+
+[node name="TileLowDesert297" parent="World" unique_id=493350607 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.926121, 20.516619, 85.486336)
+
+[node name="TileLowDesert296" parent="World" unique_id=201206480 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.926121, 20.545895, 85.46057)
+
+[node name="TileLowDesert295" parent="World" unique_id=380918706 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.896024, 20.523447, 85.486336)
+
+[node name="TileLowDesert294" parent="World" unique_id=1413955250 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.926121, 20.516619, 87.40363)
+
+[node name="TileLowDesert293" parent="World" unique_id=27305583 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.926121, 20.545895, 87.37788)
+
+[node name="TileLowDesert292" parent="World" unique_id=1628972126 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.898414, 20.484646, 87.37034)
+
+[node name="TileLowDesert291" parent="World" unique_id=1270631296 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.981095, 20.545895, 87.37788)
+
+[node name="TileLowDesert290" parent="World" unique_id=388038558 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.981095, 20.545895, 85.46057)
+
+[node name="TileLowDesert289" parent="World" unique_id=1058268394 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.981095, 20.545895, 83.54888)
+
+[node name="TileLowDesert288" parent="World" unique_id=1492319011 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.981095, 20.545895, 81.55529)
+
+[node name="TileLowDesert287" parent="World" unique_id=1763629465 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.981095, 20.545895, 79.59114)
+
+[node name="TileLowDesert286" parent="World" unique_id=1293009503 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.981095, 20.545895, 77.67384)
+
+[node name="TileLowDesert285" parent="World" unique_id=1330972575 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.981095, 20.545895, 75.76215)
+
+[node name="TileLowDesert284" parent="World" unique_id=458378371 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.981095, 20.545895, 73.76856)
+
+[node name="TileLowDesert283" parent="World" unique_id=1214969166 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.849514, 20.545895, 87.37788)
+
+[node name="TileLowDesert282" parent="World" unique_id=730113018 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.849514, 20.545895, 85.46057)
+
+[node name="TileLowDesert281" parent="World" unique_id=1727945042 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.849514, 20.545895, 83.54888)
+
+[node name="TileLowDesert280" parent="World" unique_id=1273191150 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.849514, 20.545895, 81.55529)
+
+[node name="TileLowDesert279" parent="World" unique_id=1658722493 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.849514, 20.545895, 79.59114)
+
+[node name="TileLowDesert278" parent="World" unique_id=108035920 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.849514, 20.545895, 77.67384)
+
+[node name="TileLowDesert277" parent="World" unique_id=65756666 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.849514, 20.545895, 75.76215)
+
+[node name="TileLowDesert276" parent="World" unique_id=746196866 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.849514, 20.545895, 73.76856)
+
+[node name="TileLowDesert275" parent="World" unique_id=121619209 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.019014, 20.545895, 87.37788)
+
+[node name="TileLowDesert274" parent="World" unique_id=1407186390 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.019014, 20.545895, 85.46057)
+
+[node name="TileLowDesert273" parent="World" unique_id=78099524 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.019014, 20.545895, 83.54888)
+
+[node name="TileLowDesert272" parent="World" unique_id=1726410662 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.019014, 20.545895, 81.55529)
+
+[node name="TileLowDesert271" parent="World" unique_id=2001024045 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.019014, 20.545895, 79.59114)
+
+[node name="TileLowDesert270" parent="World" unique_id=512621372 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.019014, 20.545895, 77.67384)
+
+[node name="TileLowDesert269" parent="World" unique_id=254478482 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.019014, 20.545895, 75.76215)
+
+[node name="TileLowDesert268" parent="World" unique_id=838482228 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.019014, 20.545895, 73.76856)
+
+[node name="TileLowDesert267" parent="World" unique_id=1560094982 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.832981, 20.545895, 73.76856)
+
+[node name="TileLowDesert266" parent="World" unique_id=1951347145 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.832981, 20.545895, 75.76215)
+
+[node name="TileLowDesert265" parent="World" unique_id=1664434948 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.832981, 20.545895, 77.67384)
+
+[node name="TileLowDesert264" parent="World" unique_id=1621700730 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.832981, 20.545895, 79.59114)
+
+[node name="TileLowDesert263" parent="World" unique_id=1844648242 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.832981, 20.545895, 81.55529)
+
+[node name="TileLowDesert262" parent="World" unique_id=1384504059 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.832981, 20.545895, 83.54888)
+
+[node name="TileLowDesert261" parent="World" unique_id=1307029397 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.832981, 20.545895, 85.46057)
+
+[node name="TileLowDesert260" parent="World" unique_id=65073071 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.832981, 20.545895, 87.37788)
+
+[node name="TileLowDesert259" parent="World" unique_id=1317547558 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.832981, 20.545895, 89.335915)
+
+[node name="TileLowDesert258" parent="World" unique_id=4665839 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.019014, 20.545895, 89.335915)
+
+[node name="TileLowDesert257" parent="World" unique_id=538356645 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.849514, 20.545895, 89.335915)
+
+[node name="TileLowDesert256" parent="World" unique_id=233832572 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.981095, 20.545895, 89.335915)
+
+[node name="TileLowDesert255" parent="World" unique_id=383917354 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.898414, 20.484646, 89.32838)
+
+[node name="TileLowDesert254" parent="World" unique_id=1990328939 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.926121, 20.545895, 89.335915)
+
+[node name="TileLowDesert253" parent="World" unique_id=916566770 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.926121, 20.516619, 89.36167)
+
+[node name="TileLowDesert252" parent="World" unique_id=642584868 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13801277, 20.516619, 89.36167)
+
+[node name="TileLowDesert251" parent="World" unique_id=1973583673 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8619874, 20.545895, 89.335915)
+
+[node name="TileLowDesert250" parent="World" unique_id=2135063795 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1103058, 20.484646, 89.32838)
+
+[node name="TileLowDesert249" parent="World" unique_id=798828384 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8070128, 20.545895, 89.335915)
+
+[node name="TileLowDesert248" parent="World" unique_id=1528978548 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.061407, 20.545895, 89.335915)
+
+[node name="TileLowDesert247" parent="World" unique_id=1715648158 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7690935, 20.545895, 89.335915)
+
+[node name="TileLowDesert246" parent="World" unique_id=1094702433 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.044873, 20.545895, 89.335915)
+
+[node name="TileLowDesert245" parent="World" unique_id=1660016990 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.044873, 20.545895, 87.37788)
+
+[node name="TileLowDesert244" parent="World" unique_id=356737670 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.044873, 20.545895, 85.46057)
+
+[node name="TileLowDesert243" parent="World" unique_id=1179759498 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.044873, 20.545895, 83.54888)
+
+[node name="TileLowDesert242" parent="World" unique_id=1100364066 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.044873, 20.545895, 81.55529)
+
+[node name="TileLowDesert241" parent="World" unique_id=7746622 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.044873, 20.545895, 79.59114)
+
+[node name="TileLowDesert240" parent="World" unique_id=2094762555 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.044873, 20.545895, 77.67384)
+
+[node name="TileLowDesert239" parent="World" unique_id=1387499120 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.044873, 20.545895, 75.76215)
+
+[node name="TileLowDesert238" parent="World" unique_id=420992474 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.044873, 20.545895, 73.76856)
+
+[node name="TileLowDesert237" parent="World" unique_id=2126749016 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7690935, 20.545895, 73.76856)
+
+[node name="TileLowDesert236" parent="World" unique_id=2042967848 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7690935, 20.545895, 75.76215)
+
+[node name="TileLowDesert235" parent="World" unique_id=733351595 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7690935, 20.545895, 77.67384)
+
+[node name="TileLowDesert234" parent="World" unique_id=1570547854 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7690935, 20.545895, 79.59114)
+
+[node name="TileLowDesert233" parent="World" unique_id=977624470 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7690935, 20.545895, 81.55529)
+
+[node name="TileLowDesert232" parent="World" unique_id=132502888 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7690935, 20.545895, 83.54888)
+
+[node name="TileLowDesert231" parent="World" unique_id=276064181 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7690935, 20.545895, 85.46057)
+
+[node name="TileLowDesert230" parent="World" unique_id=1095853718 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7690935, 20.545895, 87.37788)
+
+[node name="TileLowDesert229" parent="World" unique_id=640642480 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.061407, 20.545895, 73.76856)
+
+[node name="TileLowDesert228" parent="World" unique_id=1004139167 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.061407, 20.545895, 75.76215)
+
+[node name="TileLowDesert227" parent="World" unique_id=1380313202 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.061407, 20.545895, 77.67384)
+
+[node name="TileLowDesert226" parent="World" unique_id=1183396389 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.061407, 20.545895, 79.59114)
+
+[node name="TileLowDesert225" parent="World" unique_id=701830104 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.061407, 20.545895, 81.55529)
+
+[node name="TileLowDesert224" parent="World" unique_id=1749735065 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.061407, 20.545895, 83.54888)
+
+[node name="TileLowDesert223" parent="World" unique_id=49628396 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.061407, 20.545895, 85.46057)
+
+[node name="TileLowDesert222" parent="World" unique_id=1722033634 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.061407, 20.545895, 87.37788)
+
+[node name="TileLowDesert221" parent="World" unique_id=222131522 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8070128, 20.545895, 73.76856)
+
+[node name="TileLowDesert220" parent="World" unique_id=2067944850 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8070128, 20.545895, 75.76215)
+
+[node name="TileLowDesert219" parent="World" unique_id=935283032 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8070128, 20.545895, 77.67384)
+
+[node name="TileLowDesert218" parent="World" unique_id=1845888916 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8070128, 20.545895, 79.59114)
+
+[node name="TileLowDesert217" parent="World" unique_id=1587187248 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8070128, 20.545895, 81.55529)
+
+[node name="TileLowDesert216" parent="World" unique_id=1253157583 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8070128, 20.545895, 83.54888)
+
+[node name="TileLowDesert215" parent="World" unique_id=1759789658 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8070128, 20.545895, 85.46057)
+
+[node name="TileLowDesert214" parent="World" unique_id=1248212651 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8070128, 20.545895, 87.37788)
+
+[node name="TileLowDesert213" parent="World" unique_id=746424486 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1103058, 20.484646, 87.37034)
+
+[node name="TileLowDesert212" parent="World" unique_id=802826729 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8619874, 20.545895, 87.37788)
+
+[node name="TileLowDesert211" parent="World" unique_id=1209242984 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13801277, 20.516619, 87.40363)
+
+[node name="TileLowDesert210" parent="World" unique_id=476031717 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.107916, 20.523447, 85.486336)
+
+[node name="TileLowDesert209" parent="World" unique_id=1320805221 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8619874, 20.545895, 85.46057)
+
+[node name="TileLowDesert208" parent="World" unique_id=1177295758 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13801277, 20.516619, 85.486336)
+
+[node name="TileLowDesert207" parent="World" unique_id=1055198530 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.107916, 20.523447, 83.57464)
+
+[node name="TileLowDesert206" parent="World" unique_id=331286054 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8619874, 20.545895, 83.54888)
+
+[node name="TileLowDesert205" parent="World" unique_id=1802026086 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13801277, 20.516619, 83.57464)
+
+[node name="TileLowDesert204" parent="World" unique_id=1949027117 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.107916, 20.523447, 81.58105)
+
+[node name="TileLowDesert203" parent="World" unique_id=635841981 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8619874, 20.545895, 81.55529)
+
+[node name="TileLowDesert202" parent="World" unique_id=1086712677 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13801277, 20.516619, 81.58105)
+
+[node name="TileLowDesert201" parent="World" unique_id=1051906307 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.107916, 20.523447, 79.616905)
+
+[node name="TileLowDesert200" parent="World" unique_id=1230785809 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8619874, 20.545895, 79.59114)
+
+[node name="TileLowDesert199" parent="World" unique_id=555229123 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13801277, 20.516619, 79.616905)
+
+[node name="TileLowDesert198" parent="World" unique_id=1647446790 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.107916, 20.523447, 77.6996)
+
+[node name="TileLowDesert197" parent="World" unique_id=651157543 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8619874, 20.545895, 77.67384)
+
+[node name="TileLowDesert196" parent="World" unique_id=925983919 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13801277, 20.516619, 77.6996)
+
+[node name="TileLowDesert195" parent="World" unique_id=1360369478 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.107916, 20.523447, 75.78792)
+
+[node name="TileLowDesert194" parent="World" unique_id=1507928829 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8619874, 20.545895, 75.76215)
+
+[node name="TileLowDesert193" parent="World" unique_id=1501385605 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13801277, 20.516619, 75.78792)
+
+[node name="TileLowDesert192" parent="World" unique_id=520794363 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.107916, 20.523447, 73.79433)
+
+[node name="TileLowDesert191" parent="World" unique_id=1003563329 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8619874, 20.545895, 73.76856)
+
+[node name="TileLowDesert190" parent="World" unique_id=482906068 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13801277, 20.516619, 73.79433)
+
+[node name="TileLowDesert441" parent="World" unique_id=910437664 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13801277, 20.516619, 91.23329)
+
+[node name="TileLowDesert440" parent="World" unique_id=1954105542 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8619874, 20.545895, 91.20753)
+
+[node name="TileLowDesert439" parent="World" unique_id=59610726 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.107916, 20.523447, 91.23329)
+
+[node name="TileLowDesert438" parent="World" unique_id=1248756936 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13801277, 20.516619, 93.15059)
+
+[node name="TileLowDesert437" parent="World" unique_id=1429968766 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8619874, 20.545895, 93.12483)
+
+[node name="TileLowDesert436" parent="World" unique_id=776940235 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1103058, 20.484646, 93.117294)
+
+[node name="TileLowDesert435" parent="World" unique_id=2062196916 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8070128, 20.545895, 93.12483)
+
+[node name="TileLowDesert434" parent="World" unique_id=1359438272 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8070128, 20.545895, 91.20753)
+
+[node name="TileLowDesert433" parent="World" unique_id=2047218123 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.061407, 20.545895, 93.12483)
+
+[node name="TileLowDesert432" parent="World" unique_id=133735878 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.061407, 20.545895, 91.20753)
+
+[node name="TileLowDesert431" parent="World" unique_id=123768447 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7690935, 20.545895, 93.12483)
+
+[node name="TileLowDesert430" parent="World" unique_id=335615058 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7690935, 20.545895, 91.20753)
+
+[node name="TileLowDesert429" parent="World" unique_id=612653813 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.044873, 20.545895, 91.20753)
+
+[node name="TileLowDesert428" parent="World" unique_id=1997597960 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.044873, 20.545895, 93.12483)
+
+[node name="TileLowDesert427" parent="World" unique_id=939836718 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.044873, 20.545895, 95.08287)
+
+[node name="TileLowDesert426" parent="World" unique_id=1426498779 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7690935, 20.545895, 95.08287)
+
+[node name="TileLowDesert425" parent="World" unique_id=721732545 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.061407, 20.545895, 95.08287)
+
+[node name="TileLowDesert424" parent="World" unique_id=1634336905 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8070128, 20.545895, 95.08287)
+
+[node name="TileLowDesert423" parent="World" unique_id=1700645169 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1103058, 20.484646, 95.07533)
+
+[node name="TileLowDesert422" parent="World" unique_id=1122748502 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8619874, 20.545895, 95.08287)
+
+[node name="TileLowDesert421" parent="World" unique_id=370496092 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13801277, 20.516619, 95.10863)
+
+[node name="TileLowDesert420" parent="World" unique_id=2119643643 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.926121, 20.516619, 95.10863)
+
+[node name="TileLowDesert419" parent="World" unique_id=1885115471 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.926121, 20.545895, 95.08287)
+
+[node name="TileLowDesert418" parent="World" unique_id=1756008563 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.898414, 20.484646, 95.07533)
+
+[node name="TileLowDesert417" parent="World" unique_id=959637702 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.981095, 20.545895, 95.08287)
+
+[node name="TileLowDesert416" parent="World" unique_id=617491343 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.849514, 20.545895, 95.08287)
+
+[node name="TileLowDesert415" parent="World" unique_id=613984443 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.019014, 20.545895, 95.08287)
+
+[node name="TileLowDesert414" parent="World" unique_id=686550264 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.832981, 20.545895, 95.08287)
+
+[node name="TileLowDesert413" parent="World" unique_id=46652872 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.832981, 20.545895, 93.12483)
+
+[node name="TileLowDesert412" parent="World" unique_id=326669843 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.832981, 20.545895, 91.20753)
+
+[node name="TileLowDesert411" parent="World" unique_id=366190124 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.019014, 20.545895, 91.20753)
+
+[node name="TileLowDesert410" parent="World" unique_id=828435529 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.019014, 20.545895, 93.12483)
+
+[node name="TileLowDesert409" parent="World" unique_id=1955900462 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.849514, 20.545895, 91.20753)
+
+[node name="TileLowDesert408" parent="World" unique_id=891135049 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.849514, 20.545895, 93.12483)
+
+[node name="TileLowDesert407" parent="World" unique_id=484790138 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.981095, 20.545895, 91.20753)
+
+[node name="TileLowDesert406" parent="World" unique_id=191212501 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.981095, 20.545895, 93.12483)
+
+[node name="TileLowDesert405" parent="World" unique_id=56640707 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.898414, 20.484646, 93.117294)
+
+[node name="TileLowDesert404" parent="World" unique_id=758943713 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.926121, 20.545895, 93.12483)
+
+[node name="TileLowDesert403" parent="World" unique_id=824790193 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.926121, 20.516619, 93.15059)
+
+[node name="TileLowDesert402" parent="World" unique_id=1671620221 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.896024, 20.523447, 91.23329)
+
+[node name="TileLowDesert401" parent="World" unique_id=38705246 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.926121, 20.545895, 91.20753)
+
+[node name="TileLowDesert400" parent="World" unique_id=1916707673 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.926121, 20.516619, 91.23329)
+
+[node name="TileLowDesert399" parent="World" unique_id=587658087 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.618124, 20.516619, 95.10863)
+
+[node name="TileLowDesert398" parent="World" unique_id=1211952827 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.618124, 20.545895, 95.08287)
+
+[node name="TileLowDesert397" parent="World" unique_id=974989758 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.645831, 20.484646, 95.07533)
+
+[node name="TileLowDesert396" parent="World" unique_id=1807834728 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.56315, 20.545895, 95.08287)
+
+[node name="TileLowDesert395" parent="World" unique_id=602109092 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.69473, 20.545895, 95.08287)
+
+[node name="TileLowDesert394" parent="World" unique_id=1982446332 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.52523, 20.545895, 95.08287)
+
+[node name="TileLowDesert393" parent="World" unique_id=1081277473 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.7112637, 20.545895, 95.08287)
+
+[node name="TileLowDesert392" parent="World" unique_id=1693023205 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.7112637, 20.545895, 93.12483)
+
+[node name="TileLowDesert391" parent="World" unique_id=1525263861 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.7112637, 20.545895, 91.20753)
+
+[node name="TileLowDesert390" parent="World" unique_id=101685136 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.52523, 20.545895, 91.20753)
+
+[node name="TileLowDesert389" parent="World" unique_id=970842202 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.52523, 20.545895, 93.12483)
+
+[node name="TileLowDesert388" parent="World" unique_id=269404317 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.69473, 20.545895, 91.20753)
+
+[node name="TileLowDesert387" parent="World" unique_id=48011832 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.69473, 20.545895, 93.12483)
+
+[node name="TileLowDesert386" parent="World" unique_id=1788561540 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.56315, 20.545895, 91.20753)
+
+[node name="TileLowDesert385" parent="World" unique_id=1653980924 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.56315, 20.545895, 93.12483)
+
+[node name="TileLowDesert384" parent="World" unique_id=876109883 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.645831, 20.484646, 93.117294)
+
+[node name="TileLowDesert383" parent="World" unique_id=510682172 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.618124, 20.545895, 93.12483)
+
+[node name="TileLowDesert382" parent="World" unique_id=917457465 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.618124, 20.516619, 93.15059)
+
+[node name="TileLowDesert381" parent="World" unique_id=1932457181 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.648221, 20.523447, 91.23329)
+
+[node name="TileLowDesert380" parent="World" unique_id=1203840069 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.618124, 20.545895, 91.20753)
+
+[node name="TileLowDesert379" parent="World" unique_id=1526302349 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.618124, 20.516619, 91.23329)

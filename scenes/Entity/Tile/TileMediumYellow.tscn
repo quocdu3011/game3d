@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://1ajvys8ncpt"]
+
+[ext_resource type="PackedScene" uid="uid://wkvu2rbj8uws" path="res://models/tileMedium_teamYellow.gltf" id="1_6lvfo"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7divy"]
+size = Vector3(2.0, 1.5, 2.0)
+
+[node name="TileMediumYellow" type="Node3D" unique_id=41485686]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=753028358]
+
+[node name="tileMedium_teamYellow2" parent="StaticBody3D" unique_id=672015818 instance=ExtResource("1_6lvfo")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=54800328]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 0.75, 0.0)
+shape = SubResource("BoxShape3D_7divy")

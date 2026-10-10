@@ -1,0 +1,123 @@
+[gd_scene format=3 uid="uid://c2dvu7umx878q"]
+
+[ext_resource type="Script" uid="uid://dhblqcg31ry38" path="res://scripts/online_menu.gd" id="1_omgd"]
+[ext_resource type="Theme" uid="uid://d3k1yd5a1drwo" path="res://assets/UI/ui_theme.tres" id="2_theme"]
+
+[node name="OnlineMenu" type="Control" unique_id=850147876]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_theme")
+script = ExtResource("1_omgd")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1938089762]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1, 0.14, 0.22, 1)
+
+[node name="Title" type="Label" parent="." unique_id=448810897]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -250.0
+offset_top = 25.0
+offset_right = 250.0
+offset_bottom = 75.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 36
+text = "CHẾ ĐỘ ONLINE CO-OP"
+horizontal_alignment = 1
+
+[node name="CenterContainer" type="VBoxContainer" parent="." unique_id=237840408]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -170.0
+offset_top = -180.0
+offset_right = 170.0
+offset_bottom = 260.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="BtnHost" type="Button" parent="CenterContainer" unique_id=108422714]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(340, 105)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "TẠO PHÒNG MỚI (HOST)"
+
+[node name="LblRoomID" type="Label" parent="CenterContainer" unique_id=973281865]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "MÃ PHÒNG (ROOM ID): ------"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer" unique_id=1403524594]
+layout_mode = 2
+
+[node name="LblJoinTitle" type="Label" parent="CenterContainer" unique_id=43620886]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Nhập Mã Phòng (6 chữ số):"
+
+[node name="TxtIP" type="LineEdit" parent="CenterContainer" unique_id=2074208536]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+placeholder_text = "Ví dụ: 483920"
+alignment = 1
+max_length = 6
+
+[node name="BtnJoin" type="Button" parent="CenterContainer" unique_id=1754127068]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(340, 105)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "THAM GIA PHÒNG (JOIN)"
+
+[node name="LblPlayerCount" type="Label" parent="CenterContainer" unique_id=2041137186]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Số người chơi trong phòng: 0 / 2"
+horizontal_alignment = 1
+
+[node name="LblStatus" type="Label" parent="CenterContainer" unique_id=2109357662]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Sẵn sàng kết nối..."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="BtnStartGame" type="Button" parent="CenterContainer" unique_id=398617621]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(340, 105)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "BẮT ĐẦU GAME"
+
+[node name="BtnBack" type="Button" parent="." unique_id=1828411776]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(146, 45)
+layout_mode = 1
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 171.0
+offset_bottom = 70.0
+theme_override_font_sizes/font_size = 16
+text = "QUAY LẠI"

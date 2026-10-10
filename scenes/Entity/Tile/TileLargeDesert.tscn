@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://thbm4nj2dq7"]
+
+[ext_resource type="PackedScene" uid="uid://dald6l00ybv11" path="res://models/tileLarge_desert.gltf" id="1_shrvr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dwz93"]
+size = Vector3(6.0, 1.0, 6.0)
+
+[node name="TileLargeDesert" type="Node3D" unique_id=416258289]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=172988697]
+
+[node name="tileLarge_desert2" parent="StaticBody3D" unique_id=317475389 instance=ExtResource("1_shrvr")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=240244413]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 0.5, 0.0)
+shape = SubResource("BoxShape3D_dwz93")

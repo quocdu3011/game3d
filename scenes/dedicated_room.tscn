@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://dedicatedroom1"]
+
+[node name="DedicatedRoom" type="Node"]

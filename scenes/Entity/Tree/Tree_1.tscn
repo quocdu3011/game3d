@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://0wr65ma3snrs"]
+
+[ext_resource type="PackedScene" uid="uid://cep3s0octcpou" path="res://models/tree_desert.gltf" id="1_pic7j"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_82oju"]
+height = 2.7480469
+radius = 0.3017578
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0o70f"]
+height = 1.1088867
+radius = 0.2861328
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_lges3"]
+height = 0.9503174
+radius = 0.28125
+
+[node name="Tree1" type="Node2D" unique_id=618377458]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1298288077]
+
+[node name="tree_desert2" parent="StaticBody3D" unique_id=967924812 instance=ExtResource("1_pic7j")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1430150498]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4006072, 0)
+shape = SubResource("CylinderShape3D_82oju")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" unique_id=943343802]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75405395, 1.6213627, 0)
+shape = SubResource("CylinderShape3D_0o70f")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="StaticBody3D" unique_id=81438841]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7578956, 1.0557274, 0)
+shape = SubResource("CylinderShape3D_lges3")

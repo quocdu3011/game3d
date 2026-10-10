@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://dpmncbtqv1t"]
+
+[ext_resource type="PackedScene" uid="uid://dvnawdfsmbwbr" path="res://models/tileSmall_teamRed.gltf" id="1_572az"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fqrl7"]
+size = Vector3(1.0, 1.0, 1.0)
+
+[node name="TileSmallRed" type="Node3D" unique_id=260406075]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=159807631]
+
+[node name="tileSmall_teamRed2" parent="StaticBody3D" unique_id=583388651 instance=ExtResource("1_572az")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=217323711]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 0.5, 0.0)
+shape = SubResource("BoxShape3D_fqrl7")

@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://bkvthv45qm44l"]
+
+[ext_resource type="PackedScene" uid="uid://dyxjmuvvb28ov" path="res://models/barrierSmall.gltf" id="1_hisc8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0o70f"]
+size = Vector3(1.9799805, 1, 0.19970703)
+
+[node name="BarierSmall" type="StaticBody3D" unique_id=2145283508]
+
+[node name="barrierSmall2" parent="." unique_id=966365785 instance=ExtResource("1_hisc8")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=204806556]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0036621094, 0.5020819, 0.0041503906)
+shape = SubResource("BoxShape3D_0o70f")

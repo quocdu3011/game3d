@@ -1,0 +1,471 @@
+[gd_scene format=3 uid="uid://lvlselectui1"]
+
+[ext_resource type="Script" uid="uid://c2dlwaj78pil3" path="res://scripts/level_select.gd" id="1_lsgd"]
+[ext_resource type="Texture2D" uid="uid://ugd56qyy2xpb" path="res://assets/UI/BoxesBanners/Banner_Blue.png" id="2_banner"]
+[ext_resource type="Texture2D" uid="uid://buol5yo37uigh" path="res://assets/UI/BoxesBanners/Box_Blank_Rounded.png" id="3_card_box"]
+[ext_resource type="Texture2D" uid="uid://crp75iv5442wm" path="res://assets/UI/ButtonsIcons/IconButton_Large_Orange_Square.png" id="4_orange_sq"]
+[ext_resource type="Texture2D" uid="uid://cqn5gxqi4ie6v" path="res://assets/UI/ButtonsIcons/IconButton_Large_Blue_Square.png" id="5_blue_sq"]
+[ext_resource type="Texture2D" uid="uid://uv3rf5dvnbi5" path="res://assets/UI/Icons/Icon_Small_Star.png" id="6_star"]
+[ext_resource type="Texture2D" uid="uid://cw7y8bpjfck3t" path="res://assets/UI/Icons/Icon_Small_Lock.png" id="7_lock"]
+[ext_resource type="Texture2D" uid="uid://bikbufghrijhm" path="res://assets/UI/Icons/Icon_Small_Blank_Arrow.png" id="8_arrow"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_card"]
+texture = ExtResource("3_card_box")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_orange_btn"]
+texture = ExtResource("4_orange_sq")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_blue_btn"]
+texture = ExtResource("5_blue_sq")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
+
+[node name="LevelSelect" type="Control" unique_id=1502481828]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lsgd")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1368961187]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.18, 0.12, 0.2, 1)
+
+[node name="MainCard" type="PanelContainer" parent="." unique_id=1350465871]
+custom_minimum_size = Vector2(560, 560)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -280.0
+offset_top = -240.0
+offset_right = 280.0
+offset_bottom = 320.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.9, 0.9)
+theme_override_styles/panel = SubResource("StyleBoxTexture_card")
+
+[node name="VBox" type="VBoxContainer" parent="MainCard" unique_id=591970014]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="SpacerTop" type="Control" parent="MainCard/VBox" unique_id=1382359079]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="MainCard/VBox" unique_id=155608865]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 14
+theme_override_constants/v_separation = 14
+columns = 4
+
+[node name="BtnLvl1" type="Button" parent="MainCard/VBox/GridContainer" unique_id=2081658288]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(95, 95)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.15, 0.05, 1)
+theme_override_colors/font_pressed_color = Color(0.5, 0.2, 0.05, 1)
+theme_override_colors/font_hover_color = Color(0.2, 0.08, 0.02, 1)
+theme_override_font_sizes/font_size = 46
+theme_override_styles/normal = SubResource("StyleBoxTexture_orange_btn")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_orange_btn")
+theme_override_styles/hover = SubResource("StyleBoxTexture_orange_btn")
+text = "1"
+
+[node name="Star" type="TextureRect" parent="MainCard/VBox/GridContainer/BtnLvl1" unique_id=2141204522]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -28.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("6_star")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BtnLvl2" type="Button" parent="MainCard/VBox/GridContainer" unique_id=1246277676]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(95, 95)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.15, 0.05, 1)
+theme_override_colors/font_pressed_color = Color(0.5, 0.2, 0.05, 1)
+theme_override_colors/font_hover_color = Color(0.2, 0.08, 0.02, 1)
+theme_override_font_sizes/font_size = 46
+theme_override_styles/normal = SubResource("StyleBoxTexture_orange_btn")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_orange_btn")
+theme_override_styles/hover = SubResource("StyleBoxTexture_orange_btn")
+text = "2"
+
+[node name="Star" type="TextureRect" parent="MainCard/VBox/GridContainer/BtnLvl2" unique_id=1144703355]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -28.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("6_star")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BtnLvl3" type="Button" parent="MainCard/VBox/GridContainer" unique_id=1523359209]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(95, 95)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.15, 0.05, 1)
+theme_override_colors/font_pressed_color = Color(0.5, 0.2, 0.05, 1)
+theme_override_colors/font_hover_color = Color(0.2, 0.08, 0.02, 1)
+theme_override_font_sizes/font_size = 46
+theme_override_styles/normal = SubResource("StyleBoxTexture_orange_btn")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_orange_btn")
+theme_override_styles/hover = SubResource("StyleBoxTexture_orange_btn")
+text = "3"
+
+[node name="Star" type="TextureRect" parent="MainCard/VBox/GridContainer/BtnLvl3" unique_id=2057689064]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -28.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("6_star")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BtnLvl4" type="Button" parent="MainCard/VBox/GridContainer" unique_id=634815545]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(95, 95)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.15, 0.05, 1)
+theme_override_colors/font_pressed_color = Color(0.5, 0.2, 0.05, 1)
+theme_override_colors/font_hover_color = Color(0.2, 0.08, 0.02, 1)
+theme_override_font_sizes/font_size = 46
+theme_override_styles/normal = SubResource("StyleBoxTexture_orange_btn")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_orange_btn")
+theme_override_styles/hover = SubResource("StyleBoxTexture_orange_btn")
+text = "4"
+
+[node name="Star" type="TextureRect" parent="MainCard/VBox/GridContainer/BtnLvl4" unique_id=755560803]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -28.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("6_star")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BtnLvl5" type="Button" parent="MainCard/VBox/GridContainer" unique_id=15403854]
+custom_minimum_size = Vector2(95, 95)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.15, 0.05, 1)
+theme_override_font_sizes/font_size = 46
+theme_override_styles/normal = SubResource("StyleBoxTexture_orange_btn")
+text = "5"
+
+[node name="Star" type="TextureRect" parent="MainCard/VBox/GridContainer/BtnLvl5" unique_id=1503105620]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -28.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("6_star")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BtnLvl6" type="Button" parent="MainCard/VBox/GridContainer" unique_id=144603710]
+custom_minimum_size = Vector2(95, 95)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.15, 0.05, 1)
+theme_override_font_sizes/font_size = 46
+theme_override_styles/normal = SubResource("StyleBoxTexture_orange_btn")
+text = "6"
+
+[node name="Star" type="TextureRect" parent="MainCard/VBox/GridContainer/BtnLvl6" unique_id=1742097397]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -28.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("6_star")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BtnLvl7" type="Button" parent="MainCard/VBox/GridContainer" unique_id=93695212]
+custom_minimum_size = Vector2(95, 95)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.15, 0.05, 1)
+theme_override_font_sizes/font_size = 46
+theme_override_styles/normal = SubResource("StyleBoxTexture_orange_btn")
+text = "7"
+
+[node name="Star" type="TextureRect" parent="MainCard/VBox/GridContainer/BtnLvl7" unique_id=1782671768]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -28.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("6_star")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BtnLvl8" type="Button" parent="MainCard/VBox/GridContainer" unique_id=393051347]
+custom_minimum_size = Vector2(95, 95)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.15, 0.05, 1)
+theme_override_font_sizes/font_size = 46
+theme_override_styles/normal = SubResource("StyleBoxTexture_orange_btn")
+text = "8"
+
+[node name="Star" type="TextureRect" parent="MainCard/VBox/GridContainer/BtnLvl8" unique_id=1332635629]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -28.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("6_star")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BtnLvl9" type="Button" parent="MainCard/VBox/GridContainer" unique_id=1541530548]
+custom_minimum_size = Vector2(95, 95)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.15, 0.05, 1)
+theme_override_font_sizes/font_size = 46
+theme_override_styles/normal = SubResource("StyleBoxTexture_orange_btn")
+text = "9"
+
+[node name="BtnLvl10" type="Button" parent="MainCard/VBox/GridContainer" unique_id=2054089705]
+custom_minimum_size = Vector2(95, 95)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.15, 0.3, 0.5, 1)
+theme_override_font_sizes/font_size = 44
+theme_override_styles/normal = SubResource("StyleBoxTexture_blue_btn")
+text = "10"
+
+[node name="Lock" type="TextureRect" parent="MainCard/VBox/GridContainer/BtnLvl10" unique_id=108861518]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -26.0
+offset_top = -26.0
+offset_right = 2.0
+offset_bottom = 2.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("7_lock")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BtnLvl11" type="Button" parent="MainCard/VBox/GridContainer" unique_id=472301957]
+custom_minimum_size = Vector2(95, 95)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.15, 0.3, 0.5, 1)
+theme_override_font_sizes/font_size = 44
+theme_override_styles/normal = SubResource("StyleBoxTexture_blue_btn")
+text = "11"
+
+[node name="Lock" type="TextureRect" parent="MainCard/VBox/GridContainer/BtnLvl11" unique_id=1492012680]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -26.0
+offset_top = -26.0
+offset_right = 2.0
+offset_bottom = 2.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("7_lock")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BtnLvl12" type="Button" parent="MainCard/VBox/GridContainer" unique_id=1584016038]
+custom_minimum_size = Vector2(95, 95)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.15, 0.3, 0.5, 1)
+theme_override_font_sizes/font_size = 44
+theme_override_styles/normal = SubResource("StyleBoxTexture_blue_btn")
+text = "12"
+
+[node name="Lock" type="TextureRect" parent="MainCard/VBox/GridContainer/BtnLvl12" unique_id=21060955]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -26.0
+offset_top = -26.0
+offset_right = 2.0
+offset_bottom = 2.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("7_lock")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BottomContainer" type="HBoxContainer" parent="MainCard/VBox" unique_id=2008985688]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="BtnPrev" type="TextureButton" parent="MainCard/VBox/BottomContainer" unique_id=79531312]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+size_flags_vertical = 4
+texture_normal = ExtResource("8_arrow")
+ignore_texture_size = true
+stretch_mode = 5
+flip_h = true
+
+[node name="ProgressBar" type="ProgressBar" parent="MainCard/VBox/BottomContainer" unique_id=1008241021]
+custom_minimum_size = Vector2(320, 24)
+layout_mode = 2
+size_flags_vertical = 4
+value = 33.0
+show_percentage = false
+
+[node name="BtnNext" type="TextureButton" parent="MainCard/VBox/BottomContainer" unique_id=779943589]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+size_flags_vertical = 4
+texture_normal = ExtResource("8_arrow")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="TitleBanner" type="Control" parent="." unique_id=1366905751]
+custom_minimum_size = Vector2(340, 100)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -170.0
+offset_top = 52.0
+offset_right = 170.0
+offset_bottom = 152.0
+grow_horizontal = 2
+
+[node name="BannerTexture" type="TextureRect" parent="TitleBanner" unique_id=1779652817]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_banner")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TitleLabel" type="Label" parent="TitleBanner" unique_id=898835041]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 32
+text = "Level Select"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BtnBack" type="Button" parent="." unique_id=1288368331]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(140, 45)
+layout_mode = 1
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 165.0
+offset_bottom = 70.0
+theme_override_font_sizes/font_size = 16
+text = "QUAY LẠI"

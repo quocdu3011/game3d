@@ -1,0 +1,808 @@
+[gd_scene format=3 uid="uid://hudui1"]
+
+[ext_resource type="Script" uid="uid://6usro25cjrms" path="res://scripts/hud.gd" id="1_hudgd"]
+[ext_resource type="Script" uid="uid://s1ltf2digq4i" path="res://scripts/options_menu.gd" id="2_optsgd"]
+[ext_resource type="Theme" uid="uid://d3k1yd5a1drwo" path="res://assets/UI/ui_theme.tres" id="3_theme"]
+[ext_resource type="Texture2D" uid="uid://jo18a1174llq" path="res://assets/UI/BoxesBanners/Box_Orange_Rounded.png" id="10_box"]
+[ext_resource type="Texture2D" uid="uid://b3ojaptvannds" path="res://assets/UI/BoxesBanners/banner-pause.png" id="11_banner"]
+[ext_resource type="Texture2D" uid="uid://bo6dbclustk2a" path="res://assets/UI/BoxesBanners/button-options.png" id="12_banneropt"]
+[ext_resource type="Texture2D" uid="uid://d2c54iqwvf3fv" path="res://assets/UI/BoxesBanners/Box_Rounded.png" id="13_boxrnd"]
+[ext_resource type="Texture2D" uid="uid://c6r6m65wfjl20" path="res://assets/UI/ButtonsText/PremadeButtons_Resume.png" id="14_resume"]
+[ext_resource type="Texture2D" uid="uid://c7i5lrgy5anol" path="res://assets/UI/ButtonsText/PremadeButtons_Replay.png" id="15_replay"]
+[ext_resource type="Texture2D" uid="uid://io20o8v57r05" path="res://assets/UI/ButtonsText/PremadeButtons_Options.png" id="16_options"]
+[ext_resource type="Texture2D" uid="uid://dx4t0cstc10ij" path="res://assets/UI/ButtonsText/PremadeButtons_ExitOrange.png" id="17_exit"]
+[ext_resource type="Texture2D" uid="uid://cu02bvucr6fqw" path="res://assets/UI/ButtonsText/PremadeButtons_XWhiteOutline.png" id="18_x"]
+[ext_resource type="Texture2D" uid="uid://dq2n74wp01kmk" path="res://assets/UI/ButtonsText/PremadeButtons_Menu.png" id="19_menu"]
+[ext_resource type="Texture2D" uid="uid://bkafwn5x0k8v6" path="res://assets/UI/Icons/Icon_Small_WhiteOutline_Audio.png" id="20_aud"]
+[ext_resource type="Texture2D" uid="uid://dpx6m3d2ebi8i" path="res://assets/UI/Icons/Icon_Small_WhiteOutline_Music.png" id="21_mus"]
+[ext_resource type="Texture2D" uid="uid://c0pgxfy6k6u4d" path="res://assets/UI/ButtonsText/ButtonText_Orange_OnOffButton.png" id="22_toggle"]
+[ext_resource type="Texture2D" uid="uid://dystlx7ddssc3" path="res://assets/UI/Sliders/SlimSlider_Track_BG.png" id="23_trackbg"]
+[ext_resource type="Texture2D" uid="uid://ds40jyqewgq75" path="res://assets/UI/Sliders/SlimSlider_Track_Fill.png" id="24_trackfill"]
+[ext_resource type="Texture2D" uid="uid://cb654001giwhl" path="res://assets/UI/Sliders/SlimSlider_Green_Pointer_Small.png" id="25_pointer"]
+[ext_resource type="Texture2D" uid="uid://01cyoagipbpi" path="res://assets/UI/Icons/Icon_Large_Menu_Grey.png" id="26_pauseicon"]
+[ext_resource type="Texture2D" uid="uid://cb5d751bwki62" path="res://assets/UI/BoxesBanners/banner-level-complete.png" id="30_donebanner"]
+[ext_resource type="Texture2D" uid="uid://c5yjwkl7clmj7" path="res://assets/UI/Icons/Icon_Large_StarGrey.png" id="32_stargrey"]
+[ext_resource type="Texture2D" uid="uid://hoohmsddw7rk" path="res://assets/UI/Icons/Icon_Small_Coin.png" id="33_coin"]
+[ext_resource type="Texture2D" uid="uid://c4otwe0ong05f" path="res://assets/UI/Icons/Icon_Small_Diamond.png" id="34_gem"]
+[ext_resource type="Texture2D" uid="uid://dt12faib6u1t2" path="res://assets/UI/ButtonsText/PremadeButtons_XRed.png" id="35_xred"]
+[ext_resource type="Texture2D" uid="uid://bf7nbdpxkg5id" path="res://assets/UI/ButtonsText/Badge_Orange.png" id="36_badge"]
+[ext_resource type="Texture2D" uid="uid://c2v4mh80dhh1h" path="res://assets/UI/Icons/Icon_Small_StarGrey.png" id="38_sstargrey"]
+[ext_resource type="Texture2D" uid="uid://cls1y6lra32j3" path="res://assets/UI/ButtonsText/ButtonText_Large_Orange_Square.png" id="39_starbg"]
+
+[sub_resource type="StyleBoxEmpty" id="SB_flat"]
+
+[sub_resource type="StyleBoxTexture" id="SB_track_bg"]
+texture = ExtResource("23_trackbg")
+texture_margin_left = 22.0
+texture_margin_top = 22.0
+texture_margin_right = 22.0
+texture_margin_bottom = 22.0
+
+[sub_resource type="StyleBoxTexture" id="SB_track_fill"]
+texture = ExtResource("24_trackfill")
+texture_margin_left = 22.0
+texture_margin_top = 22.0
+texture_margin_right = 22.0
+texture_margin_bottom = 22.0
+
+[sub_resource type="StyleBoxTexture" id="SB_badge"]
+texture = ExtResource("36_badge")
+texture_margin_left = 32.0
+texture_margin_top = 32.0
+texture_margin_right = 32.0
+texture_margin_bottom = 32.0
+
+[node name="HUD" type="CanvasLayer" unique_id=2007647181]
+process_mode = 3
+script = ExtResource("1_hudgd")
+
+[node name="TopContainer" type="HBoxContainer" parent="." unique_id=499904808]
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 66.0
+grow_horizontal = 2
+theme = ExtResource("3_theme")
+
+[node name="LblLevelInfo" type="Label" parent="TopContainer" unique_id=512792529]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "Màn 1: Rừng Xanh"
+
+[node name="BtnPause" type="Button" parent="TopContainer" unique_id=807774447]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(56, 46)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Tạm dừng"
+theme_override_styles/normal = SubResource("SB_flat")
+theme_override_styles/pressed = SubResource("SB_flat")
+theme_override_styles/hover = SubResource("SB_flat")
+theme_override_styles/disabled = SubResource("SB_flat")
+theme_override_styles/focus = SubResource("SB_flat")
+
+[node name="Art" type="TextureRect" parent="TopContainer/BtnPause" unique_id=260703718]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("26_pauseicon")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PauseOverlay" type="ColorRect" parent="." unique_id=216067911]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="PausePanel" type="Panel" parent="PauseOverlay" unique_id=1245693552]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -287.0
+offset_top = -258.0
+offset_right = 276.0
+offset_bottom = 310.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("SB_flat")
+
+[node name="FrameArt" type="TextureRect" parent="PauseOverlay/PausePanel" unique_id=1902456318]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("10_box")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BannerPause" type="TextureRect" parent="PauseOverlay/PausePanel" unique_id=665152946]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -330.0
+offset_right = 150.0
+offset_bottom = -210.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("11_banner")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PauseMenuContainer" type="VBoxContainer" parent="PauseOverlay/PausePanel" unique_id=169130973]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -149.0
+offset_top = -183.0
+offset_right = 151.0
+offset_bottom = 237.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="BtnResume" type="Button" parent="PauseOverlay/PausePanel/PauseMenuContainer" unique_id=1192013412]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 93)
+layout_mode = 2
+tooltip_text = "Tiếp tục chơi"
+theme_override_styles/normal = SubResource("SB_flat")
+theme_override_styles/pressed = SubResource("SB_flat")
+theme_override_styles/hover = SubResource("SB_flat")
+theme_override_styles/disabled = SubResource("SB_flat")
+theme_override_styles/focus = SubResource("SB_flat")
+
+[node name="Art" type="TextureRect" parent="PauseOverlay/PausePanel/PauseMenuContainer/BtnResume" unique_id=198855160]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("14_resume")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BtnRestart" type="Button" parent="PauseOverlay/PausePanel/PauseMenuContainer" unique_id=2115576728]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 93)
+layout_mode = 2
+tooltip_text = "Chơi lại màn này"
+theme_override_styles/normal = SubResource("SB_flat")
+theme_override_styles/pressed = SubResource("SB_flat")
+theme_override_styles/hover = SubResource("SB_flat")
+theme_override_styles/disabled = SubResource("SB_flat")
+theme_override_styles/focus = SubResource("SB_flat")
+
+[node name="Art" type="TextureRect" parent="PauseOverlay/PausePanel/PauseMenuContainer/BtnRestart" unique_id=161800159]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("15_replay")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BtnOptions" type="Button" parent="PauseOverlay/PausePanel/PauseMenuContainer" unique_id=415563664]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 93)
+layout_mode = 2
+tooltip_text = "Tuỳ chọn âm thanh"
+theme_override_styles/normal = SubResource("SB_flat")
+theme_override_styles/pressed = SubResource("SB_flat")
+theme_override_styles/hover = SubResource("SB_flat")
+theme_override_styles/disabled = SubResource("SB_flat")
+theme_override_styles/focus = SubResource("SB_flat")
+
+[node name="Art" type="TextureRect" parent="PauseOverlay/PausePanel/PauseMenuContainer/BtnOptions" unique_id=1993835183]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("16_options")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BtnMainMenu" type="Button" parent="PauseOverlay/PausePanel/PauseMenuContainer" unique_id=569220139]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 93)
+layout_mode = 2
+tooltip_text = "Thoát về menu chính"
+theme_override_styles/normal = SubResource("SB_flat")
+theme_override_styles/pressed = SubResource("SB_flat")
+theme_override_styles/hover = SubResource("SB_flat")
+theme_override_styles/disabled = SubResource("SB_flat")
+theme_override_styles/focus = SubResource("SB_flat")
+
+[node name="Art" type="TextureRect" parent="PauseOverlay/PausePanel/PauseMenuContainer/BtnMainMenu" unique_id=892790157]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("17_exit")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BtnClose" type="Button" parent="PauseOverlay/PausePanel" unique_id=81450480]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -66.0
+offset_right = -2.0
+offset_bottom = 64.0
+grow_horizontal = 0
+tooltip_text = "Đóng"
+theme_override_styles/normal = SubResource("SB_flat")
+theme_override_styles/pressed = SubResource("SB_flat")
+theme_override_styles/hover = SubResource("SB_flat")
+theme_override_styles/disabled = SubResource("SB_flat")
+theme_override_styles/focus = SubResource("SB_flat")
+
+[node name="Art" type="TextureRect" parent="PauseOverlay/PausePanel/BtnClose" unique_id=1243349456]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("18_x")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="OptionsOverlay" type="Control" parent="." unique_id=1800886221]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_optsgd")
+
+[node name="Dim" type="ColorRect" parent="OptionsOverlay" unique_id=1108946248]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5)
+
+[node name="OptionsPanel" type="Panel" parent="OptionsOverlay" unique_id=1515926423]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -280.0
+offset_top = -255.0
+offset_right = 260.0
+offset_bottom = 280.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("SB_flat")
+
+[node name="FrameArt" type="TextureRect" parent="OptionsOverlay/OptionsPanel" unique_id=855686193]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("13_boxrnd")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TitleBanner" type="TextureRect" parent="OptionsOverlay/OptionsPanel" unique_id=303726709]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -323.5
+offset_right = 185.0
+offset_bottom = -175.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("12_banneropt")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AudioRow" type="HBoxContainer" parent="OptionsOverlay/OptionsPanel" unique_id=1664195603]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -230.0
+offset_top = -94.0
+offset_right = 231.0
+offset_bottom = -38.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="Icon" type="TextureRect" parent="OptionsOverlay/OptionsPanel/AudioRow" unique_id=2065645661]
+custom_minimum_size = Vector2(36, 46)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("20_aud")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SliderAudio" type="HSlider" parent="OptionsOverlay/OptionsPanel/AudioRow" unique_id=735039335]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_icons/grabber = ExtResource("25_pointer")
+theme_override_icons/grabber_highlight = ExtResource("25_pointer")
+theme_override_styles/slider = SubResource("SB_track_bg")
+theme_override_styles/grabber_area = SubResource("SB_track_fill")
+theme_override_styles/grabber_area_highlight = SubResource("SB_track_fill")
+value = 100.0
+
+[node name="Spacer" type="Control" parent="OptionsOverlay/OptionsPanel/AudioRow" unique_id=1168244169]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+
+[node name="MusicRow" type="HBoxContainer" parent="OptionsOverlay/OptionsPanel" unique_id=1616672035]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -230.0
+offset_top = -18.0
+offset_right = 215.0
+offset_bottom = 38.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="Icon" type="TextureRect" parent="OptionsOverlay/OptionsPanel/MusicRow" unique_id=549099094]
+custom_minimum_size = Vector2(36, 41)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("21_mus")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SliderMusic" type="HSlider" parent="OptionsOverlay/OptionsPanel/MusicRow" unique_id=802505160]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_icons/grabber = ExtResource("25_pointer")
+theme_override_icons/grabber_highlight = ExtResource("25_pointer")
+theme_override_styles/slider = SubResource("SB_track_bg")
+theme_override_styles/grabber_area = SubResource("SB_track_fill")
+theme_override_styles/grabber_area_highlight = SubResource("SB_track_fill")
+value = 100.0
+
+[node name="ToggleMusic" type="Button" parent="OptionsOverlay/OptionsPanel/MusicRow" unique_id=1714271555]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Nhạc nền"
+theme_override_styles/normal = SubResource("SB_flat")
+theme_override_styles/pressed = SubResource("SB_flat")
+theme_override_styles/hover = SubResource("SB_flat")
+theme_override_styles/disabled = SubResource("SB_flat")
+theme_override_styles/focus = SubResource("SB_flat")
+
+[node name="Art" type="TextureRect" parent="OptionsOverlay/OptionsPanel/MusicRow/ToggleMusic" unique_id=1429770161]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("22_toggle")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BtnBack" type="Button" parent="OptionsOverlay/OptionsPanel" unique_id=1465045763]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(76, 76)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 200.0
+offset_top = -286.0
+offset_right = 276.0
+offset_bottom = -210.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Quay lại"
+theme_override_styles/normal = SubResource("SB_flat")
+theme_override_styles/pressed = SubResource("SB_flat")
+theme_override_styles/hover = SubResource("SB_flat")
+theme_override_styles/disabled = SubResource("SB_flat")
+theme_override_styles/focus = SubResource("SB_flat")
+
+[node name="Art" type="TextureRect" parent="OptionsOverlay/OptionsPanel/BtnBack" unique_id=2087087104]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("19_menu")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CameraRow" type="HBoxContainer" parent="OptionsOverlay/OptionsPanel" unique_id=1921535926]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -230.0
+offset_top = 58.0
+offset_right = 231.0
+offset_bottom = 114.0
+theme_override_constants/separation = 16
+
+[node name="CameraLabel" type="Label" parent="OptionsOverlay/OptionsPanel/CameraRow" unique_id=495279027]
+custom_minimum_size = Vector2(150, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "GÓC NHÌN"
+vertical_alignment = 1
+
+[node name="CameraMode" type="OptionButton" parent="OptionsOverlay/OptionsPanel/CameraRow" unique_id=1977043130]
+custom_minimum_size = Vector2(280, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Chọn góc nhìn của người chơi"
+
+[node name="CompleteOverlay" type="Control" parent="." unique_id=1090858188]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dim" type="ColorRect" parent="CompleteOverlay" unique_id=1195105118]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.55)
+
+[node name="CompletePanel" type="Panel" parent="CompleteOverlay" unique_id=1383842626]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -264.0
+offset_top = -257.0
+offset_right = 258.0
+offset_bottom = 275.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("SB_flat")
+
+[node name="FrameArt" type="TextureRect" parent="CompleteOverlay/CompletePanel" unique_id=1586875076]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("10_box")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BannerComplete" type="TextureRect" parent="CompleteOverlay/CompletePanel" unique_id=860048666]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -183.0
+offset_top = -317.0
+offset_right = 178.0
+offset_bottom = -174.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("30_donebanner")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StarsBack" type="TextureRect" parent="CompleteOverlay/CompletePanel" unique_id=387277158]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.35)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -129.0
+offset_top = -157.0
+offset_right = 132.0
+offset_bottom = -67.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("39_starbg")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StarsRow" type="HBoxContainer" parent="CompleteOverlay/CompletePanel" unique_id=487611392]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -93.0
+offset_top = -148.0
+offset_right = 90.0
+offset_bottom = -76.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="Star1" type="TextureRect" parent="CompleteOverlay/CompletePanel/StarsRow" unique_id=2069937192]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(46, 46)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("38_sstargrey")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Star2" type="TextureRect" parent="CompleteOverlay/CompletePanel/StarsRow" unique_id=343096632]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("32_stargrey")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Star3" type="TextureRect" parent="CompleteOverlay/CompletePanel/StarsRow" unique_id=1488449945]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(46, 46)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("38_sstargrey")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StatsRow" type="HBoxContainer" parent="CompleteOverlay/CompletePanel" unique_id=125353691]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -190.0
+offset_top = -14.0
+offset_right = 190.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="CoinBadge" type="Panel" parent="CompleteOverlay/CompletePanel/StatsRow" unique_id=817256336]
+custom_minimum_size = Vector2(180, 64)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("SB_badge")
+
+[node name="Row" type="HBoxContainer" parent="CompleteOverlay/CompletePanel/StatsRow/CoinBadge" unique_id=1163591006]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_right = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="Icon" type="TextureRect" parent="CompleteOverlay/CompletePanel/StatsRow/CoinBadge/Row" unique_id=443298324]
+custom_minimum_size = Vector2(34, 34)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("33_coin")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Value" type="Label" parent="CompleteOverlay/CompletePanel/StatsRow/CoinBadge/Row" unique_id=1369048661]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "0"
+vertical_alignment = 1
+
+[node name="GemBadge" type="Panel" parent="CompleteOverlay/CompletePanel/StatsRow" unique_id=621458327]
+custom_minimum_size = Vector2(180, 64)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("SB_badge")
+
+[node name="Row" type="HBoxContainer" parent="CompleteOverlay/CompletePanel/StatsRow/GemBadge" unique_id=1072890373]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_right = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="Icon" type="TextureRect" parent="CompleteOverlay/CompletePanel/StatsRow/GemBadge/Row" unique_id=891754008]
+custom_minimum_size = Vector2(34, 34)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("34_gem")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Value" type="Label" parent="CompleteOverlay/CompletePanel/StatsRow/GemBadge/Row" unique_id=2124636695]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "0"
+vertical_alignment = 1
+
+[node name="BtnReplay" type="Button" parent="CompleteOverlay/CompletePanel" unique_id=1083842174]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(280, 87)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -140.0
+offset_top = 76.0
+offset_right = 140.0
+offset_bottom = 163.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Chơi lại màn này"
+theme_override_styles/normal = SubResource("SB_flat")
+theme_override_styles/pressed = SubResource("SB_flat")
+theme_override_styles/hover = SubResource("SB_flat")
+theme_override_styles/disabled = SubResource("SB_flat")
+theme_override_styles/focus = SubResource("SB_flat")
+
+[node name="Art" type="TextureRect" parent="CompleteOverlay/CompletePanel/BtnReplay" unique_id=355413262]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("15_replay")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BtnCloseDone" type="Button" parent="CompleteOverlay/CompletePanel" unique_id=426853669]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -66.0
+offset_top = 4.0
+offset_right = -6.0
+offset_bottom = 64.0
+grow_horizontal = 0
+tooltip_text = "Đóng"
+theme_override_styles/normal = SubResource("SB_flat")
+theme_override_styles/pressed = SubResource("SB_flat")
+theme_override_styles/hover = SubResource("SB_flat")
+theme_override_styles/disabled = SubResource("SB_flat")
+theme_override_styles/focus = SubResource("SB_flat")
+
+[node name="Art" type="TextureRect" parent="CompleteOverlay/CompletePanel/BtnCloseDone" unique_id=802808613]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("35_xred")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VirtualJoystick" type="VirtualJoystick" parent="." unique_id=1911958052]
+offset_left = 84.0
+offset_top = 459.0
+offset_right = 222.0
+offset_bottom = 597.0
+joystick_size = 130.0
+action_left = &"move_left"
+action_right = &"move_right"
+action_up = &"move_forward"
+action_down = &"move_back"

@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://mainmenuui1"]
+
+[ext_resource type="Script" uid="uid://8oibiitmpjsc" path="res://scripts/main_menu.gd" id="1_mmgd"]
+[ext_resource type="Theme" uid="uid://d3k1yd5a1drwo" path="res://assets/UI/ui_theme.tres" id="2_theme"]
+[ext_resource type="Texture2D" uid="uid://dcojqwtwj1hf5" path="res://assets/UI/BoxesBanners/Banner_Orange.png" id="3_1g8jr"]
+
+[node name="MainMenu" type="Control" unique_id=635670755]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_theme")
+script = ExtResource("1_mmgd")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1382359078]
+z_index = -2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.035, 0.055, 0.09, 1)
+
+[node name="Panel" type="Panel" parent="." unique_id=137096845]
+z_index = -1
+layout_mode = 0
+offset_right = 1151.0
+offset_bottom = 671.0
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.7, 0.7)
+
+[node name="MenuContainer" type="VBoxContainer" parent="." unique_id=1080545762]
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -108.99997
+offset_top = -124.0
+offset_right = 211.0
+offset_bottom = 357.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.7, 0.7)
+theme_override_constants/separation = 12
+
+[node name="BtnOffline" type="Button" parent="MenuContainer" unique_id=976440946]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(320, 99)
+layout_mode = 2
+offset_transform_scale = Vector2(0.7, 0.7)
+theme_override_font_sizes/font_size = 20
+text = "OFFLINE"
+
+[node name="BtnOnline" type="Button" parent="MenuContainer" unique_id=429120882]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(320, 99)
+layout_mode = 2
+offset_transform_scale = Vector2(0.7, 0.7)
+theme_override_font_sizes/font_size = 20
+text = "ONLINE (CO-OP)"
+
+[node name="BtnCharacter" type="Button" parent="MenuContainer" unique_id=1202209669]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(320, 99)
+layout_mode = 2
+offset_transform_scale = Vector2(0.7, 0.7)
+theme_override_font_sizes/font_size = 20
+text = "ĐỔI NHÂN VẬT"
+
+[node name="BtnQuit" type="Button" parent="MenuContainer" unique_id=1013927991]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(320, 99)
+layout_mode = 2
+offset_transform_scale = Vector2(0.7, 0.7)
+theme_override_font_sizes/font_size = 20
+text = "THOÁT GAME"
+
+[node name="BannerOrange" type="Sprite2D" parent="." unique_id=1157921372]
+position = Vector2(575, 103)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_1g8jr")
