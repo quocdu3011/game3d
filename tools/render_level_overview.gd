@@ -23,6 +23,12 @@ var _settle := 0
 
 func _initialize() -> void:
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(OUT_DIR))
+	# Cong cu nay nap scene level that. Neu scene do co finish checkpoint thi
+	# `_finish_level()` co the chay va ghi de luu tien do — hay `save_path`
+	# sang file tam cho an toan.
+	var gm := root.get_node_or_null("GameManager")
+	if gm:
+		gm.save_path = "user://__render_level_overview.cfg"
 	_level = (load(LEVEL) as PackedScene).instantiate()
 	root.add_child(_level)
 

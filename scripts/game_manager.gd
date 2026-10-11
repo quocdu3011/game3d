@@ -22,6 +22,16 @@ const SKINS = {
 	"sophia": "res://addons/character/gdquest_sophia/sophia_skin.tscn"
 }
 
+## Giá mua mỗi nhân vật, tính bằng coin. Nhân vật không có trong bảng này là
+## miễn phí (gobot là nhân vật mặc định nên luôn sẵn có).
+const SKIN_PRICES = {
+	"gdbot": 50,
+	"sophia": 120,
+}
+
+## Nhân vật luôn mở khoá từ đầu, không cần mua.
+const DEFAULT_SKIN := "gobot"
+
 const LEVELS = {
 	1: "res://scenes/maps/level_1.tscn",
 	2: "res://scenes/maps/level_2.tscn",
@@ -43,12 +53,68 @@ const STAR_TIMES: Dictionary = {
 	4: [30.0, 65.0],
 }
 
+## Bắn ra mỗi khi số coin đổi, để HUD cập nhật ngay khi nhặt đồng.
+signal coins_changed(total: int)
+
 ## level -> số sao tốt nhất từng đạt được.
 var level_stars: Dictionary = {}
-## Bộ đếm tiền tệ. Chưa có màn nào rơi coin/gem nên vẫn là 0 cho tới khi
-## thêm vật phẩm thu thập; hiện tại chỉ để màn hoàn thành có chỗ hiển thị.
+## Bộ đếm tiền tệ trong túi người chơi, giữ qua các màn nhờ `_save_progress()`.
+## Mỗi đồng `coin.tscn` nhặt được sẽ gọi `add_coins()`.
 var coins: int = 0
-var gems: int = 0
+## skin -> true cho mọi nhân vật đã mở khoá. Nhân vật mặc định luôn mở.
+var unlocked_skins: Dictionary = {}
+
+## Bắn ra khi ví coin đổi (mua/xoá) và khi có nhân vật mới được mở khoá.
+signal purchase_result(ok: bool, skin_name: String, message: String)
+
+## Cộng coin và lưu ngay. `amount` âm là dùng (chưa có chỗ nào dùng tới).
+func add_coins(amount: int) -> void:
+	if amount == 0:
+		return
+	coins = maxi(0, coins + amount)
+	_save_progress()
+	coins_changed.emit(coins)
+
+func skin_price(skin_name: String) -> int:
+	return int(SKIN_PRICES.get(skin_name, 0))
+
+func is_skin_unlocked(skin_name: String) -> bool:
+	if skin_name == DEFAULT_SKIN:
+		return true
+	return bool(unlocked_skins.get(skin_name, false))
+
+## Trả về `true` nếu người chơi vừa mua được nhân vật đó. Đã mở khoá rồi
+## thì trả `true` mà không tốn coin. Không đủ coin thì bỏ qua và bắn
+## `purchase_result(false, ...)` cho UI hiện thông báo.
+func unlock_skin(skin_name: String) -> bool:
+	if not SKINS.has(skin_name):
+		push_warning("Khong co nhan vat \"%s\" de mo khoa" % skin_name)
+		return false
+	if is_skin_unlocked(skin_name):
+		return true
+
+	var price := skin_price(skin_name)
+	if coins < price:
+		var short_by := price - coins
+		var msg := "Thieu %d coin de mo khoa nhan vat nay" % short_by
+		purchase_result.emit(false, skin_name, msg)
+		push_warning(msg)
+		return false
+
+	add_coins(-price)
+	unlocked_skins[skin_name] = true
+	_save_progress()
+	purchase_result.emit(true, skin_name, "Da mo khoa %s" % skin_name.capitalize())
+	return true
+
+## Chỉ đổi nhân vật đang chơi nếu nó đã mở khoá — chặn việc lách qua
+## màn đổi nhân vật để dùng nhân vật chưa mua.
+func select_skin(skin_name: String) -> bool:
+	if not SKINS.has(skin_name) or not is_skin_unlocked(skin_name):
+		return false
+	selected_skin = skin_name
+	_save_progress()
+	return true
 
 ## 3 sao nếu nhanh hơn ngưỡng đầu, 2 sao nếu nhanh hơn ngưỡng sau, còn lại 1.
 func stars_for_time(level_num: int, seconds: float) -> int:
@@ -81,8 +147,9 @@ func total_stars() -> int:
 func _load_progress() -> void:
 	completed_levels.clear()
 	level_stars.clear()
+	unlocked_skins.clear()
 	coins = 0
-	gems = 0
+	selected_skin = DEFAULT_SKIN
 	var config := ConfigFile.new()
 	if config.load(save_path) != OK:
 		return
@@ -93,7 +160,14 @@ func _load_progress() -> void:
 		if stars > 0:
 			level_stars[level_num] = stars
 	coins = int(config.get_value("wallet", "coins", 0))
-	gems = int(config.get_value("wallet", "gems", 0))
+	# Chỉ nhận skin còn tồn tại trong SKINS để save cũ/không còn scene không
+	# làm hỏng danh sách mở khoá.
+	for skin_name in config.get_section_keys("unlock"):
+		if SKINS.has(skin_name) and bool(config.get_value("unlock", skin_name, false)):
+			unlocked_skins[skin_name] = true
+	var saved_skin := str(config.get_value("settings", "selected_skin", DEFAULT_SKIN))
+	# Skin đã lưu phải còn tồn tại và đã mở khoá, nếu không thì lùi về mặc định.
+	selected_skin = saved_skin if is_skin_unlocked(saved_skin) else DEFAULT_SKIN
 	camera_mode = clampi(int(config.get_value("settings", "camera_mode", CameraMode.THIRD_PERSON)), CameraMode.THIRD_PERSON, CameraMode.FIRST_PERSON) as CameraMode
 
 func _save_progress() -> void:
@@ -103,8 +177,11 @@ func _save_progress() -> void:
 	for level_num in level_stars:
 		config.set_value("stars", str(level_num), int(level_stars[level_num]))
 	config.set_value("wallet", "coins", coins)
-	config.set_value("wallet", "gems", gems)
+	for skin_name in unlocked_skins:
+		if unlocked_skins[skin_name]:
+			config.set_value("unlock", skin_name, true)
 	config.set_value("settings", "camera_mode", int(camera_mode))
+	config.set_value("settings", "selected_skin", selected_skin)
 	var err := config.save(save_path)
 	if err != OK:
 		push_error("Khong luu duoc tien do vao %s (loi %d)" % [save_path, err])
@@ -113,8 +190,9 @@ func _save_progress() -> void:
 func reset_progress() -> void:
 	completed_levels.clear()
 	level_stars.clear()
+	unlocked_skins.clear()
 	coins = 0
-	gems = 0
+	selected_skin = DEFAULT_SKIN
 	_save_progress()
 
 ## Số level đã hoàn thành — nguồn sự thật cho thanh tiến trình.

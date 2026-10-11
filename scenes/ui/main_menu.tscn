@@ -41,10 +41,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -108.99997
-offset_top = -124.0
+offset_left = -109.0
+offset_top = -93.0
 offset_right = 211.0
-offset_bottom = 357.0
+offset_bottom = 343.7143
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.7, 0.7)
@@ -58,21 +58,15 @@ offset_transform_scale = Vector2(0.7, 0.7)
 theme_override_font_sizes/font_size = 20
 text = "OFFLINE"
 
-[node name="BtnOnline" type="Button" parent="MenuContainer" unique_id=429120882]
+[node name="BtnShop" type="Button" parent="MenuContainer" unique_id=429120882]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(320, 99)
 layout_mode = 2
 offset_transform_scale = Vector2(0.7, 0.7)
+theme_override_constants/icon_max_width = 0
 theme_override_font_sizes/font_size = 20
-text = "ONLINE (CO-OP)"
-
-[node name="BtnCharacter" type="Button" parent="MenuContainer" unique_id=1202209669]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(320, 99)
-layout_mode = 2
-offset_transform_scale = Vector2(0.7, 0.7)
-theme_override_font_sizes/font_size = 20
-text = "ĐỔI NHÂN VẬT"
+text = "CỬA HÀNG"
+expand_icon = true
 
 [node name="BtnQuit" type="Button" parent="MenuContainer" unique_id=1013927991]
 unique_name_in_owner = true

@@ -23,11 +23,11 @@
 [ext_resource type="Texture2D" uid="uid://cb5d751bwki62" path="res://assets/UI/BoxesBanners/banner-level-complete.png" id="30_donebanner"]
 [ext_resource type="Texture2D" uid="uid://c5yjwkl7clmj7" path="res://assets/UI/Icons/Icon_Large_StarGrey.png" id="32_stargrey"]
 [ext_resource type="Texture2D" uid="uid://hoohmsddw7rk" path="res://assets/UI/Icons/Icon_Small_Coin.png" id="33_coin"]
-[ext_resource type="Texture2D" uid="uid://c4otwe0ong05f" path="res://assets/UI/Icons/Icon_Small_Diamond.png" id="34_gem"]
 [ext_resource type="Texture2D" uid="uid://dt12faib6u1t2" path="res://assets/UI/ButtonsText/PremadeButtons_XRed.png" id="35_xred"]
 [ext_resource type="Texture2D" uid="uid://bf7nbdpxkg5id" path="res://assets/UI/ButtonsText/Badge_Orange.png" id="36_badge"]
 [ext_resource type="Texture2D" uid="uid://c2v4mh80dhh1h" path="res://assets/UI/Icons/Icon_Small_StarGrey.png" id="38_sstargrey"]
 [ext_resource type="Texture2D" uid="uid://cls1y6lra32j3" path="res://assets/UI/ButtonsText/ButtonText_Large_Orange_Square.png" id="39_starbg"]
+[ext_resource type="Texture2D" uid="uid://b4e36o8qwyrd6" path="res://assets/UI/ButtonsIcons/change_camera.png" id="40_camicon"]
 
 [sub_resource type="StyleBoxEmpty" id="SB_flat"]
 
@@ -72,6 +72,51 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "Màn 1: Rừng Xanh"
+
+[node name="CoinBox" type="HBoxContainer" parent="TopContainer" unique_id=1000000051]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 6
+
+[node name="Icon" type="TextureRect" parent="TopContainer/CoinBox" unique_id=1000000052]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("33_coin")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Value" type="Label" parent="TopContainer/CoinBox" unique_id=1000000053]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "0"
+vertical_alignment = 1
+
+[node name="BtnChangeCamera" type="Button" parent="TopContainer" unique_id=1000000041]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(56, 46)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Đổi góc nhìn"
+theme_override_styles/normal = SubResource("SB_flat")
+theme_override_styles/pressed = SubResource("SB_flat")
+theme_override_styles/hover = SubResource("SB_flat")
+theme_override_styles/disabled = SubResource("SB_flat")
+theme_override_styles/focus = SubResource("SB_flat")
+
+[node name="Art" type="TextureRect" parent="TopContainer/BtnChangeCamera" unique_id=1000000042]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("40_camicon")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="BtnPause" type="Button" parent="TopContainer" unique_id=807774447]
 unique_name_in_owner = true
@@ -655,9 +700,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -190.0
+offset_left = -100.0
 offset_top = -14.0
-offset_right = 190.0
+offset_right = 100.0
 offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -691,40 +736,6 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="Value" type="Label" parent="CompleteOverlay/CompletePanel/StatsRow/CoinBadge/Row" unique_id=1369048661]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 20
-text = "0"
-vertical_alignment = 1
-
-[node name="GemBadge" type="Panel" parent="CompleteOverlay/CompletePanel/StatsRow" unique_id=621458327]
-custom_minimum_size = Vector2(180, 64)
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("SB_badge")
-
-[node name="Row" type="HBoxContainer" parent="CompleteOverlay/CompletePanel/StatsRow/GemBadge" unique_id=1072890373]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 16.0
-offset_right = 16.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/separation = 8
-
-[node name="Icon" type="TextureRect" parent="CompleteOverlay/CompletePanel/StatsRow/GemBadge/Row" unique_id=891754008]
-custom_minimum_size = Vector2(34, 34)
-layout_mode = 2
-size_flags_vertical = 4
-mouse_filter = 2
-texture = ExtResource("34_gem")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Value" type="Label" parent="CompleteOverlay/CompletePanel/StatsRow/GemBadge/Row" unique_id=2124636695]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 20

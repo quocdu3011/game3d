@@ -8,6 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://hudui1" path="res://scenes/ui/hud.tscn" id="6_hud"]
 [ext_resource type="PackedScene" uid="uid://boj3ykojm21c5" path="res://scenes/Entity/Tile/Powerup_block_1.tscn" id="8_gcjdc"]
 [ext_resource type="PackedScene" uid="uid://brblmtfgcyi8i" path="res://scenes/Entity/Item/TargetStand.tscn" id="8_stand"]
+[ext_resource type="PackedScene" uid="uid://b2trudgxhvbeu" path="res://scenes/Entity/Tile/Powerup_block_2.tscn" id="9_vqo3x"]
+[ext_resource type="PackedScene" uid="uid://7f1123xqsjp8" path="res://scenes/Entity/Trap/SpikeRoller.tscn" id="10_17lfb"]
+[ext_resource type="PackedScene" uid="uid://3mj3yiein011" path="res://scenes/Entity/Item/Bomb.tscn" id="10_kaamm"]
+[ext_resource type="PackedScene" uid="uid://ckk3vc42316xp" path="res://scenes/Entity/Item/CheckPoint_3.tscn" id="12_rhabe"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sky"]
 sky_top_color = Color(0.48, 0.42, 0.35, 1)
@@ -27,7 +31,7 @@ script = ExtResource("1_lvlctrl")
 [node name="HUD" parent="." unique_id=1769264790 instance=ExtResource("6_hud")]
 
 [node name="Players" type="Node3D" parent="." unique_id=155492094]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.059351444, 23.70931, 0.6372576)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6982471, 23.051552, 0.91132736)
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=541893245]
 _spawnable_scenes = PackedStringArray("uid://brcdva43yrr8u")
@@ -1790,5 +1794,281 @@ moving_tile = NodePath("../TileLowDesert464")
 destination = NodePath("../TileLargeDesert3")
 destination_offset = Vector3(0, 0, 4)
 
-[node name="PowerupBlock1" parent="." unique_id=2037408164 instance=ExtResource("8_gcjdc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.015293598, 21.131662, 3.500001)
+[node name="PowerupBlock1" parent="World" unique_id=2037408164 instance=ExtResource("8_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0739589, 21.283928, 135.12822)
+
+[node name="PowerupBlock2" parent="World" unique_id=1204007910 instance=ExtResource("9_vqo3x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.855226, 25.161884, 137.13477)
+
+[node name="PowerupBlock3" parent="World" unique_id=1541262574 instance=ExtResource("8_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5152421, 29.268728, 139.32831)
+
+[node name="PowerupBlock4" parent="World" unique_id=869893934 instance=ExtResource("9_vqo3x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8566389, 32.745754, 142.24501)
+
+[node name="PowerupBlock5" parent="World" unique_id=371222553 instance=ExtResource("8_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1742105, 21.166534, 152.56667)
+
+[node name="TileLargeDesert5" parent="World" unique_id=1508151138 instance=ExtResource("3_74t05")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.366291, 19.980238, 164.15257)
+
+[node name="CheckPoint3" parent="World" unique_id=2053283592 instance=ExtResource("5_swmay")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2448578, 20.978924, 164.32147)
+
+[node name="TileLowDesert465" parent="World" unique_id=1918061980 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7161884, 20.045082, 169.99352)
+
+[node name="TileLowDesert466" parent="World" unique_id=1332470480 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2838118, 20.050964, 170.0081)
+
+[node name="TileLowDesert467" parent="World" unique_id=859423129 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2838118, 20.052803, 170.01276)
+
+[node name="TileLowDesert468" parent="World" unique_id=375185405 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.283812, 20.053501, 170.03693)
+
+[node name="TileLowDesert472" parent="World" unique_id=2035189344 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.283812, 20.053501, 172.02629)
+
+[node name="TileLowDesert471" parent="World" unique_id=2118438132 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2838118, 20.052803, 172.00212)
+
+[node name="TileLowDesert470" parent="World" unique_id=2046796125 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2838118, 20.050964, 171.99747)
+
+[node name="TileLowDesert469" parent="World" unique_id=134754567 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7161884, 20.045082, 171.98288)
+
+[node name="TileLowDesert476" parent="World" unique_id=1792356682 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.283812, 20.053501, 173.97586)
+
+[node name="TileLowDesert475" parent="World" unique_id=86213002 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2838118, 20.052803, 173.95169)
+
+[node name="TileLowDesert474" parent="World" unique_id=474551094 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2838118, 20.050964, 173.94704)
+
+[node name="TileLowDesert473" parent="World" unique_id=98623330 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7161884, 20.045082, 173.93245)
+
+[node name="TileLowDesert480" parent="World" unique_id=962615613 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.283812, 20.053501, 175.89044)
+
+[node name="TileLowDesert479" parent="World" unique_id=1099947461 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2838118, 20.052803, 175.86627)
+
+[node name="TileLowDesert478" parent="World" unique_id=610669107 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2838118, 20.050964, 175.86162)
+
+[node name="TileLowDesert477" parent="World" unique_id=1910618439 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7161884, 20.045082, 175.84703)
+
+[node name="TileLowDesert484" parent="World" unique_id=1885939443 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.283812, 20.053501, 177.88159)
+
+[node name="TileLowDesert483" parent="World" unique_id=328548484 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2838118, 20.052803, 177.85742)
+
+[node name="TileLowDesert482" parent="World" unique_id=978085782 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2838118, 20.050964, 177.85277)
+
+[node name="TileLowDesert481" parent="World" unique_id=864232839 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7161884, 20.045082, 177.83818)
+
+[node name="TileLowDesert488" parent="World" unique_id=20896906 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.283812, 20.053501, 179.82074)
+
+[node name="TileLowDesert487" parent="World" unique_id=1987740001 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2838118, 20.052803, 179.79657)
+
+[node name="TileLowDesert486" parent="World" unique_id=1594122261 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2838118, 20.050964, 179.79192)
+
+[node name="TileLowDesert485" parent="World" unique_id=654664034 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7161884, 20.045082, 179.77733)
+
+[node name="TileLowDesert492" parent="World" unique_id=909719120 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.283812, 20.053501, 181.75847)
+
+[node name="TileLowDesert491" parent="World" unique_id=594849053 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2838118, 20.052803, 181.7343)
+
+[node name="TileLowDesert490" parent="World" unique_id=381664619 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2838118, 20.050964, 181.72964)
+
+[node name="TileLowDesert489" parent="World" unique_id=1851849230 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7161884, 20.045082, 181.71506)
+
+[node name="TileLowDesert496" parent="World" unique_id=1296829286 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.283812, 20.053501, 183.71114)
+
+[node name="TileLowDesert495" parent="World" unique_id=1684217810 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2838118, 20.052803, 183.68697)
+
+[node name="TileLowDesert494" parent="World" unique_id=1370075557 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2838118, 20.050964, 183.68231)
+
+[node name="TileLowDesert493" parent="World" unique_id=898374615 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7161884, 20.045082, 183.66772)
+
+[node name="TileLowDesert500" parent="World" unique_id=1274175996 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.283812, 20.053501, 185.70586)
+
+[node name="TileLowDesert499" parent="World" unique_id=1537755325 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2838118, 20.052803, 185.68169)
+
+[node name="TileLowDesert498" parent="World" unique_id=1667112694 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2838118, 20.050964, 185.67703)
+
+[node name="TileLowDesert497" parent="World" unique_id=1252468537 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7161884, 20.045082, 185.66245)
+
+[node name="TileLowDesert504" parent="World" unique_id=943324268 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.283812, 20.053501, 187.68755)
+
+[node name="TileLowDesert503" parent="World" unique_id=1867324000 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2838118, 20.052803, 187.66338)
+
+[node name="TileLowDesert502" parent="World" unique_id=1380411746 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2838118, 20.050964, 187.65872)
+
+[node name="TileLowDesert501" parent="World" unique_id=1082447187 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7161884, 20.045082, 187.64413)
+
+[node name="TileLowDesert508" parent="World" unique_id=1256527516 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.283812, 20.053501, 189.64888)
+
+[node name="TileLowDesert507" parent="World" unique_id=791046620 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2838118, 20.052803, 189.62471)
+
+[node name="TileLowDesert506" parent="World" unique_id=685002104 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2838118, 20.050964, 189.62006)
+
+[node name="TileLowDesert505" parent="World" unique_id=1033026690 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7161884, 20.045082, 189.60547)
+
+[node name="TileLowDesert512" parent="World" unique_id=310376550 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.283812, 20.053501, 191.63126)
+
+[node name="TileLowDesert511" parent="World" unique_id=1171461694 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2838118, 20.052803, 191.60709)
+
+[node name="TileLowDesert510" parent="World" unique_id=775748873 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2838118, 20.050964, 191.60243)
+
+[node name="TileLowDesert509" parent="World" unique_id=2025445173 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7161884, 20.045082, 191.58784)
+
+[node name="TileLowDesert516" parent="World" unique_id=679321627 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.283812, 20.053501, 193.6283)
+
+[node name="TileLowDesert515" parent="World" unique_id=1072159577 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2838118, 20.052803, 193.60413)
+
+[node name="TileLowDesert514" parent="World" unique_id=1712203966 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2838118, 20.050964, 193.59947)
+
+[node name="TileLowDesert513" parent="World" unique_id=459103894 instance=ExtResource("6_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7161884, 20.045082, 193.58488)
+
+[node name="SpikeRoller" parent="World" unique_id=1155446734 instance=ExtResource("10_17lfb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8196857, 21.047834, 170.4304)
+
+[node name="SpikeRoller2" parent="World" unique_id=784303992 instance=ExtResource("10_17lfb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7452002, 21.047834, 172.48946)
+
+[node name="SpikeRoller3" parent="World" unique_id=607455157 instance=ExtResource("10_17lfb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6926991, 21.047834, 174.23657)
+
+[node name="SpikeRoller4" parent="World" unique_id=1825559870 instance=ExtResource("10_17lfb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7368948, 21.047834, 176.16289)
+
+[node name="SpikeRoller5" parent="World" unique_id=1136173076 instance=ExtResource("10_17lfb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7132528, 21.047834, 177.99655)
+
+[node name="SpikeRoller6" parent="World" unique_id=275812481 instance=ExtResource("10_17lfb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7287092, 21.047834, 179.78337)
+
+[node name="SpikeRoller7" parent="World" unique_id=2045576534 instance=ExtResource("10_17lfb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8033265, 21.047834, 181.87355)
+
+[node name="SpikeRoller8" parent="World" unique_id=966616797 instance=ExtResource("10_17lfb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8003039, 21.047834, 183.76561)
+
+[node name="SpikeRoller9" parent="World" unique_id=1207281731 instance=ExtResource("10_17lfb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7632784, 21.047834, 185.60962)
+
+[node name="SpikeRoller10" parent="World" unique_id=1685869718 instance=ExtResource("10_17lfb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.727256, 21.047834, 187.8301)
+
+[node name="SpikeRoller11" parent="World" unique_id=77955510 instance=ExtResource("10_17lfb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7705128, 21.047834, 189.69453)
+
+[node name="SpikeRoller12" parent="World" unique_id=1624842752 instance=ExtResource("10_17lfb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7647747, 21.047834, 191.57623)
+
+[node name="SpikeRoller13" parent="World" unique_id=1903554495 instance=ExtResource("10_17lfb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7593508, 21.047834, 193.35564)
+
+[node name="SpikeRoller26" parent="World" unique_id=1649067372 instance=ExtResource("10_17lfb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.211905, 21.047834, 193.35564)
+
+[node name="SpikeRoller25" parent="World" unique_id=39143510 instance=ExtResource("10_17lfb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.206481, 21.047834, 191.57623)
+
+[node name="SpikeRoller24" parent="World" unique_id=1917046841 instance=ExtResource("10_17lfb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2007427, 21.047834, 189.69453)
+
+[node name="SpikeRoller23" parent="World" unique_id=933445857 instance=ExtResource("10_17lfb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.244, 21.047834, 187.8301)
+
+[node name="SpikeRoller22" parent="World" unique_id=1928370522 instance=ExtResource("10_17lfb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2079773, 21.047834, 185.60962)
+
+[node name="SpikeRoller21" parent="World" unique_id=1826656346 instance=ExtResource("10_17lfb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.170952, 21.047834, 183.76561)
+
+[node name="SpikeRoller20" parent="World" unique_id=2061179834 instance=ExtResource("10_17lfb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.167929, 21.047834, 181.87355)
+
+[node name="SpikeRoller19" parent="World" unique_id=1082313326 instance=ExtResource("10_17lfb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2425466, 21.047834, 179.78337)
+
+[node name="SpikeRoller18" parent="World" unique_id=1159458355 instance=ExtResource("10_17lfb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.258003, 21.047834, 177.99655)
+
+[node name="SpikeRoller17" parent="World" unique_id=770933713 instance=ExtResource("10_17lfb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2343607, 21.047834, 176.16289)
+
+[node name="SpikeRoller16" parent="World" unique_id=662433912 instance=ExtResource("10_17lfb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.278557, 21.047834, 174.23657)
+
+[node name="SpikeRoller15" parent="World" unique_id=1593300358 instance=ExtResource("10_17lfb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2260556, 21.047834, 172.48946)
+
+[node name="SpikeRoller14" parent="World" unique_id=1358511819 instance=ExtResource("10_17lfb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.1515703, 21.047834, 170.4304)
+
+[node name="Bomb" parent="World" unique_id=1850613488 instance=ExtResource("10_kaamm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2764178, 21.570555, 171.93211)
+
+[node name="Bomb2" parent="World" unique_id=37999952 instance=ExtResource("10_kaamm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3529282, 21.570555, 174.31924)
+
+[node name="Bomb3" parent="World" unique_id=1325930293 instance=ExtResource("10_kaamm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2593765, 21.570555, 178.7918)
+
+[node name="Bomb4" parent="World" unique_id=752650733 instance=ExtResource("10_kaamm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2764178, 21.570555, 182.3206)
+
+[node name="Bomb5" parent="World" unique_id=668155931 instance=ExtResource("10_kaamm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2764178, 21.570555, 186.83229)
+
+[node name="Bomb6" parent="World" unique_id=1784225432 instance=ExtResource("10_kaamm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2764178, 21.570555, 191.38116)
+
+[node name="TileLargeDesert6" parent="World" unique_id=524739449 instance=ExtResource("3_74t05")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1060352, 20.19839, 202.59544)
+
+[node name="CheckPoint4" parent="World" unique_id=1238037195 instance=ExtResource("12_rhabe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2322216, 21.306873, 203.10934)

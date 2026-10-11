@@ -20,14 +20,20 @@ func _init() -> void:
 		for icon in btn.get_children():
 			var tr := icon as TextureRect
 			if tr != null and tr.texture != null:
-				if tr.texture == lock_tex:
+				var path: String = tr.texture.resource_path
+				if tr.texture == lock_tex or path.get_file() == "LockIcon.png":
 					has_lock = true
-				elif tr.texture.resource_path.ends_with("Star.png"):
+				# Sao da kiem: hoac vang `Icon_Small_Star.png`, hoac xam
+				# `Icon_Small_StarGrey.png` cho nhung man chua co sao nao.
+				elif path.ends_with("Star.png") or path.ends_with("StarGrey.png"):
 					has_star = true
-		if num <= 4 and has_star and not has_lock:
-			print("OK %s: star" % btn.name)
-		elif num > 4 and has_lock and not has_star:
+		# Màn <= 4 KHÔNG phải luôn mở: `GameManager.is_level_unlocked()` mở
+		# tuần tự, nên màn 4 vẫn khoá nếu màn 3 chưa hoàn thành. Vì vậy kết
+		# luận đúng là: có khoá thì KHÔNG được có sao, và ngược lại.
+		if has_lock and not has_star:
 			print("OK %s: lock" % btn.name)
+		elif has_star and not has_lock:
+			print("OK %s: star" % btn.name)
 		else:
 			bad.append("%s (lock=%s star=%s)" % [btn.name, has_lock, has_star])
 

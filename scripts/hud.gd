@@ -7,6 +7,7 @@ signal bow_draw_released
 @onready var lbl_level: Label = get_node_or_null("TopContainer/LblLevelInfo")
 @onready var pause_overlay: ColorRect = get_node_or_null("PauseOverlay")
 @onready var btn_pause: Button = get_node_or_null("TopContainer/BtnPause")
+@onready var btn_change_camera: Button = get_node_or_null("TopContainer/BtnChangeCamera")
 @onready var btn_resume: Button = get_node_or_null("PauseOverlay/PausePanel/PauseMenuContainer/BtnResume")
 @onready var btn_restart: Button = get_node_or_null("PauseOverlay/PausePanel/PauseMenuContainer/BtnRestart")
 @onready var btn_main_menu: Button = get_node_or_null("PauseOverlay/PausePanel/PauseMenuContainer/BtnMainMenu")
@@ -18,7 +19,7 @@ signal bow_draw_released
 @onready var btn_replay: Button = get_node_or_null("CompleteOverlay/CompletePanel/BtnReplay")
 @onready var btn_close_done: Button = get_node_or_null("CompleteOverlay/CompletePanel/BtnCloseDone")
 @onready var lbl_coins: Label = get_node_or_null("CompleteOverlay/CompletePanel/StatsRow/CoinBadge/Row/Value")
-@onready var lbl_gems: Label = get_node_or_null("CompleteOverlay/CompletePanel/StatsRow/GemBadge/Row/Value")
+@onready var lbl_coin_count: Label = get_node_or_null("TopContainer/CoinBox/Value")
 
 var _inventory_bar: HBoxContainer
 var _inventory_slots: Array[Panel] = []
@@ -40,8 +41,16 @@ func _ready() -> void:
 	if lbl_level:
 		lbl_level.text = "MÀN " + str(GameManager.current_level)
 
+	# Bộ đếm coin trên HUD. Nối tín hiệu của GameManager để cập nhật ngay
+	# khi nhặt đồng, không polling mỗi khung hình.
+	if not GameManager.coins_changed.is_connected(_refresh_coin_counter):
+		GameManager.coins_changed.connect(_refresh_coin_counter)
+	_refresh_coin_counter()
+
 	if btn_pause:
 		btn_pause.pressed.connect(_toggle_pause)
+	if btn_change_camera:
+		btn_change_camera.pressed.connect(_toggle_camera_mode)
 	if btn_resume:
 		btn_resume.pressed.connect(_resume)
 	if btn_restart:
@@ -239,6 +248,15 @@ func _resume() -> void:
 	get_tree().paused = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
+## Đổi qua lại góc nhìn thứ ba / thứ nhất. `GameManager.set_camera_mode()` tự
+## lưu và phát `camera_mode_changed`, mà `player.gd` đang lắng nghe nên không
+## cần gọi thêm gì ở đây.
+func _toggle_camera_mode() -> void:
+	var next: int = GameManager.CameraMode.FIRST_PERSON \
+		if GameManager.camera_mode == GameManager.CameraMode.THIRD_PERSON \
+		else GameManager.CameraMode.THIRD_PERSON
+	GameManager.set_camera_mode(next)
+
 
 ## Mở màn tuỳ chọn ngay trên menu tạm dừng. Cây vẫn ở trạng thái paused
 ## nên người chơi vẫn dừng, và đóng là quay lại đúng menu tạm dừng.
@@ -263,16 +281,22 @@ func set_status(message: String) -> void:
 	if lbl_level:
 		lbl_level.text = message
 
-## Màn hoàn thành: 3 ngôi sao theo thời gian, coin/gem, nút chơi lại.
+## Đưa số coin lên cả bộ đếm trên HUD lẫn badge ở màn hoàn thành.
+## `_total` là tham số của tín hiệu `GameManager.coins_changed`; để mặc định
+## để còn gọi trực tiếp khi hiện màn hoàn thành.
+func _refresh_coin_counter(_total: int = -1) -> void:
+	if lbl_coin_count:
+		lbl_coin_count.text = str(GameManager.coins)
+	if lbl_coins:
+		lbl_coins.text = str(GameManager.coins)
+
+## Màn hoàn thành: 3 ngôi sao theo thời gian, số coin đã nhặt, nút chơi lại.
 ## Cây vẫn paused để nhân vật giữ pose VictorySign.
 func show_level_complete(level_num: int, stars: int, seconds: float) -> void:
 	if complete_overlay == null:
 		return
 	_set_stars(stars)
-	if lbl_coins:
-		lbl_coins.text = str(GameManager.coins)
-	if lbl_gems:
-		lbl_gems.text = str(GameManager.gems)
+	_refresh_coin_counter()
 	complete_overlay.visible = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 

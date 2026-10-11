@@ -39,6 +39,9 @@ func _on_finish_body_entered(body: Node3D) -> void:
 		return
 	if body.has_method("play_victory"):
 		body.play_victory()
+	# Đã chiến thắng: cấm đi và nhảy, phím di chuyển chỉ còn xoay nhân vật.
+	if body.has_method("lock_movement"):
+		body.lock_movement()
 	_finish_level()
 
 ## Chốt màn: ghi sao, tiếng thắng, rồi mở màn hoàn thành.

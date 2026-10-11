@@ -52,7 +52,6 @@ func test_stars_and_wallet_survive_reload() -> void:
 	_gm.mark_level_completed(1)
 	_gm.record_stars(1, 3)
 	_gm.coins = 120
-	_gm.gems = 7
 	_gm._save_progress()
 
 	var reloaded: Node = load(GM_SCRIPT).new()
@@ -61,17 +60,14 @@ func test_stars_and_wallet_survive_reload() -> void:
 	assert_eq(reloaded.best_stars(1), 3, "Sao phai con sau khi nap lai")
 	assert_true(reloaded.is_level_completed(1), "Màn 1 van con hoan thanh")
 	assert_eq(reloaded.coins, 120, "Coin phai con sau khi nap lai")
-	assert_eq(reloaded.gems, 7, "Gem phai con sau khi nap lai")
 	reloaded.free()
 
 func test_reset_clears_stars_and_wallet() -> void:
 	_gm.record_stars(1, 3)
 	_gm.coins = 50
-	_gm.gems = 2
 	_gm.reset_progress()
 	assert_eq(_gm.best_stars(1), 0, "Xoa tien do -> khong con sao")
 	assert_eq(_gm.coins, 0, "Xoa tien do -> coin ve 0")
-	assert_eq(_gm.gems, 0, "Xoa tien do -> gem ve 0")
 
 func test_completion_panel_has_all_parts() -> void:
 	var scene := load("res://scenes/ui/hud.tscn") as PackedScene
@@ -95,9 +91,10 @@ func test_completion_panel_has_all_parts() -> void:
 	assert_true(panel.get_node_or_null("BtnReplay/Art") != null, "Nut choi lai + art")
 	assert_true(panel.get_node_or_null("BtnCloseDone/Art") != null, "Nut X + art")
 	assert_true(panel.get_node_or_null("StatsRow/CoinBadge/Row/Icon") != null, "Badge coin")
-	assert_true(panel.get_node_or_null("StatsRow/GemBadge/Row/Icon") != null, "Badge gem")
 	assert_true(panel.get_node_or_null("StatsRow/CoinBadge/Row/Value") != null, "So coin")
-	assert_true(panel.get_node_or_null("StatsRow/GemBadge/Row/Value") != null, "So gem")
+	# Da bo hoan toan gem khoi man hoan thanh, chi con coin.
+	assert_true(panel.get_node_or_null("StatsRow/GemBadge") == null, "Khong con badge gem")
+	assert_true(hud.get_node_or_null("TopContainer/CoinBox/Value") != null, "Bo dem coin tren HUD")
 
 	# Art phải neo kín nút (dùng cùng kích thước) để không bị méo khi kéo.
 	var replay_art := panel.get_node_or_null("BtnReplay/Art") as TextureRect
@@ -143,7 +140,7 @@ func test_badges_have_real_size() -> void:
 	# Panel khong tu lay kich thuoc toi thieu tu stylebox -> se gon 0x0.
 	var hud := (load("res://scenes/ui/hud.tscn") as PackedScene).instantiate()
 	track(hud)
-	for badge_name in ["CoinBadge", "GemBadge"]:
+	for badge_name in ["CoinBadge"]:
 		var badge := hud.get_node_or_null("CompleteOverlay/CompletePanel/StatsRow/" + badge_name)
 		assert_true(badge != null, "Thieu badge " + badge_name)
 		if badge != null:

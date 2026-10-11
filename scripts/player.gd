@@ -49,6 +49,9 @@ var input_vector = Vector2.ZERO
 var _jumps_remaining = 0
 var _spawn_position = Vector3.ZERO
 var _celebrating = false
+## Đã chiến thắng: cấm dịch chuyển và nhảy. Phím di chuyển vẫn xoay được
+## nhân vật. `level_controller` bật cờ này khi người chơi bước vào finish.
+var _movement_locked := false
 var _bow: Node3D
 var _bow_mount: BoneAttachment3D
 var _bow_muzzle: Marker3D
@@ -79,6 +82,18 @@ func play_victory() -> void:
 
 func is_celebrating() -> bool:
 	return _celebrating
+
+## Khoá di chuyển + nhảy sau khi chiến thắng. Nhân vật vẫn đứng yên trên
+## sàn và vẫn xoay được khi bấm phím di chuyển.
+func lock_movement() -> void:
+	_movement_locked = true
+
+## Mở khoá lại (dùng khi bấm chơi lại cùng màn mà không reload scene).
+func unlock_movement() -> void:
+	_movement_locked = false
+
+func is_movement_locked() -> bool:
+	return _movement_locked
 
 func set_respawn_position(new_position: Vector3) -> void:
 	_spawn_position = new_position
@@ -248,6 +263,11 @@ func _physics_process(delta: float) -> void:
 	var jump_pressed = Input.is_action_just_pressed("jump") or Input.is_action_just_pressed("ui_accept")
 	if hud and hud.has_method("consume_virtual_jump"):
 		jump_pressed = hud.consume_virtual_jump() or jump_pressed
+	## Đã chiến thắng thì bỏ qua nhảy. Phải bỏ SAU khi gọi
+	## `consume_virtual_jump()` o tren, neu khong nut ao tren man hinh se
+	## giu nguyen trang thai "bam" va khong bao gio chay lai duoc.
+	if _movement_locked:
+		jump_pressed = false
 	if jump_pressed and _jumps_remaining > 0:
 		## Nhảy khỏi sàn đang chạy: giữ cả quán tính của vật thể để nhân vật
 		## không bị tụt lại khi sàn trượt khỏi chân.
@@ -273,14 +293,22 @@ func _physics_process(delta: float) -> void:
 		right.y = 0.0
 		direction = (forward.normalized() * -input_vector.y + right.normalized() * input_vector.x).normalized()
 	if direction != Vector3.ZERO:
-		velocity.x = move_toward(velocity.x, direction.x * speed, acceleration * delta)
-		velocity.z = move_toward(velocity.z, direction.z * speed, acceleration * delta)
+		if _movement_locked:
+			## Đã thắng: giữ nguyên chỗ, chỉ chạy ma sát cho tốc độ cuộn
+			## về 0. Nhân vật vẫn xoay theo hướng bấm ở dưới.
+			velocity.x = move_toward(velocity.x, 0.0, friction * delta)
+			velocity.z = move_toward(velocity.z, 0.0, friction * delta)
+		else:
+			velocity.x = move_toward(velocity.x, direction.x * speed, acceleration * delta)
+			velocity.z = move_toward(velocity.z, direction.z * speed, acceleration * delta)
+		# Xoay nhân vật: có thực hiện cả khi đã khoá.
 		if current_skin_node:
 			current_skin_node.rotation.y = lerp_angle(current_skin_node.rotation.y, atan2(direction.x, direction.z), 15.0 * delta)
 	else:
 		velocity.x = move_toward(velocity.x, 0.0, friction * delta)
 		velocity.z = move_toward(velocity.z, 0.0, friction * delta)
-	_try_step_up(delta)
+	if not _movement_locked:
+		_try_step_up(delta)
 	move_and_slide()
 	_carry_with_platform(delta)
 	_update_animation_local(is_jumping)
