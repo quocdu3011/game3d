@@ -6,7 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://cg7xry0i38wf3" path="res://scenes/Entity/Item/CheckPoint_1.tscn" id="5_swmay"]
 [ext_resource type="PackedScene" uid="uid://jbu7sv20j3e" path="res://scenes/Entity/Tile/TileLowDesert.tscn" id="6_gcjdc"]
 [ext_resource type="PackedScene" uid="uid://hudui1" path="res://scenes/ui/hud.tscn" id="6_hud"]
-[ext_resource type="PackedScene" path="res://scenes/Entity/Item/TargetStand.tscn" id="8_stand"]
+[ext_resource type="PackedScene" uid="uid://boj3ykojm21c5" path="res://scenes/Entity/Tile/Powerup_block_1.tscn" id="8_gcjdc"]
+[ext_resource type="PackedScene" uid="uid://brblmtfgcyi8i" path="res://scenes/Entity/Item/TargetStand.tscn" id="8_stand"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sky"]
 sky_top_color = Color(0.48, 0.42, 0.35, 1)
@@ -1787,3 +1788,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.49628258, 20.707516, 129.99
 transform = Transform3D(-0.99955815, 0, -0.02972323, 0, 1, 0, 0.02972323, 0, -0.99955815, 0.49954844, 21.707516, 129.44856)
 moving_tile = NodePath("../TileLowDesert464")
 destination = NodePath("../TileLargeDesert3")
+destination_offset = Vector3(0, 0, 4)
+
+[node name="PowerupBlock1" parent="." unique_id=2037408164 instance=ExtResource("8_gcjdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.015293598, 21.131662, 3.500001)

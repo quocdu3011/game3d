@@ -11,7 +11,7 @@ const ARROW_HIT_METHOD := &"on_arrow_hit"
 ## `moving_tile` nên tile không bị nhảy lên rồi rơi xuống.
 @export var destination_offset: Vector3 = Vector3(4.0, 0.0, 0.0)
 ## Thời gian (giây) tile trượt hết một đoạn đường.
-@export var move_duration: float = 1.0
+@export var move_duration: float = 5.0
 
 var _tile: Node3D
 var _home_position := Vector3.ZERO

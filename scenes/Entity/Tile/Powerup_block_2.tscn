@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://b2trudgxhvbeu"]
+
+[ext_resource type="Script" path="res://scripts/powerup_block.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://bv7u37hh5vq7k" path="res://models/powerupBlock_teamRed.gltf" id="2_46m34"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_body"]
+size = Vector3(1, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_area"]
+size = Vector3(1.3, 0.6, 1.3)
+
+[node name="PowerupBlock2" type="Node3D" unique_id=1204007910]
+script = ExtResource("1_script")
+launch_height = 7.0
+
+[node name="powerupBlock_teamRed2" parent="." unique_id=259673884 instance=ExtResource("2_46m34")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=2000000001]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=2000000002]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_body")
+
+[node name="LaunchArea" type="Area3D" parent="." unique_id=2000000003]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LaunchArea" unique_id=2000000004]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+shape = SubResource("BoxShape3D_area")
