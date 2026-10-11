@@ -63,6 +63,15 @@ var _camera_touch_index := -1
 var _active_touch_indices: Dictionary = {}
 var _selected_slot = 1
 
+## Mang theo vật thể đang di chuyển.
+## Godot chỉ tự tính platform velocity cho AnimatableBody3D bật sync_to_physics;
+## vật thể kéo bằng script (xoay, đổi chỗ, trượt…) không báo gì nên nhân vật đứng
+## trên đó sẽ bị trượt khỏi. Ta tự lấy chênh lệch transform của vật thể đang ở
+## dưới chân rồi áp thẳng lên mình — kể cả phần xoay, để nhân vật quay theo sàn xoay.
+var _platform_body: Node3D = null
+var _platform_transform := Transform3D.IDENTITY
+var _platform_velocity := Vector3.ZERO
+
 func play_victory() -> void:
 	_celebrating = true
 	if current_skin_node and current_skin_node.has_method("victory_sign"):
@@ -240,6 +249,10 @@ func _physics_process(delta: float) -> void:
 	if hud and hud.has_method("consume_virtual_jump"):
 		jump_pressed = hud.consume_virtual_jump() or jump_pressed
 	if jump_pressed and _jumps_remaining > 0:
+		## Nhảy khỏi sàn đang chạy: giữ cả quán tính của vật thể để nhân vật
+		## không bị tụt lại khi sàn trượt khỏi chân.
+		velocity += _platform_velocity
+		_platform_velocity = Vector3.ZERO
 		velocity.y = jump_velocity
 		_jumps_remaining -= 1
 		is_jumping = true
@@ -269,7 +282,61 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0.0, friction * delta)
 	_try_step_up(delta)
 	move_and_slide()
+	_carry_with_platform(delta)
 	_update_animation_local(is_jumping)
+
+## Dịch chuyển nhân vật theo đúng chênh lệch transform của vật thể đang đứng
+## dưới chân. Vật thể xoay thì nhân vật xoay theo quanh chính vật thể đó.
+func _carry_with_platform(delta: float) -> void:
+	var collider := _platform_under_feet()
+	if collider == null:
+		_platform_body = null
+		_platform_velocity = Vector3.ZERO
+		return
+	var current := collider.global_transform
+	if _platform_body != collider:
+		## Vừa bước lên vật thể mới: lấy transform hiện tại làm gốc, khung này
+		## chưa có chênh lệch nào để bù.
+		_platform_body = collider
+		_platform_transform = current
+		_platform_velocity = Vector3.ZERO
+		return
+	if _engine_carries_player(collider):
+		## AnimatableBody3D đồng bộ vật lý: move_and_slide đã tự đưa nhân vật đi,
+		## tự bù thêm sẽ nhân đôi độ dời.
+		_platform_transform = current
+		return
+	var motion := current * _platform_transform.affine_inverse()
+	_platform_transform = current
+	_platform_velocity = motion.origin / maxf(delta, 0.0001)
+	global_transform = motion * global_transform
+
+## Vật thể đang đỡ dưới chân.
+## Ưu tiên collider của slide collision, nhưng KHI ĐỨNG YÊN move_and_slide
+## không sinh va chạm nào (slide list rỗng) — lúc đó phải dò bằng ray từ
+## dưới chân lên. Godot 4.7 cũng không có get_platform_collider().
+func _platform_under_feet() -> Node3D:
+	if not is_on_floor():
+		return null
+	var floor_normal := get_floor_normal()
+	if not floor_normal.is_zero_approx():
+		for index in get_slide_collision_count():
+			var collision := get_slide_collision(index)
+			if collision.get_normal().dot(floor_normal) > 0.7:
+				return collision.get_collider() as Node3D
+	## Capsule người chơi đặt từ y=0 trở lên nên ray bắt đầu hơi cao hơn gốc.
+	var query := PhysicsRayQueryParameters3D.create(
+		global_position + Vector3.UP * 0.2, global_position - Vector3.UP * 0.6)
+	query.exclude = [get_rid()]
+	query.collision_mask = collision_mask
+	var hit := get_world_3d().direct_space_state.intersect_ray(query)
+	if hit.is_empty() or (hit["normal"] as Vector3).dot(get_up_direction()) < 0.7:
+		return null
+	return hit["collider"] as Node3D
+
+## Engine chỉ tự mang nhân vật theo AnimatableBody3D bật sync_to_physics.
+func _engine_carries_player(collider: Node3D) -> bool:
+	return collider is AnimatableBody3D and (collider as AnimatableBody3D).sync_to_physics
 
 func _process(_delta: float) -> void:
 	if not is_multiplayer_authority():
@@ -302,6 +369,9 @@ func _respawn_at_start() -> void:
 	global_position = _spawn_position
 	velocity = Vector3.ZERO
 	_jumps_remaining = max_jumps
+	_platform_body = null
+	_platform_transform = Transform3D.IDENTITY
+	_platform_velocity = Vector3.ZERO
 
 func _update_animation_local(is_jumping_this_frame: bool) -> void:
 	if not current_skin_node or _celebrating:

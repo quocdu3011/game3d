@@ -7,3 +7,4 @@
 script = ExtResource("1_jeg1q")
 
 [node name="arrow_teamBlue2" parent="." unique_id=859098083 instance=ExtResource("1_b4osa")]
+transform = Transform3D(-0.99990535, -0.013759982, 0, 0.013759982, -0.99990535, 0, 0, 0, 1, 0, 0, 0)

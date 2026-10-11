@@ -1,0 +1,40 @@
+{
+  "$schema": "https://raw.githubusercontent.com/can1357/oh-my-pi/main/packages/coding-agent/src/config/mcp-schema.json",
+  "mcpServers": {
+    "godot-ai": {
+      "enabled": true,
+      "timeout": 300000,
+      "command": "C:\\Users\\Admin\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-x86_64-none\\pythonw.exe",
+      "args": [
+        "-c",
+        "import subprocess,sys; raise SystemExit(subprocess.call(sys.argv[1:], stdin=sys.stdin, stdout=sys.stdout, stderr=sys.stderr, creationflags=0x08000000))",
+        "C:\\Users\\Admin\\.local\\bin\\uvx.exe",
+        "--isolated",
+        "--no-config",
+        "--no-env-file",
+        "--no-sources",
+        "--no-build",
+        "--index-strategy",
+        "first-index",
+        "--keyring-provider",
+        "disabled",
+        "--index",
+        "https://pypi.org/simple",
+        "--default-index",
+        "https://pypi.org/simple",
+        "--find-links",
+        "https://pypi.org/simple/godot-ai/",
+        "--link-mode",
+        "copy",
+        "--from",
+        "godot-ai==4.3.0",
+        "godot-ai",
+        "attach",
+        "--port",
+        "8000",
+        "--ws-port",
+        "9500"
+      ]
+    }
+  }
+}
