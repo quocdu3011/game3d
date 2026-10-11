@@ -1,11 +1,11 @@
 {
     "schema_version": 2,
-    "commit": "c1907a0a20ae7b1adeab89cfb36aea8fdccbbb49",
-    "indexed_at": "2026-10-11T18:42:59Z",
+    "commit": "3dfcf07056cf127284e3261eb1023bc42ecb6c2d",
+    "indexed_at": "2026-10-11T18:53:30Z",
     "project": "home-quocdu-game-3d",
-    "nodes": 3542,
-    "edges": 10138,
-    "original_size": 17301504,
-    "compressed_size": 4043772,
+    "nodes": 3474,
+    "edges": 9972,
+    "original_size": 17104896,
+    "compressed_size": 3996309,
     "compression_level": 3
 }

@@ -18,8 +18,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameManager="*res://scripts/game_manager.gd"
-NetworkManager="*res://scripts/network_manager.gd"
-DedicatedRoom="*res://scripts/dedicated_room.gd"
 MusicPlayer="*res://scripts/music_player.gd"
 SfxPlayer="*res://scripts/sfx_player.gd"
 _mcp_game_helper="*res://addons/godot_ai/runtime/game_helper.gd"

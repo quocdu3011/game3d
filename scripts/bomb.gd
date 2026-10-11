@@ -152,8 +152,6 @@ func _explode() -> void:
 func _knock_back(body: CharacterBody3D) -> void:
 	if body == null or blast_force <= 0.0:
 		return
-	if body.get_multiplayer_authority() != multiplayer.get_unique_id():
-		return
 	var offset := body.global_position - global_position
 	offset.y = 0.0
 	if offset.is_zero_approx():
@@ -163,8 +161,7 @@ func _knock_back(body: CharacterBody3D) -> void:
 	if body.has_method("apply_knockback"):
 		body.apply_knockback(impulse)
 
-## Dua nguoi choi ve diem checkpoint da qua gan nhat. `player.gd` tu kiem tra
-## quyen so huu multiplayer nen khong can lam gi them o day.
+## Dua nguoi choi ve diem checkpoint da qua gan nhat.
 func _send_to_checkpoint() -> void:
 	if _player != null and is_instance_valid(_player) and _player.has_method("respawn_to_checkpoint"):
 		_player.respawn_to_checkpoint()

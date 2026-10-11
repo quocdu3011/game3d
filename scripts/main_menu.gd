@@ -17,7 +17,6 @@ func _ready() -> void:
 		btn_quit.pressed.connect(_on_quit_pressed)
 
 func _on_offline_pressed() -> void:
-	GameManager.current_mode = GameManager.GameMode.OFFLINE
 	get_tree().change_scene_to_file("res://scenes/ui/level_select.tscn")
 
 func _on_shop_pressed() -> void:

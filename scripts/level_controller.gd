@@ -1,14 +1,11 @@
 extends Node3D
 
 # Script điều khiển cơ bản cho các màn chơi (Level 1, 2, 3, 4...)
-# Trên dedicated server: spawn player cho từng peer khi nó báo sẵn sàng.
-# Trên client: player được spawn tự động qua MultiplayerSpawner.
 
 @export var player_scene: PackedScene = preload("res://scenes/player.tscn")
 
 @onready var players_container: Node3D = $Players
 
-var _spawn_count := 0
 ## Thời gian đã chơi của màn (giây). Cộng dồn bằng delta nên thời gian mở
 ## menu tạm dừng KHÔNG bị tính — người chơi không bị mất sao vì tạm dừng.
 var _elapsed := 0.0
@@ -25,10 +22,7 @@ var _hud: CanvasLayer
 func _ready() -> void:
 	_hud = get_node_or_null("HUD") as CanvasLayer
 	SfxPlayer.play("game_start")
-
-	# Chơi offline tại chỗ (không qua dedicated server)
-	if multiplayer.is_server() and GameManager.current_mode == GameManager.GameMode.OFFLINE:
-		_spawn_single_player()
+	_spawn_player()
 
 func _level_number() -> int:
 	var parsed := name.trim_prefix("Level").to_int()
@@ -57,7 +51,7 @@ func _finish_level() -> void:
 	if _hud and _hud.has_method("show_level_complete"):
 		_hud.show_level_complete(level_num, stars, _elapsed)
 
-func _spawn_single_player() -> void:
+func _spawn_player() -> void:
 	if not player_scene or not players_container:
 		return
 
@@ -65,25 +59,3 @@ func _spawn_single_player() -> void:
 	player.name = "1"
 	players_container.add_child(player)
 	player.global_position = players_container.global_position
-
-## Chạy trên dedicated server: spawn player cho peer pid.
-func spawn_player_for(pid: int) -> void:
-	if not multiplayer.is_server():
-		return
-	_spawn_player(pid)
-
-func _spawn_player(pid: int = -1) -> void:
-	var id := pid if pid > 0 else multiplayer.get_remote_sender_id()
-	if players_container == null or players_container.has_node(str(id)):
-		return
-
-	var player = player_scene.instantiate()
-	player.name = str(id)
-	players_container.add_child(player)
-	_spawn_count += 1
-	player.global_position = players_container.global_position
-
-func remove_player(id: int) -> void:
-	if players_container and players_container.has_node(str(id)):
-		players_container.get_node(str(id)).queue_free()
-		_spawn_count = max(0, _spawn_count - 1)

@@ -104,49 +104,32 @@ func apply_knockback(impulse: Vector3) -> void:
 	velocity.y = max(velocity.y, impulse.y)
 
 func respawn_to_checkpoint() -> void:
-	if not is_multiplayer_authority() and GameManager.current_mode != GameManager.GameMode.OFFLINE:
-		return
 	_respawn_at_start()
-
-func _enter_tree() -> void:
-	var id_from_name = str(name).to_int()
-	if id_from_name > 0:
-		set_multiplayer_authority(id_from_name)
 
 func _ready() -> void:
 	_spawn_position = global_position
 	_jumps_remaining = max_jumps
 	floor_snap_length = 0.2
 	apply_floor_snap()
-	if is_multiplayer_authority():
-		camera.current = true
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	else:
-		camera.current = false
-	var my_id = str(name).to_int()
-	if NetworkManager.player_skins.has(my_id):
-		skin_name = NetworkManager.player_skins[my_id]
-	else:
-		skin_name = GameManager.selected_skin
+	camera.current = true
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	skin_name = GameManager.selected_skin
 	_load_skin(skin_name)
 	_setup_bow()
-	if is_multiplayer_authority():
-		if not GameManager.camera_mode_changed.is_connected(_on_camera_mode_changed):
-			GameManager.camera_mode_changed.connect(_on_camera_mode_changed)
-		var hud = get_tree().get_first_node_in_group("hud")
-		if hud:
-			if hud.has_signal("bow_draw_started") and not hud.is_connected("bow_draw_started", _start_drawing):
-				hud.connect("bow_draw_started", _start_drawing)
-			if hud.has_signal("bow_draw_released") and not hud.is_connected("bow_draw_released", _release_drawing):
-				hud.connect("bow_draw_released", _release_drawing)
-		_apply_camera_mode(GameManager.camera_mode)
+	if not GameManager.camera_mode_changed.is_connected(_on_camera_mode_changed):
+		GameManager.camera_mode_changed.connect(_on_camera_mode_changed)
+	var hud = get_tree().get_first_node_in_group("hud")
+	if hud:
+		if hud.has_signal("bow_draw_started") and not hud.is_connected("bow_draw_started", _start_drawing):
+			hud.connect("bow_draw_started", _start_drawing)
+		if hud.has_signal("bow_draw_released") and not hud.is_connected("bow_draw_released", _release_drawing):
+			hud.connect("bow_draw_released", _release_drawing)
+	_apply_camera_mode(GameManager.camera_mode)
 
 func _on_camera_mode_changed(mode: int) -> void:
 	_apply_camera_mode(mode)
 
 func _apply_camera_mode(mode: int) -> void:
-	if not is_multiplayer_authority():
-		return
 	var first_person: bool = mode == GameManager.CameraMode.FIRST_PERSON
 	spring_arm.spring_length = first_person_distance if first_person else third_person_distance
 	spring_arm.position.y = first_person_pivot_height if first_person else third_person_pivot_height
@@ -176,7 +159,7 @@ func _load_skin(s_name: String) -> void:
 			current_skin_node.walk_run_blending = 1.0
 
 func _setup_bow() -> void:
-	if not is_multiplayer_authority() or current_skin_node == null:
+	if current_skin_node == null:
 		return
 	var scene: PackedScene = load(BOW_SCENE_PATH) as PackedScene
 	var skeleton: Skeleton3D = _find_skeleton(current_skin_node)
@@ -245,10 +228,6 @@ func _hide_trajectory() -> void:
 		dot.visible = false
 
 func _physics_process(delta: float) -> void:
-	if not is_multiplayer_authority() and GameManager.current_mode != GameManager.GameMode.OFFLINE:
-		move_and_slide()
-		_update_animation_remote()
-		return
 	if global_position.y < respawn_y:
 		_respawn_at_start()
 		return
@@ -367,8 +346,6 @@ func _engine_carries_player(collider: Node3D) -> bool:
 	return collider is AnimatableBody3D and (collider as AnimatableBody3D).sync_to_physics
 
 func _process(_delta: float) -> void:
-	if not is_multiplayer_authority():
-		return
 	if _is_drawing:
 		_draw_elapsed = min(_draw_elapsed + _delta, bow_draw_time)
 		_update_trajectory()
@@ -415,17 +392,7 @@ func _update_animation_local(is_jumping_this_frame: bool) -> void:
 	elif not is_on_floor() and velocity.y < -1.0 and current_skin_node.has_method("fall"):
 		current_skin_node.fall()
 
-func _update_animation_remote() -> void:
-	if not current_skin_node:
-		return
-	if Vector2(velocity.x, velocity.z).length() > 0.2 and current_skin_node.has_method("move"):
-		current_skin_node.move()
-	elif current_skin_node.has_method("idle"):
-		current_skin_node.idle()
-
 func _input(event: InputEvent) -> void:
-	if not is_multiplayer_authority() and GameManager.current_mode != GameManager.GameMode.OFFLINE:
-		return
 	if event is InputEventScreenTouch:
 		if event.pressed:
 			_active_touch_indices[event.index] = true

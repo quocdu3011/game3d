@@ -327,5 +327,4 @@ func _close_complete() -> void:
 
 func _return_to_main_menu() -> void:
 	get_tree().paused = false
-	NetworkManager.leave_room()
 	get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")

@@ -124,11 +124,7 @@ func _update_progress() -> void:
 	progress.show_percentage = true
 
 func _load_level(level_num: int) -> void:
-	if GameManager.current_mode == GameManager.GameMode.OFFLINE:
-		GameManager.load_level(level_num)
-	else:
-		# Online: yêu cầu server phòng load level, cả 2 client được sync
-		NetworkManager.request_level(level_num)
+	GameManager.load_level(level_num)
 
 func _on_back_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")

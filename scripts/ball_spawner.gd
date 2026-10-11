@@ -13,8 +13,6 @@ var _random := RandomNumberGenerator.new()
 var _spawn_count := 0
 
 func _ready() -> void:
-	if not multiplayer.is_server():
-		return
 	_random.randomize()
 	timer.wait_time = spawn_interval
 	timer.timeout.connect(_spawn_ball)

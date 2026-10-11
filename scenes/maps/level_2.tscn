@@ -33,10 +33,6 @@ script = ExtResource("1_lvlctrl")
 [node name="Players" type="Node3D" parent="." unique_id=155492094]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6982471, 23.051552, 0.91132736)
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=541893245]
-_spawnable_scenes = PackedStringArray("uid://brcdva43yrr8u")
-spawn_path = NodePath("../Players")
-
 [node name="SpawnPoint1" type="Marker3D" parent="." unique_id=627973054]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1.5, 0)
 

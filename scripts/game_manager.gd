@@ -1,12 +1,10 @@
 extends Node
 
 # Quản lý trạng thái toàn cục của game
-enum GameMode { OFFLINE, ONLINE_HOST, ONLINE_CLIENT }
 enum CameraMode { THIRD_PERSON, FIRST_PERSON }
 
 signal camera_mode_changed(mode: CameraMode)
 
-var current_mode: GameMode = GameMode.OFFLINE
 var camera_mode: CameraMode = CameraMode.THIRD_PERSON
 var selected_skin: String = "gobot" # "gobot", "gdbot", "sophia"
 var current_level: int = 1
