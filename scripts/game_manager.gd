@@ -159,10 +159,12 @@ func _load_progress() -> void:
 			level_stars[level_num] = stars
 	coins = int(config.get_value("wallet", "coins", 0))
 	# Chỉ nhận skin còn tồn tại trong SKINS để save cũ/không còn scene không
-	# làm hỏng danh sách mở khoá.
-	for skin_name in config.get_section_keys("unlock"):
-		if SKINS.has(skin_name) and bool(config.get_value("unlock", skin_name, false)):
-			unlocked_skins[skin_name] = true
+	# làm hỏng danh sách mở khoá. `get_section_keys` sẽ báo ERROR nếu section
+	# chưa từng được ghi, nên phải kiểm tra trước.
+	if config.has_section("unlock"):
+		for skin_name in config.get_section_keys("unlock"):
+			if SKINS.has(skin_name) and bool(config.get_value("unlock", skin_name, false)):
+				unlocked_skins[skin_name] = true
 	var saved_skin := str(config.get_value("settings", "selected_skin", DEFAULT_SKIN))
 	# Skin đã lưu phải còn tồn tại và đã mở khoá, nếu không thì lùi về mặc định.
 	selected_skin = saved_skin if is_skin_unlocked(saved_skin) else DEFAULT_SKIN

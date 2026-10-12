@@ -1,5 +1,12 @@
 extends CanvasLayer
 
+## Icon vật phẩm hiển thị ở ô 1 của thanh inventory (cung).
+const INVENTORY_BOW_ICON := "res://assets/UI/Icons/bow_icon.png"
+## Ô inventory rộng 72x68. Icon 44x44 canh giữa, lệch xuống một chút để
+## không đè lên số thứ tự ở góc trên-trái.
+const ICON_SIZE := Vector2(44.0, 44.0)
+const ICON_POS := Vector2(14.0, 16.0)
+
 signal bow_draw_started
 signal bow_draw_released
 
@@ -189,12 +196,15 @@ func _create_inventory_bar() -> void:
 		slot.add_child(number)
 		if index == 0:
 			var icon := TextureRect.new()
-			icon.texture = load("res://assets/UI/Icons/Icon_Small_WhiteOutline_Arrow.png")
-			icon.position = Vector2(20.0, 16.0)
-			icon.size = Vector2(38.0, 38.0)
+			icon.texture = load(INVENTORY_BOW_ICON)
 			icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 			icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 			slot.add_child(icon)
+			# Phải đặt position/size SAU khi add_child: trước khi node vào
+			# cây, Control tự lấy kích thước min bằng kích thước texture nên
+			# gán trước sẽ bị ghi đè (bow_icon.png là 1254x1254).
+			icon.position = ICON_POS
+			icon.size = ICON_SIZE
 	select_inventory_slot(1)
 
 func select_inventory_slot(slot_number: int) -> void:

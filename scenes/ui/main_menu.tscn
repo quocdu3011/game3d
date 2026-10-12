@@ -28,10 +28,16 @@ color = Color(0.035, 0.055, 0.09, 1)
 [node name="Panel" type="Panel" parent="." unique_id=137096845]
 z_index = -1
 layout_mode = 0
-offset_right = 1151.0
-offset_bottom = 671.0
-offset_transform_enabled = true
-offset_transform_scale = Vector2(0.7, 0.7)
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -403.0
+offset_top = -235.0
+offset_right = 403.0
+offset_bottom = 235.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="MenuContainer" type="VBoxContainer" parent="." unique_id=1080545762]
 z_index = 1
@@ -41,13 +47,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -109.0
-offset_top = -93.0
-offset_right = 211.0
-offset_bottom = 343.7143
+offset_left = -160.0
+offset_top = -160.5
+offset_right = 160.0
+offset_bottom = 160.5
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.7, 0.7)
+pivot_offset = Vector2(160, 160.5)
 theme_override_constants/separation = 12
 
 [node name="BtnOffline" type="Button" parent="MenuContainer" unique_id=976440946]
