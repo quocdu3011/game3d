@@ -51,27 +51,61 @@ const STAR_TIMES: Dictionary = {
 	4: [30.0, 65.0],
 }
 
-## Bắn ra mỗi khi số coin đổi, để HUD cập nhật ngay khi nhặt đồng.
+## Bắn ra mỗi khi số coin trong màn đổi, để HUD cập nhật ngay khi nhặt đồng.
+signal level_coins_changed(amount: int)
+
+## Bắn ra khi ví coin đổi (mua/xoá) và khi coin vừa được nộp sau khi xong màn.
 signal coins_changed(total: int)
 
 ## level -> số sao tốt nhất từng đạt được.
 var level_stars: Dictionary = {}
 ## Bộ đếm tiền tệ trong túi người chơi, giữ qua các màn nhờ `_save_progress()`.
-## Mỗi đồng `coin.tscn` nhặt được sẽ gọi `add_coins()`.
+## Chỉ tăng khi nộp coin cuối màn (`bank_level_coins()`) hoặc giảm khi mua nhân vật.
 var coins: int = 0
+## Coin nhặt được trong màn đang chơi. Luôn bắt đầu từ 0 mỗi màn và chỉ được
+## cộng vào ví khi `bank_level_coins()` chạy lúc hoàn thành màn — nên bỏ giữa
+## màn (chết, bấm chơi lại) thì mất trắng, không mất tiền đã kiếm trước đó.
+var level_coins: int = 0
 ## skin -> true cho mọi nhân vật đã mở khoá. Nhân vật mặc định luôn mở.
 var unlocked_skins: Dictionary = {}
 
 ## Bắn ra khi ví coin đổi (mua/xoá) và khi có nhân vật mới được mở khoá.
 signal purchase_result(ok: bool, skin_name: String, message: String)
 
-## Cộng coin và lưu ngay. `amount` âm là dùng (chưa có chỗ nào dùng tới).
+## Coin nhặt được trong màn: cộng vào `level_coins`, KHÔNG đụng tới ví và
+## không lưu đĩa. `coin.gd` gọi hàm này mỗi lần nhặt.
 func add_coins(amount: int) -> void:
 	if amount == 0:
 		return
-	coins = maxi(0, coins + amount)
+	level_coins = maxi(0, level_coins + amount)
+	level_coins_changed.emit(level_coins)
+
+## Đặt bộ đếm về 0. `level_controller` gọi lúc màn bắt đầu để số coin trên
+## HUD luôn bắt đầu từ 0, không kế thừa coin của màn trước.
+func reset_level_coins() -> void:
+	level_coins = 0
+	level_coins_changed.emit(level_coins)
+
+## Nộp coin của màn vào ví rồi đặt bộ đếm về 0. Gọi đúng một lần lúc hoàn
+## thành màn. Trả về số coin vừa nộp để màn hoàn thành hiện ra.
+func bank_level_coins() -> int:
+	var banked := level_coins
+	level_coins = 0
+	if banked > 0:
+		coins += banked
+		_save_progress()
+		coins_changed.emit(coins)
+	level_coins_changed.emit(0)
+	return banked
+
+## Trừ coin khỏi ví (mua nhân vật). Thiếu coin thì không làm gì.
+func spend_coins(amount: int) -> bool:
+	if amount <= 0 or coins < amount:
+		return false
+	coins -= amount
 	_save_progress()
 	coins_changed.emit(coins)
+	return true
 
 func skin_price(skin_name: String) -> int:
 	return int(SKIN_PRICES.get(skin_name, 0))
@@ -99,7 +133,7 @@ func unlock_skin(skin_name: String) -> bool:
 		push_warning(msg)
 		return false
 
-	add_coins(-price)
+	spend_coins(price)
 	unlocked_skins[skin_name] = true
 	_save_progress()
 	purchase_result.emit(true, skin_name, "Da mo khoa %s" % skin_name.capitalize())
@@ -147,6 +181,7 @@ func _load_progress() -> void:
 	level_stars.clear()
 	unlocked_skins.clear()
 	coins = 0
+	level_coins = 0
 	selected_skin = DEFAULT_SKIN
 	var config := ConfigFile.new()
 	if config.load(save_path) != OK:
@@ -192,6 +227,7 @@ func reset_progress() -> void:
 	level_stars.clear()
 	unlocked_skins.clear()
 	coins = 0
+	level_coins = 0
 	selected_skin = DEFAULT_SKIN
 	_save_progress()
 

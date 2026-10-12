@@ -69,6 +69,46 @@ func test_reset_clears_stars_and_wallet() -> void:
 	assert_eq(_gm.best_stars(1), 0, "Xoa tien do -> khong con sao")
 	assert_eq(_gm.coins, 0, "Xoa tien do -> coin ve 0")
 
+func test_level_starts_at_zero_and_banks_on_finish() -> void:
+	_gm.reset_progress()
+	# Ví có sẵn 100 coin từ màn trước -> màn mới phải bắt đầu từ 0.
+	_gm.coins = 100
+	_gm.reset_level_coins()
+	assert_eq(_gm.level_coins, 0, "Dau man phai bat dau tu 0")
+	_gm.add_coins(1)
+	_gm.add_coins(2)
+	assert_eq(_gm.level_coins, 3, "Nhet 3 dong -> dem 3 trong man")
+	assert_eq(_gm.coins, 100, "Chua xong man -> vi khong doi")
+
+	# Hoan thanh man: coin cua man cong vao vi, bo dem ve 0.
+	var banked: int = _gm.bank_level_coins()
+	assert_eq(banked, 3, "Nop 3 coin")
+	assert_eq(_gm.coins, 103, "Coin cua man cong vao vi hien co")
+	assert_eq(_gm.level_coins, 0, "Sau khi nop, bo dem ve 0")
+
+func test_bank_survives_reload_and_reset_clears_it() -> void:
+	_gm.reset_progress()
+	_gm.add_coins(5)
+	_gm.bank_level_coins()
+
+	var reloaded: Node = load(GM_SCRIPT).new()
+	reloaded.save_path = TMP_SAVE
+	reloaded._load_progress()
+	assert_eq(reloaded.coins, 5, "Coin da nop phai con sau khi nap lai")
+	assert_eq(reloaded.level_coins, 0, "Nap lai khong mang theo bo dem trong man")
+	reloaded.free()
+
+	_gm.reset_progress()
+	assert_eq(_gm.level_coins, 0, "Xoa tien do -> bo dem trong man ve 0")
+
+func test_spend_coins_respects_wallet() -> void:
+	_gm.reset_progress()
+	_gm.coins = 30
+	assert_false(_gm.spend_coins(50), "Thieu coin -> khong tru")
+	assert_eq(_gm.coins, 30, "Thieu coin -> vi giu nguyen")
+	assert_true(_gm.spend_coins(20), "Du coin -> tru thanh cong")
+	assert_eq(_gm.coins, 10, "Tru dung so da")
+
 func test_completion_panel_has_all_parts() -> void:
 	var scene := load("res://scenes/ui/hud.tscn") as PackedScene
 	assert_true(scene != null, "HUD scene must load")

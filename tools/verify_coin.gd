@@ -8,7 +8,9 @@ var _step := 0
 var _hud: CanvasLayer
 var _coins: Array[Node3D] = []
 var _player: CharacterBody3D
-var _coin_before := 0
+## So coin trong man luc moi vao (phai = 0) va so coin trong vi luc moi vao.
+var _level_before := 0
+var _wallet_before := 0
 ## Cac vi tri player se di qua, dung kiem chung 3 dong.
 var _ROUTE: Array[Vector3] = [Vector3(-3.0, 1.2, 0), Vector3(0.0, 1.2, 0), Vector3(3.0, 1.2, 0), Vector3(9.0, 1.2, 0)]
 var _route := 0
@@ -25,7 +27,10 @@ func _process(_d: float) -> bool:
 			_step = 1
 			_gm = root.get_node("GameManager")
 			_gm.save_path = "user://__verify_coin.cfg"   # khong cham save that
+			# Xoa file save cu de lan chay sau khong doc nham du lieu cu.
+			DirAccess.remove_absolute(ProjectSettings.globalize_path(_gm.save_path))
 			_gm.coins = 0
+			_gm.reset_level_coins()
 			_hud = (load("res://scenes/ui/hud.tscn") as PackedScene).instantiate()
 			root.add_child(_hud)
 			var floor_b := StaticBody3D.new()
@@ -43,7 +48,8 @@ func _process(_d: float) -> bool:
 				_coins.append(c)
 			_player = (load("res://scenes/player.tscn") as PackedScene).instantiate() as CharacterBody3D
 			root.add_child(_player)
-			_coin_before = _gm.coins
+			_level_before = _gm.level_coins
+			_wallet_before = _gm.coins
 			return false
 
 		1:
@@ -85,15 +91,29 @@ func _check(label: String, ok: bool, detail: String = "") -> void:
 
 func _report() -> void:
 	print("=== Kiem chung tien te ===")
-	var got: int = int(_gm.coins) - _coin_before
+	var got: int = int(_gm.level_coins) - _level_before
 	_check("nac 3 dong", got == 3, "(nhan %d)" % got)
+	_check("bo dem man bat dau tu 0", _level_before == 0, "(dau man = %d)" % _level_before)
+	_check("chua xong man -> vi khong doi", int(_gm.coins) == _wallet_before,
+		"(vi = %d)" % _gm.coins)
 	var lbl := _hud.get_node_or_null("TopContainer/CoinBox/Value") as Label
-	_check("bo dem tren HUD", lbl != null and lbl.text == str(_gm.coins),
-		"(HUD=\"%s\", GameManager=%d)" % [lbl.text if lbl else "?", _gm.coins])
+	_check("bo dem tren HUD", lbl != null and lbl.text == str(_gm.level_coins),
+		"(HUD=\"%s\", dem trong man=%d)" % [lbl.text if lbl else "?", _gm.level_coins])
 	var cfg := ConfigFile.new()
-	_check("da luu xuong dia", cfg.load("user://__verify_coin.cfg") == OK
-		and int(cfg.get_value("wallet", "coins", -1)) == _gm.coins,
-		"(file=%d)" % int(cfg.get_value("wallet", "coins", -1)))
+	_check("chua xong man -> chua luu xuong dia", cfg.load("user://__verify_coin.cfg") != OK
+		or int(cfg.get_value("wallet", "coins", 0)) == _wallet_before,
+		"(file luu = %d)" % int(cfg.get_value("wallet", "coins", -1)))
+
+	# Xong man: coin cua man duoc cong vao vi va ghi xuong dia.
+	var banked: int = int(_gm.bank_level_coins())
+	_check("nop coin cua man", banked == 3 and int(_gm.coins) == _wallet_before + 3,
+		"(nop %d, vi = %d)" % [banked, _gm.coins])
+	_check("bo dem trong man ve 0", int(_gm.level_coins) == 0, "(con %d)" % _gm.level_coins)
+	var cfg2 := ConfigFile.new()
+	_check("da luu xuong dia", cfg2.load("user://__verify_coin.cfg") == OK
+		and int(cfg2.get_value("wallet", "coins", -1)) == _gm.coins,
+		"(file=%d)" % int(cfg2.get_value("wallet", "coins", -1)))
+
 	var alive := 0
 	for c in _coins:
 		if is_instance_valid(c): alive += 1
@@ -104,8 +124,9 @@ func _report() -> void:
 	_check("GemBadge da go khoi scene", gem == null)
 	var coin_badge := _hud.get_node_or_null("CompleteOverlay/CompletePanel/StatsRow/CoinBadge")
 	_check("CoinBadge con lai", coin_badge != null)
+	_hud.show_level_complete(1, 3, 12.0, 3)
 	var complete_lbl := _hud.get_node_or_null("CompleteOverlay/CompletePanel/StatsRow/CoinBadge/Row/Value") as Label
-	_check("nhan coin tren man hoan thanh", complete_lbl != null and complete_lbl.text == str(_gm.coins),
+	_check("hien so coin vua thu thap", complete_lbl != null and complete_lbl.text == "3",
 		"(\"%s\")" % (complete_lbl.text if complete_lbl else "?"))
 	print("")
 	print("=== TAT CA DUNG ===" if _bad == 0 else "=== %d LOI ===" % _bad)

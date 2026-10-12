@@ -22,6 +22,9 @@ var _hud: CanvasLayer
 func _ready() -> void:
 	_hud = get_node_or_null("HUD") as CanvasLayer
 	SfxPlayer.play("game_start")
+	# Mỗi màn bắt đầu với 0 coin: bộ đếm trong màn không kế thừa coin đã nộp
+	# ở màn trước, mà ví vẫn giữ nguyên số coin đã kiếm được.
+	GameManager.reset_level_coins()
 	_spawn_player()
 
 func _level_number() -> int:
@@ -47,9 +50,11 @@ func _finish_level() -> void:
 	var stars := GameManager.stars_for_time(level_num, _elapsed)
 	GameManager.mark_level_completed(level_num)
 	GameManager.record_stars(level_num, stars)
+	# Xong màn thì mới nộp coin của màn vào ví, rồi bộ đếm về 0.
+	var earned := GameManager.bank_level_coins()
 	SfxPlayer.play("game_winner")
 	if _hud and _hud.has_method("show_level_complete"):
-		_hud.show_level_complete(level_num, stars, _elapsed)
+		_hud.show_level_complete(level_num, stars, _elapsed, earned)
 
 func _spawn_player() -> void:
 	if not player_scene or not players_container:

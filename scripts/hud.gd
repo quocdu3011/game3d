@@ -49,9 +49,10 @@ func _ready() -> void:
 		lbl_level.text = "MÀN " + str(GameManager.current_level)
 
 	# Bộ đếm coin trên HUD. Nối tín hiệu của GameManager để cập nhật ngay
-	# khi nhặt đồng, không polling mỗi khung hình.
-	if not GameManager.coins_changed.is_connected(_refresh_coin_counter):
-		GameManager.coins_changed.connect(_refresh_coin_counter)
+	# khi nhặt đồng, không polling mỗi khung hình. Số hiện là coin của màn
+	# đang chơi (luôn bắt đầu từ 0), không phải tổng coin trong ví.
+	if not GameManager.level_coins_changed.is_connected(_refresh_coin_counter):
+		GameManager.level_coins_changed.connect(_refresh_coin_counter)
 	_refresh_coin_counter()
 
 	if btn_pause:
@@ -291,22 +292,24 @@ func set_status(message: String) -> void:
 	if lbl_level:
 		lbl_level.text = message
 
-## Đưa số coin lên cả bộ đếm trên HUD lẫn badge ở màn hoàn thành.
-## `_total` là tham số của tín hiệu `GameManager.coins_changed`; để mặc định
-## để còn gọi trực tiếp khi hiện màn hoàn thành.
-func _refresh_coin_counter(_total: int = -1) -> void:
+## Đưa số coin của màn lên bộ đếm trên HUD. `_amount` là tham số của tín hiệu
+## `GameManager.level_coins_changed`; để mặc định để còn gọi trực tiếp khi
+## vào màn.
+func _refresh_coin_counter(_amount: int = -1) -> void:
 	if lbl_coin_count:
-		lbl_coin_count.text = str(GameManager.coins)
-	if lbl_coins:
-		lbl_coins.text = str(GameManager.coins)
+		lbl_coin_count.text = str(GameManager.level_coins)
 
-## Màn hoàn thành: 3 ngôi sao theo thời gian, số coin đã nhặt, nút chơi lại.
-## Cây vẫn paused để nhân vật giữ pose VictorySign.
-func show_level_complete(level_num: int, stars: int, seconds: float) -> void:
+## Màn hoàn thành: 3 ngôi sao theo thời gian, số coin vừa thu thập, nút chơi
+## lại. Cây vẫn paused để nhân vật giữ pose VictorySign.
+## `earned_coins` là số coin màn này vừa nộp vào ví (mặc định -1 = lấy bộ đếm
+## hiện tại, hữu ích khi gọi trực tiếp từ test).
+func show_level_complete(level_num: int, stars: int, seconds: float, earned_coins: int = -1) -> void:
 	if complete_overlay == null:
 		return
 	_set_stars(stars)
 	_refresh_coin_counter()
+	if lbl_coins:
+		lbl_coins.text = str(GameManager.level_coins if earned_coins < 0 else earned_coins)
 	complete_overlay.visible = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
