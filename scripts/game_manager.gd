@@ -266,6 +266,16 @@ func next_unfinished_level() -> int:
 			return level_num
 	return -1
 
+## Màn liền kề sau `level_num` trong thứ tự tăng dần, dùng cho nút "sang màn
+## tiếp theo" ở màn hoàn thành. Trả -1 khi `level_num` không tồn tại hoặc đã là
+## màn cuối — lúc đó UI nên ẩn nút đi.
+func next_level_after(level_num: int) -> int:
+	var ordered := _ordered_levels()
+	var index: int = ordered.find(level_num)
+	if index < 0 or index + 1 >= ordered.size():
+		return -1
+	return int(ordered[index + 1])
+
 ## Mở khoá tuần tự: level đầu tiên luôn mở, level sau chỉ mở khi level
 ## liền trước đã hoàn thành. Level không tồn tại thì không bao giờ mở.
 func is_level_unlocked(level_num: int) -> bool:

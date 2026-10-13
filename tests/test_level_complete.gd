@@ -176,6 +176,47 @@ func test_center_star_is_large_and_sides_are_small() -> void:
 		assert_eq(back.get_index() < row.get_parent().get_children().find(row), true,
 			"Nen phai ve truoc StarsRow de khong che sao")
 
+func test_complete_panel_buttons_sit_side_by_side_inside_panel() -> void:
+	# Hồi quy bố cục: nút "Chơi lại" bên trái, nút "màn tiếp theo" bên phải, cả
+	# hai cùng nằm TRONG panel. Trước đây offset của chúng được tính theo tâm
+	# panel (anchors_preset = 8) rồi đổi sang neo góc mà quên đổi công thức, khiến
+	# nút chơi lại trôi ra ngoài panel.
+	var hud := (load("res://scenes/ui/hud.tscn") as PackedScene).instantiate()
+	track(hud)
+	var panel := hud.get_node_or_null("CompleteOverlay/CompletePanel") as Control
+	var replay := panel.get_node_or_null("BtnReplay") as Control
+	var next_btn := panel.get_node_or_null("BtnNextLevel") as Control
+	assert_ne(next_btn, null, "Phai co nut sang man tiep theo")
+	if replay == null or next_btn == null:
+		return
+
+	# `panel.get_rect()` trả về rect so với CHA (overlay), còn rect của nút là so
+	# với panel — nên phải so với `Rect2(Vector2.ZERO, panel.size)`.
+	var panel_box := Rect2(Vector2.ZERO, panel.size)
+	for entry in [["BtnReplay", replay], ["BtnNextLevel", next_btn]]:
+		var r: Rect2 = (entry[1] as Control).get_rect()
+		assert_true(panel_box.encloses(r),
+			"%s phai nam trong panel (nut %s, panel 0..%s)" % [entry[0], str(r), str(panel.size)])
+
+	assert_true(replay.get_rect().end.x <= next_btn.get_rect().position.x,
+		"Nut choi lai phai ben trai nut man tiep theo")
+	assert_eq(replay.get_rect().position.y, next_btn.get_rect().position.y,
+		"Hai nut phai cung hang")
+
+	# Nút màn tiếp theo phải dùng đúng asset yêu cầu.
+	var art := next_btn.get_node_or_null("Art") as TextureRect
+	assert_ne(art, null, "Nut man tiep theo phai co art")
+	if art != null:
+		assert_eq(art.texture.resource_path,
+			"res://assets/UI/ButtonsText/button-next-level.png", "Dung asset nut man tiep theo")
+		assert_eq(art.stretch_mode, TextureRect.STRETCH_KEEP_ASPECT_CENTERED,
+			"Art nut man tiep theo phai giu ti le")
+
+# `show_level_complete()` nằm trong `hud.gd` — script này không phải @tool nên
+	# không chạy được trong ngữ cảnh editor. Hành vi ẩn/hiện nút và việc bấm
+	# nút có sang màn thật không được kiểm ở
+	# `tools/verify_level_complete.gd` (chạy thật nên gọi được script).
+
 func test_badges_have_real_size() -> void:
 	# Panel khong tu lay kich thuoc toi thieu tu stylebox -> se gon 0x0.
 	var hud := (load("res://scenes/ui/hud.tscn") as PackedScene).instantiate()

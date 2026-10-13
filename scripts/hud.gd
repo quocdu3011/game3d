@@ -24,6 +24,7 @@ signal bow_draw_released
 @onready var complete_overlay: Control = get_node_or_null("CompleteOverlay")
 @onready var stars_row: HBoxContainer = get_node_or_null("CompleteOverlay/CompletePanel/StarsRow")
 @onready var btn_replay: Button = get_node_or_null("CompleteOverlay/CompletePanel/BtnReplay")
+@onready var btn_next: Button = get_node_or_null("CompleteOverlay/CompletePanel/BtnNextLevel")
 @onready var btn_close_done: Button = get_node_or_null("CompleteOverlay/CompletePanel/BtnCloseDone")
 @onready var lbl_coins: Label = get_node_or_null("CompleteOverlay/CompletePanel/StatsRow/CoinBadge/Row/Value")
 @onready var lbl_coin_count: Label = get_node_or_null("TopContainer/CoinBox/Value")
@@ -35,6 +36,8 @@ var _virtual_joystick: Control
 var _virtual_jump_requested := false
 var _jump_button: TextureButton
 var _bow_button: TextureButton
+## Màn sẽ sang khi bấm nút "màn tiếp theo"; -1 nghĩa là đã ở màn cuối.
+var _next_level := -1
 
 
 func _ready() -> void:
@@ -79,11 +82,15 @@ func _ready() -> void:
 			overlay.visibility_changed.connect(_on_overlay_visibility_changed)
 	if btn_replay:
 		btn_replay.pressed.connect(_restart)
+	if btn_next:
+		btn_next.pressed.connect(_on_next_level_pressed)
+		# Màn cuối không có màn kế tiếp thì giấu nút đi, tránh bấm nhầm.
+		btn_next.visible = false
 	if btn_close_done:
 		btn_close_done.pressed.connect(_close_complete)
 		_bind_hover(btn_close_done)
 
-	for button in [btn_pause, btn_resume, btn_restart, btn_options, btn_main_menu, btn_close]:
+	for button in [btn_pause, btn_resume, btn_restart, btn_options, btn_main_menu, btn_close, btn_next]:
 		_bind_hover(button)
 
 func _setup_mobile_controls() -> void:
@@ -329,9 +336,25 @@ func show_level_complete(level_num: int, stars: int, seconds: float, earned_coin
 	_refresh_coin_counter()
 	if lbl_coins:
 		lbl_coins.text = str(GameManager.level_coins if earned_coins < 0 else earned_coins)
+	_refresh_next_level_button(level_num)
 	complete_overlay.visible = true
 	_sync_overlay_chrome()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+## Tính màn kế tiếp và ẩn/hiện nút cho vừa. Ở màn cuối (hoặc màn không có trong
+## `LEVELS`) không có gì để sang nên nút bị ẩn hoàn toàn.
+func _refresh_next_level_button(level_num: int) -> void:
+	_next_level = GameManager.next_level_after(level_num)
+	if btn_next:
+		btn_next.visible = _next_level > 0
+
+## Sang thẳng màn kế tiếp. Cây đang paused (nhân vật giữ pose VictorySign) nên
+## phải bỏ pause trước khi đổi scene.
+func _on_next_level_pressed() -> void:
+	if _next_level <= 0:
+		return
+	get_tree().paused = false
+	GameManager.load_level(_next_level)
 
 ## Sao giữa dung ban Large, hai ben dung ban Small. Tô sáng từ trái sang
 ## phải: đạt `stars` ngôi sao đầu tiên sẽ vàng, phần còn lại xám.

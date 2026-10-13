@@ -28,6 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://c2v4mh80dhh1h" path="res://assets/UI/Icons/Icon_Small_StarGrey.png" id="38_sstargrey"]
 [ext_resource type="Texture2D" uid="uid://cls1y6lra32j3" path="res://assets/UI/ButtonsText/ButtonText_Large_Orange_Square.png" id="39_starbg"]
 [ext_resource type="Texture2D" uid="uid://b4e36o8qwyrd6" path="res://assets/UI/ButtonsIcons/change_camera.png" id="40_camicon"]
+[ext_resource type="Texture2D" uid="uid://0kh3d0by0emr" path="res://assets/UI/ButtonsText/button-next-level.png" id="41_nextlevel"]
 
 [sub_resource type="StyleBoxEmpty" id="SB_flat"]
 
@@ -530,7 +531,6 @@ stretch_mode = 5
 [node name="Label" type="Label" parent="OptionsOverlay/OptionsPanel/TiltRow" unique_id=1714271558]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 4
 theme_override_font_sizes/font_size = 18
 text = "CẢM BIẾN CON QUAY"
 vertical_alignment = 1
@@ -576,7 +576,6 @@ theme_override_constants/separation = 16
 
 [node name="Label" type="Label" parent="OptionsOverlay/OptionsPanel/TiltSensRow" unique_id=1714271562]
 layout_mode = 2
-size_flags_vertical = 4
 theme_override_font_sizes/font_size = 18
 text = "TỐC ĐỘ XOAY"
 vertical_alignment = 1
@@ -593,8 +592,6 @@ theme_override_icons/grabber_highlight = ExtResource("25_pointer")
 theme_override_styles/slider = SubResource("SB_track_bg")
 theme_override_styles/grabber_area = SubResource("SB_track_fill")
 theme_override_styles/grabber_area_highlight = SubResource("SB_track_fill")
-max_value = 100.0
-step = 1.0
 value = 26.0
 
 [node name="BtnBack" type="Button" parent="OptionsOverlay/OptionsPanel" unique_id=1465045763]
@@ -658,7 +655,6 @@ tooltip_text = "Chọn góc nhìn của người chơi"
 
 [node name="CompleteOverlay" type="Control" parent="." unique_id=1090858188]
 unique_name_in_owner = true
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -838,19 +834,12 @@ vertical_alignment = 1
 
 [node name="BtnReplay" type="Button" parent="CompleteOverlay/CompletePanel" unique_id=1083842174]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(280, 87)
+custom_minimum_size = Vector2(230, 87)
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -140.0
-offset_top = 76.0
-offset_right = 140.0
-offset_bottom = 163.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = 21.0
+offset_top = 342.0
+offset_right = 251.0
+offset_bottom = 429.0
 tooltip_text = "Chơi lại màn này"
 theme_override_styles/normal = SubResource("SB_flat")
 theme_override_styles/pressed = SubResource("SB_flat")
@@ -863,10 +852,41 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 20.0
+offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.9, 0.9)
 mouse_filter = 2
 texture = ExtResource("15_replay")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BtnNextLevel" type="Button" parent="CompleteOverlay/CompletePanel" unique_id=1083842175]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(230, 87)
+layout_mode = 1
+offset_left = 271.0
+offset_top = 342.0
+offset_right = 501.0
+offset_bottom = 429.0
+tooltip_text = "Sang màn tiếp theo"
+theme_override_styles/normal = SubResource("SB_flat")
+theme_override_styles/pressed = SubResource("SB_flat")
+theme_override_styles/hover = SubResource("SB_flat")
+theme_override_styles/disabled = SubResource("SB_flat")
+theme_override_styles/focus = SubResource("SB_flat")
+
+[node name="Art" type="TextureRect" parent="CompleteOverlay/CompletePanel/BtnNextLevel" unique_id=-740834675]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.9, 0.9)
+mouse_filter = 2
+texture = ExtResource("41_nextlevel")
 expand_mode = 1
 stretch_mode = 5
 
@@ -902,14 +922,13 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="VirtualJoystick" type="VirtualJoystick" parent="." unique_id=1911958052]
-layout_mode = 1
+anchors_preset = -1
 anchor_top = 0.5
 anchor_right = 0.25
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 joystick_mode = 1
-visibility_mode = 0
 joystick_size = 120.0
 action_left = &"move_left"
 action_right = &"move_right"
