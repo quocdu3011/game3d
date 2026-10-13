@@ -5,7 +5,24 @@ enum CameraMode { THIRD_PERSON, FIRST_PERSON }
 
 signal camera_mode_changed(mode: CameraMode)
 
+## Bắn ra khi người chơi bật/tắt chế độ điều khiển góc nhìn bằng cảm biến con quay.
+signal tilt_camera_changed(enabled: bool)
+## Bắn ra khi độ nhạy con quay bị kéo trong màn tuỳ chọn.
+signal tilt_sensitivity_changed(value: float)
+
+## Độ nhạy nhỏ nhất / lớn nhất mà thanh trượt trong màn tuỳ chọn cho phép.
+## Khoảng này rộng có chủ đích: người chơi có thể cần xoay rất nhẹ (máy cầm
+## ngang) hoặc rất mạnh (chơi bằng một tay).
+const TILT_SENSITIVITY_MIN := 0.05
+const TILT_SENSITIVITY_MAX := 2.0
+
 var camera_mode: CameraMode = CameraMode.THIRD_PERSON
+## Bật cảm biến con quay để xoay camera bằng cách nghiêng máy. Tắt mặc định vì
+## máy tính không có cảm biến và người chơi vẫn xoay camera bằng chuột/vuốt tay.
+var tilt_camera_enabled: bool = false
+## Góc xoay camera (radian) cho mỗi 1 rad/s con quay báo. Người chơi chỉnh
+## bằng thanh trượt trong màn tuỳ chọn; `TiltSensor` đọc giá trị này.
+var tilt_sensitivity: float = 0.55
 var selected_skin: String = "gobot" # "gobot", "gdbot", "sophia"
 var current_level: int = 1
 var completed_levels: Dictionary = {}
@@ -204,6 +221,11 @@ func _load_progress() -> void:
 	# Skin đã lưu phải còn tồn tại và đã mở khoá, nếu không thì lùi về mặc định.
 	selected_skin = saved_skin if is_skin_unlocked(saved_skin) else DEFAULT_SKIN
 	camera_mode = clampi(int(config.get_value("settings", "camera_mode", CameraMode.THIRD_PERSON)), CameraMode.THIRD_PERSON, CameraMode.FIRST_PERSON) as CameraMode
+	tilt_camera_enabled = bool(config.get_value("settings", "tilt_camera", false))
+	# Save cũ chưa có khoá thì lấy mặc định; giá trị lưu bị hỏng cũng kẹp lại
+	# trong khoảng hợp lệ để thanh trượt không nhảy về 0.
+	tilt_sensitivity = clampf(float(config.get_value("settings", "tilt_sensitivity", 0.55)),
+		TILT_SENSITIVITY_MIN, TILT_SENSITIVITY_MAX)
 
 func _save_progress() -> void:
 	var config := ConfigFile.new()
@@ -216,6 +238,8 @@ func _save_progress() -> void:
 		if unlocked_skins[skin_name]:
 			config.set_value("unlock", skin_name, true)
 	config.set_value("settings", "camera_mode", int(camera_mode))
+	config.set_value("settings", "tilt_camera", tilt_camera_enabled)
+	config.set_value("settings", "tilt_sensitivity", tilt_sensitivity)
 	config.set_value("settings", "selected_skin", selected_skin)
 	var err := config.save(save_path)
 	if err != OK:
@@ -266,6 +290,23 @@ func set_camera_mode(mode: int) -> void:
 	camera_mode = next_mode
 	_save_progress()
 	camera_mode_changed.emit(camera_mode)
+
+## Bật/tắt xoay camera bằng cảm biến con quay, lưu lại để nhớ qua các màn.
+func set_tilt_camera_enabled(enabled: bool) -> void:
+	if tilt_camera_enabled == enabled:
+		return
+	tilt_camera_enabled = enabled
+	_save_progress()
+	tilt_camera_changed.emit(tilt_camera_enabled)
+
+## Đặt độ nhạy con quay, luôn kẹp trong khoảng hợp lệ và lưu lại.
+func set_tilt_sensitivity(value: float) -> void:
+	var next := clampf(value, TILT_SENSITIVITY_MIN, TILT_SENSITIVITY_MAX)
+	if is_equal_approx(tilt_sensitivity, next):
+		return
+	tilt_sensitivity = next
+	_save_progress()
+	tilt_sensitivity_changed.emit(tilt_sensitivity)
 
 func get_skin_path(skin_name: String = "") -> String:
 	var name_to_use = skin_name if skin_name != "" else selected_skin

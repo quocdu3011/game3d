@@ -261,9 +261,8 @@ func _physics_process(delta: float) -> void:
 	input_vector = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	if input_vector == Vector2.ZERO:
 		input_vector = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	if input_vector == Vector2.ZERO:
-		if hud and hud.has_method("get_virtual_move_input"):
-			input_vector = hud.get_virtual_move_input()
+	# Cần điều khiển ảo không cần đường riêng: `VirtualJoystick` của Godot tự
+	# nhấn/thả các action `move_*` nên đã nằm trong `Input.get_vector()` ở trên.
 	var direction = Vector3.ZERO
 	if input_vector != Vector2.ZERO:
 		var forward = -spring_arm.global_transform.basis.z
@@ -349,6 +348,22 @@ func _process(_delta: float) -> void:
 	if _is_drawing:
 		_draw_elapsed = min(_draw_elapsed + _delta, bow_draw_time)
 		_update_trajectory()
+	_apply_tilt_camera()
+
+## Xoay camera theo cảm biến con quay. Vuốt tay và chuột vẫn hoạt động song
+## song, nên người chơi muốn chỉnh nhanh thì dùng tay cũng được — trên điện
+## thoại cảm biến chỉ làm thao tác xoay camera nhẹ hơn.
+func _apply_tilt_camera() -> void:
+	if not GameManager.tilt_camera_enabled or spring_arm == null:
+		return
+	var look := TiltSensor.consume_look_delta()
+	if look == Vector2.ZERO:
+		return
+	spring_arm.rotation.y -= look.x
+	spring_arm.rotation.x = clampf(
+		spring_arm.rotation.x - look.y,
+		deg_to_rad(camera_pitch_min),
+		deg_to_rad(camera_pitch_max))
 
 func _try_step_up(delta: float) -> void:
 	if max_step_height <= 0.0 or not is_on_floor():

@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 GameManager="*res://scripts/game_manager.gd"
 MusicPlayer="*res://scripts/music_player.gd"
 SfxPlayer="*res://scripts/sfx_player.gd"
+TiltSensor="*res://scripts/tilt_sensor.gd"
 _mcp_game_helper="*res://addons/godot_ai/runtime/game_helper.gd"
 
 [display]
@@ -62,6 +63,11 @@ jump={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":32,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
+
+[input_devices]
+
+sensors/enable_gravity=true
+sensors/enable_gyroscope=true
 
 [physics]
 

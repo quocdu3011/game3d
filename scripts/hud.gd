@@ -32,7 +32,6 @@ var _inventory_bar: HBoxContainer
 var _inventory_slots: Array[Panel] = []
 var _selected_inventory_slot := 1
 var _virtual_joystick: Control
-var _virtual_move_input := Vector2.ZERO
 var _virtual_jump_requested := false
 var _jump_button: TextureButton
 var _bow_button: TextureButton
@@ -73,6 +72,11 @@ func _ready() -> void:
 		options_overlay.closed.connect(_close_options)
 	if complete_overlay:
 		complete_overlay.visible = false
+	# Theo dõi trạng thái hiển thị của từng overlay để giấu thanh inventory
+	# đúng lúc, kể cả khi ai đó bật/tắt trực tiếp thay vì qua menu tạm dừng.
+	for overlay in [pause_overlay, options_overlay, complete_overlay]:
+		if overlay:
+			overlay.visibility_changed.connect(_on_overlay_visibility_changed)
 	if btn_replay:
 		btn_replay.pressed.connect(_restart)
 	if btn_close_done:
@@ -84,13 +88,11 @@ func _ready() -> void:
 
 func _setup_mobile_controls() -> void:
 	_virtual_joystick = get_node_or_null("VirtualJoystick") as Control
-	if _virtual_joystick:
-		if _virtual_joystick.has_signal("joystick_moved"):
-			_virtual_joystick.connect("joystick_moved", _on_virtual_joystick_moved)
-		if _virtual_joystick.has_signal("joystick_released"):
-			_virtual_joystick.connect("joystick_released", _on_virtual_joystick_released)
-		if _virtual_joystick.has_signal("hardware_visibility_changed"):
-			_virtual_joystick.connect("hardware_visibility_changed", _on_mobile_controls_visibility_changed)
+	# Không nối tín hiệu nào của joystick: `VirtualJoystick` của Godot tự nhấn
+	# các action `move_*` khi bị lệch, nên `player.gd` đọc thẳng qua InputMap.
+	# (Các tên `joystick_moved` / `hardware_visibility_changed` từng được nối ở
+	# đây không hề tồn tại — Godot chỉ có pressed/released/flicked/flick_canceled/
+	# tapped — nên chúng chưa bao giờ chạy.)
 
 	_jump_button = TextureButton.new()
 	_jump_button.name = "JumpButton"
@@ -126,17 +128,23 @@ func _setup_mobile_controls() -> void:
 	_bow_button.button_up.connect(_on_bow_button_up)
 	add_child(_bow_button)
 
-	if _virtual_joystick:
-		_jump_button.visible = _virtual_joystick.visible
-		_bow_button.visible = _virtual_joystick.visible
-
-func get_virtual_move_input() -> Vector2:
-	return _virtual_move_input
+	# KHÔNG sao chép `_virtual_joystick.visible` sang hai nút này nữa. Joystick
+	# đang để ở chế độ "chỉ hiện khi chạm" nên `visible` của nó nghĩa là "đang
+	# được chạm", không phải "thiết bị này có màn hình cảm ứng" — đọc nó để quyết
+	# định ẩn nút nhảy/cung sẽ làm hai nút đó biến mất vĩnh viễn.
+	_jump_button.visible = true
+	_bow_button.visible = true
 
 func can_use_camera_touch_at(screen_position: Vector2) -> bool:
 	if (pause_overlay and pause_overlay.visible) or (options_overlay and options_overlay.visible) or (complete_overlay and complete_overlay.visible):
 		return false
-	for control in [_virtual_joystick, _jump_button, _bow_button, _inventory_bar, btn_pause]:
+	# Vùng joystick phải GIỮ CHỖ luôn, kể cả lúc chưa chạm: joystick đang ở
+	# chế độ "chỉ hiện khi chạm" nên `visible` là false cho tới lần chạm đầu.
+	# Nếu có xét `visible` như các control khác thì cử chỉ vuốt xoay camera ở
+	# góc dưới bên trái sẽ lúc được chọn làm camera, lúc thành joystick.
+	if _virtual_joystick and _virtual_joystick.get_global_rect().has_point(screen_position):
+		return false
+	for control in [_jump_button, _bow_button, _inventory_bar, btn_pause]:
 		if control is Control and control.visible and control.get_global_rect().has_point(screen_position):
 			return false
 	return true
@@ -145,23 +153,6 @@ func consume_virtual_jump() -> bool:
 	var requested := _virtual_jump_requested
 	_virtual_jump_requested = false
 	return requested
-
-func _on_virtual_joystick_moved(direction: Vector2) -> void:
-	_virtual_move_input = direction.limit_length(1.0)
-
-func _on_virtual_joystick_released() -> void:
-	_virtual_move_input = Vector2.ZERO
-
-func _on_mobile_controls_visibility_changed(is_visible: bool) -> void:
-	if _jump_button:
-		_jump_button.visible = is_visible
-	if _bow_button:
-		_bow_button.visible = is_visible
-	if not is_visible:
-		_virtual_move_input = Vector2.ZERO
-		_virtual_jump_requested = false
-		Input.action_release("jump")
-		bow_draw_released.emit()
 
 func _on_jump_button_down() -> void:
 	_virtual_jump_requested = true
@@ -248,15 +239,41 @@ func _toggle_pause() -> void:
 		var should_pause := not pause_overlay.visible
 		pause_overlay.visible = should_pause
 		get_tree().paused = should_pause
+		_sync_overlay_chrome()
 		if pause_overlay.visible:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
+## Thanh inventory nằm sát đáy màn hình, đè lên các hàng dưới cùng của panel
+## Tuỳ chọn/Tạm dừng. Khi đang mở overlay che toàn màn thì thanh đó cũng vô
+## nghĩa (không bấm được), nên ta ẩn đi cho khỏi che.
+##
+## Trạng thái được suy ra từ chính các overlay chứ không nhận tham số, và mọi
+## thay đổi hiển thị đều gọi qua `_on_overlay_visibility_changed()` — nhờ vậy
+## ai bật/tắt overlay bằng đường nào cũng không bị lệch.
+##
+## CHỈ thanh inventory mới bị ẩn. Cần điều khiển ảo thì không: nó nằm ở góc
+## dưới bên trái, không hề chạm panel, và trạng thái hiện/ẩn của nó do tín hiệu
+## `hardware_visibility_changed` quyết định. Trước đây hàm này có ẩn joystick
+## khi mở overlay nhưng không khôi phục lại, khiến joystick biến mất vĩnh viễn
+## sau lần đầu mở Tuỳ chọn.
+func _sync_overlay_chrome() -> void:
+	if _inventory_bar == null:
+		return
+	var overlay_open := (pause_overlay != null and pause_overlay.visible) \
+		or (options_overlay != null and options_overlay.visible) \
+		or (complete_overlay != null and complete_overlay.visible)
+	_inventory_bar.visible = not overlay_open
+
+func _on_overlay_visibility_changed() -> void:
+	_sync_overlay_chrome()
+
 func _resume() -> void:
 	if pause_overlay:
 		pause_overlay.visible = false
 	get_tree().paused = false
+	_sync_overlay_chrome()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 ## Đổi qua lại góc nhìn thứ ba / thứ nhất. `GameManager.set_camera_mode()` tự
@@ -277,12 +294,14 @@ func _open_options() -> void:
 	# Ẩn khung pause để không chồng hai khung lên nhau.
 	if pause_overlay:
 		pause_overlay.visible = false
+	_sync_overlay_chrome()
 
 func _close_options() -> void:
 	if options_overlay:
 		options_overlay.visible = false
 	if pause_overlay:
 		pause_overlay.visible = true
+	_sync_overlay_chrome()
 
 func _restart() -> void:
 	get_tree().paused = false
@@ -311,6 +330,7 @@ func show_level_complete(level_num: int, stars: int, seconds: float, earned_coin
 	if lbl_coins:
 		lbl_coins.text = str(GameManager.level_coins if earned_coins < 0 else earned_coins)
 	complete_overlay.visible = true
+	_sync_overlay_chrome()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 ## Sao giữa dung ban Large, hai ben dung ban Small. Tô sáng từ trái sang
@@ -337,6 +357,7 @@ func _set_stars(stars: int) -> void:
 func _close_complete() -> void:
 	if complete_overlay:
 		complete_overlay.visible = false
+	_sync_overlay_chrome()
 
 func _return_to_main_menu() -> void:
 	get_tree().paused = false
